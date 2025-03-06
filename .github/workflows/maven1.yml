@@ -31,7 +31,8 @@ jobs:
       working-directory: member1
       run:  mvn test
 
-    - name: Current Directory
+    - if: always()
+      name: Current Directory
       run: |
         echo "Current NQA: %CD%"
       
@@ -39,4 +40,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: logs-artifact
-        path: logs
+        path: member1\logs
