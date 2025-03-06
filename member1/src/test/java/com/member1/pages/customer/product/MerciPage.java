@@ -19,6 +19,8 @@ public class MerciPage extends BaseDriverManager{
 	// Merci page
 	By merciText = new By.ByXPath("//h1[contains(.,'Merci !')]");
 	By merciContentText = new By.ByXPath("//div[contains(@class,'subscribe_password')]");
+	By merciHeaderText = new By.ByXPath("//div[contains(text(),'Merci pour votre confiance et votre achat ! Mes-Prix')]");
+	By decoureznosproduitsButton = new By.ByXPath("//a[contains(text(),'Découvrez nos produits')]|//span[contains(text(),'Découvrez nos produits')]");
 	 
 	public Boolean isMerciTextDisplayed() {
 		generics.waitForElementVisible(merciText);
@@ -28,4 +30,14 @@ public class MerciPage extends BaseDriverManager{
 	public String getMerciContentText() {
 		return generics.getText(merciContentText);
 	}
+	
+	public Boolean isMerciHeaderTextDisplayed() {
+		generics.waitForElementVisible(merciHeaderText);
+		return generics.isElementPresent(merciHeaderText);
+	}
+	
+	public Boolean isDecoureznosproduitsButtonDisplayed() {
+		return generics.isElementPresent(decoureznosproduitsButton);
+	}	
+	
 }

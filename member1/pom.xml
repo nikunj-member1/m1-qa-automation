@@ -29,20 +29,18 @@
   </dependencyManagement>
 
   <dependencies>
-   <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+   		<!-- https://mvnrepository.com/artifact/io.appium/java-client -->
 		<dependency>
 			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
 			<version>8.5.1</version>
-		</dependency>
-		
+		</dependency>		
 		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
 		    <groupId>org.seleniumhq.selenium</groupId>
 		    <artifactId>selenium-java</artifactId>
-		    <version>4.24.0</version>
-		</dependency>
-		
+		    <version>4.29.0</version>
+		</dependency>	
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -50,12 +48,11 @@
 			<version>7.4.0</version>
 			<scope>test</scope>
 		</dependency>
-		<!--
-		https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+		<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
 		<dependency>
-			<groupId>io.github.bonigarcia</groupId>
-			<artifactId>webdrivermanager</artifactId>
-			<version>5.5.3</version>
+		    <groupId>io.github.bonigarcia</groupId>
+		    <artifactId>webdrivermanager</artifactId>
+		    <version>5.9.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
 		<dependency>
@@ -74,7 +71,6 @@
 			<artifactId>javafaker</artifactId>
 			<version>1.0.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -85,7 +81,6 @@
 			<artifactId>slf4j-simple</artifactId>
 			<version>2.0.7</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
 		<dependency>
 			<groupId>io.rest-assured</groupId>
@@ -93,28 +88,24 @@
 			<version>5.0.0</version>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>5.2.2</version>
-		</dependency>
-		
+		</dependency>		
 		<!-- https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator -->
 		<dependency>
 		    <groupId>io.rest-assured</groupId>
 		    <artifactId>json-schema-validator</artifactId>
 		    <version>4.3.0</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
   			<groupId>org.projectlombok</groupId>
   			<artifactId>lombok</artifactId>
@@ -174,8 +165,7 @@
 		    <artifactId>google-auth-library-credentials</artifactId>
 		    <version>1.30.1</version>
 		</dependency>
-		
-
+	
   </dependencies>
 
   <build>
@@ -187,7 +177,7 @@
 			<version>3.3.0</version>
 			<configuration>
 				<suiteXmlFiles>
-					<suiteXmlFile>${suite}</suiteXmlFile>
+					<suiteXmlFile>smoke.xml</suiteXmlFile>
 				</suiteXmlFiles>
 			</configuration>
 		</plugin>

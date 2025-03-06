@@ -24,17 +24,25 @@ public class DataProvider {
 	}
 	
 	public String getEmailDomain() {
-		return "@mailinator.com";
+		return "@maildrop.cc";
 	}
 	
 	public String getEmail() {
-		return "AT_" + faker.name().firstName()+"@mailinator.com";
+		return "AT_" + faker.name().firstName()+"@maildrop.cc";
 	}
 
 	Faker fakerAddress = new Faker(new Locale("en-IND"));
 
 	public String getPostalCode() {
 		return fakerAddress.address().zipCode();
+	}
+	
+	public String getAddressLine1() {
+		return fakerAddress.address().fullAddress();
+	}
+	
+	public String getAddressLine2() {
+		return fakerAddress.address().secondaryAddress();
 	}
 
 	public String getCountryName() {
@@ -64,7 +72,7 @@ public class DataProvider {
 	public String getCvvNumber() {
 		return "367";
 	}
-	
+		
 	public String getBirthDate() {
 		Date date = faker.date().birthday(19, 50);
 		DateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
@@ -74,5 +82,9 @@ public class DataProvider {
 	public String getCustomerRecruiterEmail() {
 		return getFirstName() + getEmailDomain();
 	}
+	
+	public String getCardHolderName() {
+		return "hind hage";
+	}	
 	
 }

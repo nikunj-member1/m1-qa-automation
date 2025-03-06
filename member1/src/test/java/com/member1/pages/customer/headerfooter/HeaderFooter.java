@@ -16,12 +16,15 @@ public class HeaderFooter extends BaseDriverManager {
 		generics = new Generics(webDriver);
 	}
 
-	// Header Footer
+	// LP Header Footer
 	By secureCardImage  = new By.ByXPath("//div[contains(@class,'offerbarexpire')][contains(.,'Paiement sécurisé')]/img");
 	By paiementSécuriséText  = new By.ByXPath("//span[contains(.,'Paiement sécurisé')]");
 	By serviceContactImage  = new By.ByXPath("//div[contains(@class,'offerbarexpire')][contains(.,'Service client à votre écoute')]/img");
 	By serviceClientàVotreéCouteText = new By.ByXPath("//SPAN[normalize-space(text())=\"Service client à votre écoute\"]");
 	
+	// Mes-Prix HeaderFooter
+	By shoppingCart = new By.ByXPath("//a[@title='View your shopping cart']");
+	 	
 	public void navigateToLP(String url) {
 		webDriver.get(url);
 	}
@@ -45,6 +48,10 @@ public class HeaderFooter extends BaseDriverManager {
 	
 	public boolean verifyServiceClientàVotreéCouteTextDisplayed() {
 		return generics.isElementPresent(serviceClientàVotreéCouteText);
+	}
+	
+	public void clickOnShoppingCartButton() {
+		generics.clickOn(shoppingCart);
 	}
 		
 }

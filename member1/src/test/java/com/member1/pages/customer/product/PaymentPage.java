@@ -1,5 +1,8 @@
 package com.member1.pages.customer.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -26,7 +29,36 @@ public class PaymentPage extends BaseDriverManager{
 	By cardMonthTextbox = new By.ById("card-exp-month");
 	By payerButton = new By.ById("buybtn");
 	By paymentCardIcons = new By.ByXPath("//div[contains(@class,'secure-payment-cards')]/div/img");
-		
+	By cardHolderNameTextbox = new By.ById("card_hold");
+	By productSuggestionList = new By.ByCssSelector("[name='productSelect']");
+	By commanderButton = new By.ByXPath("//button[contains(.,'Commander')]");
+	By visaCardIcon = new By.ByXPath("//img[contains(@src,'visalogo2')]");
+	By masterCardIcon = new By.ByXPath("//img[contains(@src,'master-card')]");
+	By cbIcon = new By.ByXPath("//img[contains(@src,'cb-card')]");
+	
+	// Mesprix page
+	By paymentTitleText = new By.ByXPath("//h1[contains(.,'Paiement')]");
+	By billingDetailsTitle = new By.ByXPath("//h3[contains(.,'Détails de la facturation')]");	
+	By firstNameTextBox = new By.ById("billing_first_name");
+	By lastNameTextBox = new By.ById("billing_last_name");
+	By addressLine1Textbox = new By.ById("billing_address_1");
+	By addressLine2Textbox = new By.ById("billing_address_2");
+	By postCodeTextbox = new By.ById("billing_postcode");
+	By cityTextbox = new By.ById("billing_city");
+	By phoneTextbox = new By.ById("billing_phone");
+	By emailTextbox = new By.ById("billing_email");
+	By informationAdditionnelleText = new By.ByXPath("//h3[text()='Information additionnelle']");
+	By orderNotesTextbox = new By.ById("order_comments");
+	By cardHolderTextbox = new By.ById("emerchantpay_direct-card-holder");
+	By billingCardNumberTextbox = new By.ById("emerchantpay_direct-card-number");
+	By expiryDateTextbox = new By.ById("emerchantpay_direct-card-expiry");
+	By cardCodeTextbox = new By.ById("emerchantpay_direct-card-cvc");
+	By termsCheckbox = new By.ById("terms");
+	By privacyCheckbox = new By.ByCssSelector("[class='your-checkbox-class']");
+	By placeOrderButton = new By.ById("place_order");
+	By paymentByCreditCardTitle = new By.ByXPath("//label[@for='payment_method_emerchantpay_direct'][contains(.,'Paiement par carte bancaire')]");
+	By yourOrderTitleText = new By.ByXPath("//h3[@id='order_review_heading'][contains(.,'Votre commande')]");
+			
 	public String getPaymentTitle() {
 		generics.waitForElementVisible(paymentTitle);
 		return generics.getText(paymentTitle);
@@ -35,6 +67,27 @@ public class PaymentPage extends BaseDriverManager{
 	public Boolean isCardNumberIconDisplayed() {
 		return generics.isElementPresent(cardNumberIcon);
 	}
+	
+	public Boolean isCardHolderNameTextboxDisplayed() {
+		generics.scrollToElement(webDriver.findElement(cardHolderNameTextbox));
+		return generics.isElementPresent(cardHolderNameTextbox);
+	}
+	
+	public Boolean isVisaCardIconDisplayed() {
+		return generics.isElementPresent(visaCardIcon);
+	}
+	
+	public Boolean isMasterCardIconDisplayed() {
+		return generics.isElementPresent(masterCardIcon);
+	}
+	
+	public Boolean isCbIconDisplayed() {
+		return generics.isElementPresent(cbIcon);
+	}
+	
+	public Boolean isCommanderButtonDisplayed() {
+		return generics.isElementPresent(commanderButton);
+	}	
 		 
 	public String getCardNumberTextboxPlaceholder() {
 		return webDriver.findElement(cardNumberTextbox).getAttribute("placeholder");
@@ -42,6 +95,10 @@ public class PaymentPage extends BaseDriverManager{
 	
 	public Boolean isCcvIconDisplayed() {
 		return generics.isElementPresent(ccvIcon);
+	}
+	
+	public Boolean isCcvTextboxDisplayed() {
+		return generics.isElementPresent(cardNumberTextbox);
 	}
 	
 	public String getCcvTextboxPlaceholder() {
@@ -76,6 +133,7 @@ public class PaymentPage extends BaseDriverManager{
 	//	generics.scrollToElement(webDriver.findElement(paymentTitle));
 		Generics.pause(2);
 		Generics.type(webDriver.findElement(cardNumberTextbox),cardNumber);
+		
 	}
 	
 	public void typeCVVTextbox(String cvvNumber) {
@@ -94,6 +152,15 @@ public class PaymentPage extends BaseDriverManager{
 		generics.clickOn(payerButton);
 	}
 	
+	public void clickOnCommanderButton() {
+		generics.clickOn(commanderButton);
+	}
+	
+	public void selectSubscriberPlan(String text) {
+		generics.selectValueFromDropDown(webDriver.findElement(productSuggestionList),text);
+		Generics.pause(2);
+	}
+	
 	public void fillUpCardDetails(String cardNumber,String cvvNumber,String cardMonth,String cardYear,boolean isPayer) {
 		typeCardNumberTextbox(cardNumber);
 		selectMonth(cardMonth);
@@ -104,5 +171,148 @@ public class PaymentPage extends BaseDriverManager{
 			clickPayerButton();	
 			Generics.pause(2);
 		}
+	}	
+	
+	public void fillUpCardDetails(String cardNumber,String cvvNumber,String cardMonth,String cardYear,String subscriptionPlan,boolean isCommander) {
+		typeCardNumberTextbox(cardNumber);
+		selectMonth(cardMonth);
+		selectYear(cardYear);		
+		typeCVVTextbox(cvvNumber);
+		Generics.pause(2);
+		selectSubscriberPlan(subscriptionPlan);
+		if(isCommander) {
+			clickOnCommanderButton();	
+			Generics.pause(2);
+		}
+	}	
+	
+	public Boolean isPaymentTitleDisplayed() {
+		return generics.isElementPresent(paymentTitleText);
 	}
+	
+	public Boolean isBillingDetailsTitleDisplayed() {
+		return generics.isElementPresent(billingDetailsTitle);
+	}
+	
+	public void typeFirstNameTextbox(String firstName) {
+		Generics.type(webDriver.findElement(firstNameTextBox),firstName);
+	}
+	
+	public void typeLastNameTextbox(String lastName) {
+		Generics.type(webDriver.findElement(lastNameTextBox),lastName);
+	}
+	
+	public void typeAddressLine1Textbox(String addressline1) {
+		Generics.type(webDriver.findElement(addressLine1Textbox),addressline1);
+	}
+	
+	public void typeAddressLine2Textbox(String addressline2) {
+		Generics.type(webDriver.findElement(addressLine2Textbox),addressline2);
+	}
+	
+	public void typePostCodeTextbox(String postCode) {
+		Generics.type(webDriver.findElement(postCodeTextbox),postCode);
+	}
+	
+	public void typeCityTextbox(String city) {
+		Generics.type(webDriver.findElement(cityTextbox),city);
+	}
+	
+	public void typePhoneTextbox(String phoneNumber) {
+		Generics.type(webDriver.findElement(phoneTextbox),phoneNumber);
+	}
+	
+	public void typeEmailTextbox(String email) {
+		Generics.type(webDriver.findElement(emailTextbox),email);
+	}
+	
+	public Boolean isInformationAdditionnelleTextDisplayed() {
+		return generics.isElementPresent(informationAdditionnelleText);
+	}
+	
+	public void typeOrderNotesTextbox(String orderNotes) {
+		Generics.type(webDriver.findElement(orderNotesTextbox),orderNotes);
+	}	
+	
+	public void typeCardHolderTextbox(String cardHolderName) {
+		generics.scrollToElement(webDriver.findElement(cardHolderTextbox));
+		Generics.type(webDriver.findElement(cardHolderTextbox),cardHolderName);
+	}
+	
+	public void typeBillingCardNumberTextbox(String cardNumber) {
+		
+		List<String> cardNumberlist = new ArrayList<String>();
+		
+		cardNumberlist.add(cardNumber.split(" ")[0]);
+		cardNumberlist.add(cardNumber.split(" ")[1]);
+		cardNumberlist.add(cardNumber.split(" ")[2]);
+		cardNumberlist.add(cardNumber.split(" ")[3]);
+		
+		for(int i=0; i<cardNumberlist.size(); i++) {
+			webDriver.findElement(billingCardNumberTextbox).sendKeys(cardNumberlist.get(i));
+		}
+	}
+	
+	public void typeExpiryDateTextbox(String expiryDate) {	
+	List<String> expiryDatelist = new ArrayList<String>();
+		
+	expiryDatelist.add(expiryDate.split("/")[0]);
+	expiryDatelist.add(expiryDate.split("/")[1]);
+		for(int i=0; i<expiryDatelist.size(); i++) {
+			webDriver.findElement(expiryDateTextbox).sendKeys(expiryDatelist.get(i));
+		}
+	}
+	
+	public void typeCCVTextbox(String cvv) {
+		generics.scrollToElement(webDriver.findElement(cardHolderTextbox));
+		Generics.type(webDriver.findElement(cardCodeTextbox),cvv);
+	}
+	
+	public void clickOnTermsCheckbox() {
+		generics.clickOn(termsCheckbox);
+	}
+	
+	public void clickOnPrivacyCheckbox() {
+		generics.clickOn(privacyCheckbox);
+	}
+	
+	public void clickOnPlaceOrderButton() {
+		generics.clickOn(placeOrderButton);
+	}
+	
+	public Boolean isPaymentByCreditCardTitleDisplayed() {
+		return generics.isElementPresent(paymentByCreditCardTitle);
+	}
+	
+	public Boolean isYourOrderTitleTextDisplayed() {
+		return generics.isElementPresent(yourOrderTitleText);
+	}	
+	
+	public void fillUpBillingForm(String firstName,String lastName,String addressLine1,String addressLine2,
+			String postCode,String city,String email) {
+		typeFirstNameTextbox(firstName);
+		typeLastNameTextbox(lastName);
+		typeAddressLine1Textbox(addressLine1);
+		typeAddressLine2Textbox(addressLine2);
+		typePostCodeTextbox(postCode);
+		typeCityTextbox(city);
+		typeEmailTextbox(email);		
+	}
+	
+	public void fillUpCreditCardDetails(String cardHolderName, String cardNumber,String cardExpiryDate, String CardCVC) {
+		typeCardHolderTextbox(cardHolderName);
+		Generics.pause(2);
+		typeBillingCardNumberTextbox(cardNumber);
+		Generics.pause(2);
+		typeExpiryDateTextbox(cardExpiryDate);
+		Generics.pause(2);		
+		typeCCVTextbox(CardCVC);
+		Generics.pause(2);
+	}
+	
+	public void checkPrivacyTermsAndCondition() {
+		clickOnPrivacyCheckbox();
+		clickOnTermsCheckbox();
+	}
+	
 }
