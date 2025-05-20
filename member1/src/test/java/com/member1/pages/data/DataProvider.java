@@ -54,7 +54,7 @@ public class DataProvider {
 	}
 
 	public String getCityName() {
-		return "Ahmedabad";
+		return "AHMEDABAD";
 	}
 
 	public String getCardExpireMonth() {
@@ -86,5 +86,9 @@ public class DataProvider {
 	public String getCardHolderName() {
 		return "hind hage";
 	}	
+	
+	public String getMessageText() {
+		return faker.book().genre();
+	}
 	
 }

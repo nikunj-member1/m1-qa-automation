@@ -21,24 +21,24 @@ public class BasketPage extends BaseDriverManager {
 	By basketTitle = new By.ByXPath("//h1[text()='Panier']");
 	By proceedToCheckoutButton = new By.ByXPath("//div[@class=\"wc-proceed-to-checkout\"]/a");
 	By totalAmountText = new By.ByXPath("//td[@data-title='Total']//bdi");
+	By shippingAmountText = new By.ById("shipping_method");
 		
 	public Boolean isBasketTitleDisplayed() {
+		generics.waitForElementVisible(basketTitle);
 		return generics.isElementPresent(basketTitle);
 	}
 	
 	public Boolean isProceedToCheckoutDisplayed() {
-	//	generics.scrollToElement(webDriver.findElement(totalAmountText));
-		Generics.pause(2);
+		generics.scrollToElement(webDriver.findElement(shippingAmountText));
 		return generics.isElementPresent(proceedToCheckoutButton);
 	}
 	
 	public void clickOnProceedToCheckout() {		
-	//	generics.scrollToElement(webDriver.findElement(totalAmountText));
-		Generics.pause(2);
 		generics.clickOn(proceedToCheckoutButton);
 	}
 	
 	public Boolean isTotalAmountTextDisplayed() {
+		generics.scrollToElement(webDriver.findElement(shippingAmountText));
 		return generics.isElementPresent(totalAmountText);
 	}
 		

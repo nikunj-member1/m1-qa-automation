@@ -217,7 +217,7 @@ public class TemplateTest extends BaseDriverManager {
 								getScreenshot(getDriver()));
 					}
 
-					if (headerFooter.verifyPaiementSécuriséTextDisplayed()) {
+					if (headerFooter.isPaiementSécuriséTextDisplayed()) {
 						Report.pass("'Paiement sécurisé' text on header on Product Description Page.",
 								getScreenshot(getDriver()));
 					} else {
@@ -238,7 +238,7 @@ public class TemplateTest extends BaseDriverManager {
 								getScreenshot(getDriver()));
 					}
 
-					if (headerFooter.verifyServiceClientàVotreéCouteTextDisplayed()) {
+					if (headerFooter.isServiceClientàVotreéCouteTextDisplayed()) {
 						Report.pass("'Service client à votre écoute' text on header on Product Description Page.",
 								getScreenshot(getDriver()));
 					} else {
@@ -1058,7 +1058,7 @@ public class TemplateTest extends BaseDriverManager {
 								getScreenshot(getDriver()));
 					}
 
-					if (headerFooter.verifyPaiementSécuriséTextDisplayed()) {
+					if (headerFooter.isPaiementSécuriséTextDisplayed()) {
 						Report.pass("'Paiement sécurisé' text on header on Payment Page.", getScreenshot(getDriver()));
 					} else {
 						Report.fail("'Paiement sécurisé' text on header on Payment Page.", getScreenshot(getDriver()));
@@ -1076,7 +1076,7 @@ public class TemplateTest extends BaseDriverManager {
 								getScreenshot(getDriver()));
 					}
 
-					if (headerFooter.verifyServiceClientàVotreéCouteTextDisplayed()) {
+					if (headerFooter.isServiceClientàVotreéCouteTextDisplayed()) {
 						Report.pass("'Service client à votre écoute' text on header on Payment Page.",
 								getScreenshot(getDriver()));
 					} else {

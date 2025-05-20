@@ -22,16 +22,10 @@ public class ProductDetailsPage extends BaseDriverManager {
 	By productImage = new By.ByXPath("//img[contains(@class,'product-')]");
 	By addToCartButton = new By.ByXPath("//button[contains(.,'Add to cart')]");
 	By priceRadioButton = new By.ByXPath("//p[contains(.,'9.18 €')]/input[@name='price_radio']");
-	
-	public void navigateURL(String url) {
-		webDriver.navigate().to(url);
-	}
-	
-	public Boolean isProductTitleDisplayed() {
-		return generics.isElementPresent(productTitle);
-	}
-	
+	By miniCartTruncate = new By.ByXPath("//div/a[@class='mini_cart_title truncate']");
+		
 	public String getProductTitle() {
+		generics.waitForElementVisible(productTitle);
 		return generics.getText(productTitle);
 	}
 
@@ -47,13 +41,13 @@ public class ProductDetailsPage extends BaseDriverManager {
 		generics.clickOn(addToCartButton);
 	}
 	
-	public Boolean isProductPriceRadioButtonDisplayed() {
-		return generics.isElementPresent(priceRadioButton);
+	public Boolean isProductPriceRadioButtonDisplayed(String price) {
+		return generics.isElementPresent(By.xpath("//p[contains(.,'"+price+" €')]/input[@name='price_radio']"));
 	}
 	
 	public Boolean isMiniCartProductTitleDisplayed(String miniCartProductTitle) {
+		generics.waitForElementVisible(miniCartTruncate);
 		return generics.isElementPresent(By.xpath("//div/a[@class='mini_cart_title truncate'][contains(.,'"+miniCartProductTitle+"')]"));
 	}
-	
 	
 }

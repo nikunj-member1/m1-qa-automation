@@ -87,6 +87,7 @@ public class ProductDescriptionPage extends BaseDriverManager {
 
 	public void navigateURL(String url) {
 		webDriver.navigate().to(url);
+		generics.waitForPageLoad("2");
 	}
 	
 	public String getProductManagerBreadCrumb() {

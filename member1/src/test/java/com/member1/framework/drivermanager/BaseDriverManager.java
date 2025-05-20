@@ -157,7 +157,7 @@ public class BaseDriverManager implements Configuration {
 	 */
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
-	//	getDriver().quit();
+		getDriver().quit();
 		System.out.println("After Test Thread ID: " + Thread.currentThread().getId());
 		threadLocalDriver.remove();
 	}

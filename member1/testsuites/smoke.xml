@@ -3,7 +3,7 @@
 <suite name="Suite">
   <test thread-count="1" name="Test">
     <classes>
-      <class name="com.member1.tests.lp.ChecklistMesPrixTest"/>
+      <class name="com.member1.tests.mesprix.ChecklistMesPrixTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.TimeoutException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -202,7 +203,7 @@ public class Generics implements Configuration {
 	 * 
 	 * @param pauseTime
 	 */
-    public void WaitForPageLoad(String pauseTime)
+    public void waitForPageLoad(String pauseTime)
     {
         pause(2);
         implicitWaitOf(0);
@@ -253,7 +254,7 @@ public class Generics implements Configuration {
 	 *
 	 * @param element WebElement
 	 */
-	public void isClickable(WebElement element) {
+	public void waitForElementToBeClickable(WebElement element) {
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
 
@@ -410,5 +411,9 @@ public class Generics implements Configuration {
 		WebElement element = generalDriver.findElement(by);
 		action.doubleClick(element).build().perform();
 		implicitWaitOf(Integer.parseInt(WEB_IMPLICIT_WAIT));
+	}
+	
+	public void pressBackOnBrowser() {
+		generalDriver.navigate().back();
 	}
 }

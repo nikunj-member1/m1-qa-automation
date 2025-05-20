@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.member1.framework.common.Generics;
 import com.member1.framework.drivermanager.BaseDriverManager;
@@ -58,6 +59,7 @@ public class PaymentPage extends BaseDriverManager{
 	By placeOrderButton = new By.ById("place_order");
 	By paymentByCreditCardTitle = new By.ByXPath("//label[@for='payment_method_emerchantpay_direct'][contains(.,'Paiement par carte bancaire')]");
 	By yourOrderTitleText = new By.ByXPath("//h3[@id='order_review_heading'][contains(.,'Votre commande')]");
+	By termsAndConditionLink = new By.ByXPath("//a[contains(@class,'terms-and-conditions-link')][contains(.,'terms and conditions')]");
 			
 	public String getPaymentTitle() {
 		generics.waitForElementVisible(paymentTitle);
@@ -187,6 +189,7 @@ public class PaymentPage extends BaseDriverManager{
 	}	
 	
 	public Boolean isPaymentTitleDisplayed() {
+		generics.waitForElementVisible(paymentTitleText);
 		return generics.isElementPresent(paymentTitleText);
 	}
 	
@@ -195,6 +198,7 @@ public class PaymentPage extends BaseDriverManager{
 	}
 	
 	public void typeFirstNameTextbox(String firstName) {
+		generics.waitForElementVisible(firstNameTextBox);
 		Generics.type(webDriver.findElement(firstNameTextBox),firstName);
 	}
 	
@@ -235,7 +239,8 @@ public class PaymentPage extends BaseDriverManager{
 	}	
 	
 	public void typeCardHolderTextbox(String cardHolderName) {
-		generics.scrollToElement(webDriver.findElement(cardHolderTextbox));
+		generics.scrollToElement(webDriver.findElement(paymentByCreditCardTitle));
+		Generics.pause(2);
 		Generics.type(webDriver.findElement(cardHolderTextbox),cardHolderName);
 	}
 	
@@ -313,6 +318,55 @@ public class PaymentPage extends BaseDriverManager{
 	public void checkPrivacyTermsAndCondition() {
 		clickOnPrivacyCheckbox();
 		clickOnTermsCheckbox();
+	}
+	
+	public void clickOnTermsAndConditionLink() {
+		generics.scrollToElement(webDriver.findElement(cardCodeTextbox));
+		generics.clickOn(termsAndConditionLink);
+	}
+	
+	public int getCompanyNameAndAddressCount(String companyName,String companyAddress) {
+		List<WebElement> addresses = webDriver.findElements(By.xpath("//p[contains(.,'"+companyName+"') and ('"+companyAddress+"')]"));
+		return addresses.size();
+	}
+	
+	public int getMonthPriceCount(String price) {
+		List<WebElement> prices = webDriver.findElements(By.xpath("//p[contains(.,'"+price+"')]"));
+		return prices.size();
+	}
+		
+	public int getCompanyNameCount(String companyName) {
+		List<WebElement> addresses = webDriver.findElements(By.xpath("//p[contains(.,'"+companyName+"')]"));
+		return addresses.size();
+	}
+	
+	public int getCompanyAddressCount(String companyAddress) {
+		List<WebElement> addresses = webDriver.findElements(By.xpath("//p[contains(.,'"+companyAddress+"')]"));
+		return addresses.size();
+	}
+	
+	public int getCompanyNameWithAddressCount(String companyName,String companyAddress) {
+		List<WebElement> addresses1 = webDriver.findElements(By.xpath("//li[contains(.,'"+companyName+ " " +companyAddress+"')]"));
+		return addresses1.size();
+	}
+
+	public int getEmailCount(String email) {
+		List<WebElement> email1 = webDriver.findElements(By.xpath("//a[contains(@href,'"+email+"')]"));
+		List<WebElement> email2 = webDriver.findElements(By.xpath("//li[contains(.,'"+email+"')]"));
+		List<WebElement> email3 = webDriver.findElements(By.xpath("//p[contains(.,'e-mail') and contains(.,'"+email+"')]"));	
+		return email1.size()+email2.size()+email3.size();
+	}
+	
+	public int getContactNumberCount(String phoneNumber) {
+		List<WebElement> contactNumber1 = webDriver.findElements(By.xpath("//a[contains(@href,'"+phoneNumber+"')]"));
+		List<WebElement> contactNumber2 = webDriver.findElements(By.xpath("//li[contains(.,'"+phoneNumber+"')]"));
+		List<WebElement> contactNumber3 = webDriver.findElements(By.xpath("//p[contains(.,'téléphone au "+phoneNumber+".')]"));	
+		return contactNumber1.size() + contactNumber2.size() +contactNumber3.size();
+	}
+	
+	public int getBothPriceCount(String price) {
+		List<WebElement> prices = webDriver.findElements(By.xpath("//p[contains(.,'"+price+"')]"));
+		return prices.size();
 	}
 	
 }

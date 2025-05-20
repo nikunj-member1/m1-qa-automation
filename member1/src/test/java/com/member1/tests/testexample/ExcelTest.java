@@ -1,4 +1,4 @@
-package com.member1.tests.lp;
+package com.member1.tests.testexample;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
