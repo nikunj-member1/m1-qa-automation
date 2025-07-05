@@ -1,4 +1,4 @@
-package com.member1.pages.customer.product;
+package com.member1.pages.customer.product.commonpages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class PaymentPage extends BaseDriverManager{
 	
 	// Mesprix page
 	By paymentTitleText = new By.ByXPath("//h1[contains(.,'Paiement')]");
-	By billingDetailsTitle = new By.ByXPath("//h3[contains(.,'Détails de la facturation')]");	
+	By billingDetailsTitle = new By.ByXPath("//h3[contains(.,'Détails de la facturation')]|//h3[contains(.,'Détails de facturation')]");	
 	By firstNameTextBox = new By.ById("billing_first_name");
 	By lastNameTextBox = new By.ById("billing_last_name");
 	By addressLine1Textbox = new By.ById("billing_address_1");
@@ -55,11 +55,11 @@ public class PaymentPage extends BaseDriverManager{
 	By expiryDateTextbox = new By.ById("emerchantpay_direct-card-expiry");
 	By cardCodeTextbox = new By.ById("emerchantpay_direct-card-cvc");
 	By termsCheckbox = new By.ById("terms");
-	By privacyCheckbox = new By.ByCssSelector("[class='your-checkbox-class']");
+	By privacyCheckbox = new By.ByXPath("//div[@class='woocommerce-privacy-policy-text']/div/input");
 	By placeOrderButton = new By.ById("place_order");
 	By paymentByCreditCardTitle = new By.ByXPath("//label[@for='payment_method_emerchantpay_direct'][contains(.,'Paiement par carte bancaire')]");
 	By yourOrderTitleText = new By.ByXPath("//h3[@id='order_review_heading'][contains(.,'Votre commande')]");
-	By termsAndConditionLink = new By.ByXPath("//a[contains(@class,'terms-and-conditions-link')][contains(.,'terms and conditions')]");
+	By termsAndConditionLink = new By.ByXPath("//a[contains(@class,'terms-and-conditions-link')]");
 			
 	public String getPaymentTitle() {
 		generics.waitForElementVisible(paymentTitle);
@@ -278,6 +278,8 @@ public class PaymentPage extends BaseDriverManager{
 	}
 	
 	public void clickOnPrivacyCheckbox() {
+		generics.scrollToElement(webDriver.findElement(cardCodeTextbox));
+		generics.waitForElementToBeClickable(webDriver.findElement(privacyCheckbox));
 		generics.clickOn(privacyCheckbox);
 	}
 	

@@ -43,6 +43,14 @@ public interface Configuration {
 	String CLIENT_SECRET_JSON = PROJECT_DIR + File.separator + "resources" + File.separator + "testdata"
 			+ File.separator + "client_secret.json";
 	String SHEET_RANGE = "Sheet1!A:AK";
+	
+	String MESPRIX_URL = genericsConfig.getProperty("mesprixUrl");
+	String MESMARQUES_URL = genericsConfig.getProperty("mesmarquesUrl");
+	String PRIXVIP_URL = genericsConfig.getProperty("prixvipUrl");
+	String TARIFFIXE_URL = genericsConfig.getProperty("tariffixeUrl");
+	String SANSFRAIS_URL = genericsConfig.getProperty("sansfraisUrl");
+	String PRIXGARANTI_URL = genericsConfig.getProperty("prixgarantiUrl"); 
+	String PRIXCOUTANT_URL=genericsConfig.getProperty("prixcoutantUrl"); 
 
 	static URL getRemoteGridURL() {
 		URL REMOTE_GRID_URL = null;

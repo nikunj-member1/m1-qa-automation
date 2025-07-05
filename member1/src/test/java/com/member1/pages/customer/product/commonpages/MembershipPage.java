@@ -1,4 +1,4 @@
-package com.member1.pages.customer.product;
+package com.member1.pages.customer.product.commonpages;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class MembershipPage extends BaseDriverManager {
 
 	// Become Privilage Member page
 	By devenirMembrePrivilegeTitleText = new By.ByXPath("//h2[contains(.,'Devenir Membre Privilège')]");
-	By formTitleText = new By.ByXPath("//form/div/h3[contains(.,'DEVENIR MEMBRE PRIVILÈGE')]");
+	By formTitleText = new By.ByXPath("//form/div/h3[contains(.,'DEVENIR MEMBRE PRIVILÈGE')]|//h3[contains(.,'DEVENIR MEMBRE PRIVILÈGE')]");
 	By prenomTextbox = new By.ById("fname");
 	By nomTextbox = new By.ById("lname");
 	By emailTextbox = new By.ById("email");
@@ -30,16 +30,18 @@ public class MembershipPage extends BaseDriverManager {
 	By villeTextbox = new By.ById("ville");
 	By telephoneTextbox = new By.ById("phone");
 	By conditionCheckbox = new By.ById("is_adult");
-	By conditionText = new By.ByCssSelector("[for='is_adult']");
-	By jeDeviensMembrePrivilegeButton = new By.ByXPath("//button[@data-text-value=\"JE DEVIENS MEMBRE PRIVILÈGE\"]");
-	By jeDeviensMembrePrivilegeButtonBelowPrixTitle = new By.ByXPath("(//a[contains(@class,'elementor-button-link')][contains(.,'Je deviens Membre Privilège ')])[1]");
+	By conditionText = new By.ByXPath("//span[@for='is_adult']|//label[contains(@for,'accept_terms')]");
+	By jeDeviensMembrePrivilegeButton = new By.ByXPath("//button[@data-text-value='JE DEVIENS MEMBRE PRIVILÈGE']|//button[@id='register-button']");
+	By jeDeviensMembrePrivilegeButtonBelowPrixTitle = new By.ByXPath("(//a[contains(@class,'elementor-button-link')][contains(.,'Je deviens Membre Privilège ')])[1]|//a[contains(@title,'Je deviens Membre Privilège')]");
 	By jeDeviensMembrePrivilegeButtonBelowReadyToSaveTextButton = new By.ByXPath("(//a[contains(@class,'elementor-button-link')][contains(.,'Je deviens Membre Privilège ')])[2]");
-	By lesConditionLink =new By.ByXPath("//a[@title='les conditions'][contains(.,'les conditions')]");		
+	By lesConditionLink =new By.ByXPath("//a[contains(.,'les conditions')]");	//"//a[@title='les conditions'][contains(.,'les conditions')]"
+	By devenezMembrePrivilegeTitle = new By.ByXPath("//h1[contains(.,'Devenez Membre Privilège')]|//h1[contains(.,'Become a Privilege Member')]");
+	By suspendezTitle = new By.ByXPath("//h6[contains(.,'SUSPENDEZ VOTRE ABONNEMENT SANS FRAIS')]|//h6[contains(.,'SUSPEND YOUR SUBSCRIPTION FREE OF CHARGE')]");
 	
 	//CGV Modal
 	
 	By cgvTitle = new By.ByXPath("//h1[contains(.,'CGV')]");
-	By closeButton = new By.ByXPath("//button[@aria-label=\"Close\"]");	
+	By closeButton = new By.ByXPath("//h1[@id='exampleModalLabel']/following::button[1]");	
 	
 	public Boolean isDevenirMembrePrivilegeTitleDisplayed() {
 		generics.scrollToElement(webDriver.findElement(devenirMembrePrivilegeTitleText));
@@ -181,7 +183,7 @@ public class MembershipPage extends BaseDriverManager {
 	}
 	
 	public void clickJeDeviensMembrePrivilegeButtonBelowPrixTitle() {	
-		generics.scrollToElement(webDriver.findElement(jeDeviensMembrePrivilegeButtonBelowPrixTitle));
+		generics.scrollToElement(webDriver.findElement(devenezMembrePrivilegeTitle));
 		generics.clickOn(jeDeviensMembrePrivilegeButtonBelowPrixTitle);
 	}
 	
@@ -190,6 +192,7 @@ public class MembershipPage extends BaseDriverManager {
 	}
 	
 	public void clickJeDeviensMembrePrivilegeButtonBelowReadyToSave() {
+		generics.scrollToElement(webDriver.findElement(suspendezTitle));
 		generics.clickOn(jeDeviensMembrePrivilegeButtonBelowReadyToSaveTextButton);
 	}
 	
@@ -203,7 +206,8 @@ public class MembershipPage extends BaseDriverManager {
 	}
 	
 	public void clickCloseButton() {
-		generics.clickOn(closeButton);
+		generics.clickOnJS(webDriver.findElement(closeButton));
+		Generics.pause(5);
 	}
 	
 	public int getEURMonthPriceCount(String price) {
@@ -212,9 +216,9 @@ public class MembershipPage extends BaseDriverManager {
 	}
 	
 	public int getBothPriceCount(String price) {
-		List<WebElement> prices1 = webDriver.findElements(By.xpath("//span[contains(.,'"+price+"')]"));
-		List<WebElement> prices2 = webDriver.findElements(By.xpath("//p[contains(.,'"+price+"')]"));
-		return prices1.size()+prices2.size();
+		List<WebElement> prices1 = webDriver.findElements(By.xpath("//div[@class='entry-content']//span[contains(.,'"+price+"')]"));
+	//	List<WebElement> prices2 = webDriver.findElements(By.xpath("//div[@class='entry-content']//p[contains(.,'"+price+"')]"));
+		return prices1.size();
 	}
 	
 	public Boolean isCGVTitleDisplayed() {

@@ -17,12 +17,19 @@ public class LoginPage extends BaseDriverManager {
 	}
 	
 	By mesPrixLogo = By.xpath("//h1[@class='wp-login-logo']/a[text()='mes-prix.com']");
-	By emailTextbox = By.xpath("//label[text()='Identifiant ou adresse e-mail']/following::input[@id='user_login']");
+	By emailTextbox = By.xpath("//label[text()='Identifiant ou adresse e-mail']/following::input[@id='user_login']|//label[text()='Username or Email Address']/following::input[@id='user_login']");
 	By passwordTextbox =By.xpath("//label[contains(@for,'user_pass')]/following::input[@id='user_pass']");
 	By seconnectorButton = By.id("wp-submit");
+	By mesMarquesLogo = By.xpath("//h1[@class='wp-login-logo']/a[text()='mes-marques.com']");
+	By priceCostLogo = By.xpath("//h1[@class='wp-login-logo']/a[text()='prix-vip.com']");
+	By prixgarantiLogo = By.xpath("//h1[@class='wp-login-logo']/a[text()='prix-garanti.com']");
+	By prixvipLogo = By.xpath("//h1[@class='wp-login-logo']/a[text()='prix-vip.com']");
+	By sansFraisLogo = By.xpath("//h1[@class='wp-login-logo']/a[text()='sans-frais.com']");
+	By tarifFixeLogo = By.xpath("//h1[@class='wp-login-logo']/a[text()='tarif-fixe.com']");
 	
-	public void navigateToMesPrixBackEnd(String mespricBackendURL) {
-		webDriver.get(mespricBackendURL);
+	public void navigateToWebsiteBackEnd(String backendURL) {
+		generics.switchToNewTab();
+		webDriver.get(backendURL);
 		generics.waitForPageLoad("2");
 	}
 	
@@ -30,6 +37,36 @@ public class LoginPage extends BaseDriverManager {
 		generics.waitForElementVisible(mesPrixLogo);
 		return generics.isElementPresent(mesPrixLogo);
 	}
+	
+	public boolean isMesMarquesLogoDisplayed() {
+		generics.waitForElementVisible(mesMarquesLogo);
+		return generics.isElementPresent(mesMarquesLogo);
+	}
+	
+	public boolean isPriceCostLogoDisplayed() {
+		generics.waitForElementVisible(priceCostLogo);
+		return generics.isElementPresent(priceCostLogo);
+	}
+	
+	public boolean isPrixGarantiLogoDisplayed() {
+		generics.waitForElementVisible(prixgarantiLogo);
+		return generics.isElementPresent(prixgarantiLogo);
+	}
+	
+	public boolean isPrixVipLogoDisplayed() {
+		generics.waitForElementVisible(prixvipLogo);
+		return generics.isElementPresent(prixvipLogo);
+	}
+	
+	public boolean isSansFraisLogoDisplayed() {
+		generics.waitForElementVisible(sansFraisLogo);
+		return generics.isElementPresent(sansFraisLogo);
+	}
+	
+	public boolean isTarifFixeLogoDisplayed() {
+		generics.waitForElementVisible(tarifFixeLogo);
+		return generics.isElementPresent(tarifFixeLogo);
+	}	
 	
 	public boolean isEmailTextBox() {
 		return generics.isElementPresent(emailTextbox);

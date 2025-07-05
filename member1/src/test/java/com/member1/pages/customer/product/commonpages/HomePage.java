@@ -1,4 +1,4 @@
-package com.member1.pages.customer.product;
+package com.member1.pages.customer.product.commonpages;
 
 import java.util.List;
 
@@ -19,15 +19,15 @@ public class HomePage extends BaseDriverManager {
 		generics = new Generics(webDriver);
 	}
 
-	// Mes Prix Home page
 	By adherezEnTouteFlexibiliteTitle = new By.ByXPath("//h2[contains(.,'Adhérez en toute flexibilité')]");
 	By jeDeviensMembrePrivilègeButtonFromHowItWorksSection = new By.ByXPath("(//span[@class='elementor-button-text'])[1]");
 	By jeDeviensMembrePrivilègeButtonFromWhoAreWeSection = new By.ByXPath("(//span[@class='elementor-button-text'])[2]");
-	By nousSommesUnClubentrepotTitle = new By.ByXPath("//h2[text()='Nous sommes un Club-entrepôt ! ']");
+	By quiSommesNousTitle = new By.ByXPath("//h2[contains(text(),'Qui sommes-nous ?')]|//span[contains(text(),'QUI SOMMES-NOUS ?')]");	
+	By francaisLanguage = new By.ByXPath("//a[contains(.,'Français')]");
 		
 	public void navigateURL(String url) {
 		webDriver.navigate().to(url);
-		generics.waitForPageLoad("2");
+		generics.waitForPageLoad("3");
 	}
 	
 	public Boolean isJeDeviensMembrePrivilègeButtonFromHowItWorksSectionDisplayed() {
@@ -42,7 +42,7 @@ public class HomePage extends BaseDriverManager {
 	
 	public Boolean isJeDeviensMembrePrivilègeButtonFromWhoAreWeSectionDisplayed() {
 		generics.waitForElementVisible(jeDeviensMembrePrivilègeButtonFromWhoAreWeSection);
-		generics.scrollToElement(webDriver.findElement(nousSommesUnClubentrepotTitle));
+	//	generics.scrollToElement(webDriver.findElement(quiSommesNousTitle));
 		return generics.isElementPresent(jeDeviensMembrePrivilègeButtonFromWhoAreWeSection);
 	}
 	
@@ -53,6 +53,11 @@ public class HomePage extends BaseDriverManager {
 	public int getMonthPriceCountOnContent(String price) {
 		List<WebElement> prices = webDriver.findElements(By.xpath("//div[@class='entry-content']//p[contains(.,'"+price+"')]"));
 		return prices.size();
+	}
+	
+	public void selectFrancaisLanguageFromHeader() {
+		generics.waitForElementVisible(francaisLanguage);
+		generics.clickOn(francaisLanguage);
 	}
 	
 }

@@ -1,4 +1,4 @@
-package com.member1.pages.customer.product;
+package com.member1.pages.customer.product.commonpages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

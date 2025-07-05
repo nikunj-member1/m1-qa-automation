@@ -1,4 +1,4 @@
-package com.member1.pages.customer.product;
+package com.member1.pages.customer.product.commonpages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +20,7 @@ public class ProductDetailsPage extends BaseDriverManager {
 	
 	By productTitle = new By.ByXPath("//h1[contains(@class,'product_title')]");
 	By productImage = new By.ByXPath("//img[contains(@class,'product-')]");
-	By addToCartButton = new By.ByXPath("//button[contains(.,'Add to cart')]");
+	By addToCartButton = new By.ByXPath("//button[contains(.,'Add to cart')]|//button[contains(.,'Ajouter au panier')]");
 	By priceRadioButton = new By.ByXPath("//p[contains(.,'9.18 €')]/input[@name='price_radio']");
 	By miniCartTruncate = new By.ByXPath("//div/a[@class='mini_cart_title truncate']");
 		
@@ -39,6 +39,7 @@ public class ProductDetailsPage extends BaseDriverManager {
 	
 	public void clickOnAddToCartButton() {
 		generics.clickOn(addToCartButton);
+		generics.waitForPageLoad("2");
 	}
 	
 	public Boolean isProductPriceRadioButtonDisplayed(String price) {

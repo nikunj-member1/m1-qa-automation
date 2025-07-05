@@ -1,6 +1,7 @@
 package com.member1.framework.common;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +14,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -133,7 +135,7 @@ public class Generics implements Configuration {
 	 */
 	public boolean isElementPresent(By by) {
 		try {
-			waitForElementVisible(by);
+		//	waitForElementVisible(by);
 			WebElement element = generalDriver.findElement(by);
 			return element.isDisplayed();
 		} catch (NoSuchElementException nse) {
@@ -258,41 +260,41 @@ public class Generics implements Configuration {
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
 
-	/**
-	 * To swipe towards next screen
-	 *
-	 */
-	public void swipeToNextScreen() {
-		int locationXStart, locationXEnd;
-
-		int locationX = generalDriver.manage().window().getSize().width;
-		int locationY = generalDriver.manage().window().getSize().height / 2;
-
-		locationXStart = (int) Math.round(locationX * 0.90);
-		locationXEnd = (int) Math.round(locationX * 0.10);
-
-		new TouchAction<>((AndroidDriver) generalDriver).press(PointOption.point(locationXStart, locationY))
-				.waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
-				.moveTo(PointOption.point(locationXEnd, locationY)).release().perform();
-	}
-
-	/**
-	 * To swipe towards previous screen
-	 *
-	 */
-	public void swipeToPreviousScreen() {
-		int locationXStart, locationXEnd;
-
-		int locationX = generalDriver.manage().window().getSize().width;
-		int locationY = generalDriver.manage().window().getSize().height / 2;
-
-		locationXStart = (int) Math.round(locationX * 0.10);
-		locationXEnd = (int) Math.round(locationX * 0.90);
-
-		new TouchAction<>((AndroidDriver) generalDriver).press(PointOption.point(locationXStart, locationY))
-				.waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
-				.moveTo(PointOption.point(locationXEnd, locationY)).release().perform();
-	}
+//	/**
+//	 * To swipe towards next screen
+//	 *
+//	 */
+//	public void swipeToNextScreen() {
+//		int locationXStart, locationXEnd;
+//
+//		int locationX = generalDriver.manage().window().getSize().width;
+//		int locationY = generalDriver.manage().window().getSize().height / 2;
+//
+//		locationXStart = (int) Math.round(locationX * 0.90);
+//		locationXEnd = (int) Math.round(locationX * 0.10);
+//
+//		new TouchAction<>((AndroidDriver) generalDriver).press(PointOption.point(locationXStart, locationY))
+//				.waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
+//				.moveTo(PointOption.point(locationXEnd, locationY)).release().perform();
+//	}
+//
+//	/**
+//	 * To swipe towards previous screen
+//	 *
+//	 */
+//	public void swipeToPreviousScreen() {
+//		int locationXStart, locationXEnd;
+//
+//		int locationX = generalDriver.manage().window().getSize().width;
+//		int locationY = generalDriver.manage().window().getSize().height / 2;
+//
+//		locationXStart = (int) Math.round(locationX * 0.10);
+//		locationXEnd = (int) Math.round(locationX * 0.90);
+//
+//		new TouchAction<>((AndroidDriver) generalDriver).press(PointOption.point(locationXStart, locationY))
+//				.waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
+//				.moveTo(PointOption.point(locationXEnd, locationY)).release().perform();
+//	}
 
 	/**
 	 * To set implicit wait
@@ -300,17 +302,17 @@ public class Generics implements Configuration {
 	 * @param seconds Integer
 	 */
 	public void implicitWaitOf(int seconds) {
-		generalDriver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+		generalDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
 	}
 
-	/**
-	 * Returns current android activity.
-	 *
-	 * @return String value of current android activity name.
-	 */
-	public String getCurrentActivity() {
-		return ((AndroidDriver) generalDriver).currentActivity();
-	}
+//	/**
+//	 * Returns current android activity.
+//	 *
+//	 * @return String value of current android activity name.
+//	 */
+//	public String getCurrentActivity() {
+//		return ((AndroidDriver) generalDriver).currentActivity();
+//	}
 
 	/**
 	 * Wait until element is invisible on screen.
@@ -323,27 +325,27 @@ public class Generics implements Configuration {
 		implicitWaitOf(Integer.parseInt(APP_IMPLICIT_WAIT));
 	}
 
-	/**
-	 * Press back button of android phone.
-	 */
-	public void pressBack() {
-		((AndroidDriver) generalDriver).pressKey(new KeyEvent().withKey(AndroidKey.BACK));
-	}
+//	/**
+//	 * Press back button of android phone.
+//	 */
+//	public void pressBack() {
+//		((AndroidDriver) generalDriver).pressKey(new KeyEvent().withKey(AndroidKey.BACK));
+//	}
 
-	/**
-	 * To perform scroll Down
-	 *
-	 */
-	public void scrollDown() {
-
-		int locationXStart = generalDriver.manage().window().getSize().width / 2;
-		int locationYStart = (int) (generalDriver.manage().window().getSize().height * 0.80);
-		int locationYEnd = (int) (generalDriver.manage().window().getSize().height * 0.20);
-
-		new TouchAction<>((AndroidDriver) generalDriver).press(PointOption.point(locationXStart, locationYStart))
-				.waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
-				.moveTo(PointOption.point(locationXStart, locationYEnd)).release().perform();
-	}
+//	/**
+//	 * To perform scroll Down
+//	 *
+//	 */
+//	public void scrollDown() {
+//
+//		int locationXStart = generalDriver.manage().window().getSize().width / 2;
+//		int locationYStart = (int) (generalDriver.manage().window().getSize().height * 0.80);
+//		int locationYEnd = (int) (generalDriver.manage().window().getSize().height * 0.20);
+//
+//		new TouchAction<>((AndroidDriver) generalDriver).press(PointOption.point(locationXStart, locationYStart))
+//				.waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
+//				.moveTo(PointOption.point(locationXStart, locationYEnd)).release().perform();
+//	}
 
 	/**
 	 * To perform drag and drop using JS
@@ -416,4 +418,12 @@ public class Generics implements Configuration {
 	public void pressBackOnBrowser() {
 		generalDriver.navigate().back();
 	}
+	
+	public void switchToNewTab() {
+		generalDriver.switchTo().newWindow(WindowType.TAB);
+		ArrayList<String> tabs = new ArrayList<>(generalDriver.getWindowHandles());
+		generalDriver.switchTo().window(tabs.get(1));
+	}
+	
+	
 }

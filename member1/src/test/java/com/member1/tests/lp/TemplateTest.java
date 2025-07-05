@@ -13,9 +13,9 @@ import com.member1.framework.drivermanager.BaseDriverManager;
 import com.member1.framework.utilities.GetSheetData;
 import com.member1.framework.utilities.Report;
 import com.member1.pages.customer.headerfooter.HeaderFooter;
-import com.member1.pages.customer.product.MerciPage;
-import com.member1.pages.customer.product.PaymentPage;
-import com.member1.pages.customer.product.ProductDescriptionPage;
+import com.member1.pages.customer.product.commonpages.MerciPage;
+import com.member1.pages.customer.product.commonpages.PaymentPage;
+import com.member1.pages.customer.product.commonpages.ProductDescriptionPage;
 import com.member1.pages.data.DataProvider;
 
 public class TemplateTest extends BaseDriverManager {

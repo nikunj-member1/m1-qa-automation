@@ -1,4 +1,4 @@
-package com.member1.pages.customer.product;
+package com.member1.pages.customer.product.mesprix;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class ContactUsPage extends BaseDriverManager {
 	By emailTextbox = new By.ByCssSelector("[placeholder='Adresse mail']");
 	By yourMessageTextbox = new By.ByCssSelector("[placeholder='Votre message']");
 	By envoyerButton = new By.ByCssSelector("[value='ENVOYER']");
-	By responseText = new By.ByXPath("//div[contains(@class,'response-output')][contains(.,\"L’envoi a été détecté comme indésirable.\")]");
+	By responseText = new By.ByXPath("//div[contains(@class,'response-output')][contains(.,\"Le message de l’expéditeur a bien été envoyé.\")]");
 	By commentResilierMonAbonnementText = new By.ByXPath("//a[@class=\"elementor-accordion-title\"][text()='Comment résilier mon abonnement ?']");
 	
 	public Boolean isBasoinDaideContactUsTitleDisplayed() {
@@ -69,6 +69,7 @@ public class ContactUsPage extends BaseDriverManager {
 	public void clickOnEnvoyerButton() {
 		generics.scrollToElement(webDriver.findElement(yourMessageTextbox));
 		generics.clickOn(envoyerButton);
+		Generics.pause(5);
 	}
 	
 	public void addContactUsFormDetails(String nom,String email,String message) {
@@ -82,6 +83,7 @@ public class ContactUsPage extends BaseDriverManager {
 	}
 	
 	public void expandCommentResilierMonAbonnementSection() {
+	//	generics.scrollToElement(webDriver.findElement(commentResilierMonAbonnementText));
 		generics.clickOn(commentResilierMonAbonnementText);
 		Generics.pause(2);
 	}
