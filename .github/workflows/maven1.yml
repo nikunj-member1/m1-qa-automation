@@ -44,7 +44,7 @@ jobs:
       working-directory: member1
       run: mvn test -Dsuite=testsuites\smoke
       
-    - name: Upload TestNG results
+    - if: always()
       uses: actions/upload-artifact@v4
       with:
         name: report
