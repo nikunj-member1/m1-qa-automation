@@ -2043,6 +2043,8 @@ public class ChecklistMesMarquesTest extends BaseDriverManager {
 				Report.fail("Expected contact number '"+contactNumber+"' should appear <b>'"+expectedContactNumberCount+"'</b> times but found <b>'"+actualContactNumberCount+"'</b> times on header section on FAQ Et Service Client page.", getScreenshot(getDriver()));
 			}
 			
+			//faq et service client page > Content
+			
 			FaqEtServiceClientPage faqEtServiceClientPage = new FaqEtServiceClientPage(getDriver());
 			
 			actualEmailCount = faqEtServiceClientPage.getEmailCount(email);			
@@ -2055,7 +2057,7 @@ public class ChecklistMesMarquesTest extends BaseDriverManager {
 			}
 			 
 			actualContactNumberCount = faqEtServiceClientPage.getContactNumberCount(contactNumber);
-			expectedContactNumberCount = 3;
+			expectedContactNumberCount = 1;
 			
 			if (actualContactNumberCount==expectedContactNumberCount) {
 				Report.pass("ContactNumber '"+contactNumber+"' appear '"+expectedContactNumberCount+"' times on FAQ Et Service Client page.", getScreenshot(getDriver()));
@@ -2082,14 +2084,16 @@ public class ChecklistMesMarquesTest extends BaseDriverManager {
 				Report.fail("Expected Price '"+faqSectionPrice+"' should appear <b>'"+expectedPriceCount+"'</b> times but found <b>'"+actualPriceCount+"'</b> times on FAQ Et Service Client page.", getScreenshot(getDriver()));
 			}
 			
+			//faq et service client page > Footer
+			
 			companyNameWithAddress = Enums.MesMarquesDetails.COMPANY_NAME.getValue() + " " + Enums.MesMarquesDetails.COMPANY_ADDRESS.getValue();
 			actualCompanyNameWithAddressCount = headerFooter.getCompanyFullAddressCountOnFooter(Enums.MesMarquesDetails.COMPANY_NAME.getValue(),Enums.MesMarquesDetails.COMPANY_ADDRESS.getValue());
 			expectedCompanyNameWithAddressCount = 1;
 			
 			if (actualCompanyNameWithAddressCount==expectedCompanyNameWithAddressCount) {
-				Report.pass("Company name with address '"+companyNameWithAddress+"' appear '"+expectedCompanyNameWithAddressCount+"' times on footer section on Donnes Personnelles page.", getScreenshot(getDriver()));
+				Report.pass("Company name with address '"+companyNameWithAddress+"' appear '"+expectedCompanyNameWithAddressCount+"' times on footer section on FAQ Et Service Client page.", getScreenshot(getDriver()));
 			} else {
-				Report.fail("Expected company name with address '"+companyNameWithAddress+"' should appear <b>'"+expectedCompanyNameWithAddressCount+"'</b> times but found <b>'"+actualCompanyNameWithAddressCount+"'</b> times on footer section on Donnes Personnelles page.", getScreenshot(getDriver()));
+				Report.fail("Expected company name with address '"+companyNameWithAddress+"' should appear <b>'"+expectedCompanyNameWithAddressCount+"'</b> times but found <b>'"+actualCompanyNameWithAddressCount+"'</b> times on footer section on FAQ Et Service Client page.", getScreenshot(getDriver()));
 			}
 			
 			email = Enums.MesMarquesDetails.EMAIL.getValue();			
@@ -2097,9 +2101,9 @@ public class ChecklistMesMarquesTest extends BaseDriverManager {
 			expectedEmailCount = 1;
 			
 			if (actualEmailCount==expectedEmailCount) {
-				Report.pass("Email '"+email+"' appear '"+expectedEmailCount+"' times on footer section on Donnes Personnelles page.", getScreenshot(getDriver()));
+				Report.pass("Email '"+email+"' appear '"+expectedEmailCount+"' times on footer section on FAQ Et Service Client page.", getScreenshot(getDriver()));
 			} else {
-				Report.fail("Expected email '"+email+"' should appear <b>'"+expectedEmailCount+"'</b> times but found <b>'"+actualEmailCount+"'</b> times on footer section on Donnes Personnelles page.", getScreenshot(getDriver()));
+				Report.fail("Expected email '"+email+"' should appear <b>'"+expectedEmailCount+"'</b> times but found <b>'"+actualEmailCount+"'</b> times on footer section on FAQ Et Service Client page.", getScreenshot(getDriver()));
 			}
 		
 			contactNumber = Enums.MesMarquesDetails.CONTACT_NUMBER.getValue();
@@ -2107,9 +2111,9 @@ public class ChecklistMesMarquesTest extends BaseDriverManager {
 			expectedContactNumberCount = 1;
 			
 			if (actualContactNumberCount==expectedContactNumberCount) {
-				Report.pass("Contact number '"+contactNumber+"' appear '"+expectedContactNumberCount+"' times on footer section on Donnes Personnelles page.", getScreenshot(getDriver()));
+				Report.pass("Contact number '"+contactNumber+"' appear '"+expectedContactNumberCount+"' times on footer section on FAQ Et Service Client page.", getScreenshot(getDriver()));
 			} else {
-				Report.fail("Expected contact number '"+contactNumber+"' should appear <b>'"+expectedContactNumberCount+"'</b> times but found <b>'"+actualContactNumberCount+"'</b> times on footer section on Donnes Personnelles page.", getScreenshot(getDriver()));
+				Report.fail("Expected contact number '"+contactNumber+"' should appear <b>'"+expectedContactNumberCount+"'</b> times but found <b>'"+actualContactNumberCount+"'</b> times on footer section on FAQ Et Service Client page.", getScreenshot(getDriver()));
 			}
 			
 			bothPrice = "29,90€/mois ou 75€/trimestre";
@@ -2117,9 +2121,9 @@ public class ChecklistMesMarquesTest extends BaseDriverManager {
 			expectedPriceCount = 1;
 			
 			if (actualPriceCount==expectedPriceCount) {
-				Report.pass("Price '"+bothPrice+"' appear '"+expectedPriceCount+"' times on footer section on Donnes Personnelles page.", getScreenshot(getDriver()));
+				Report.pass("Price '"+bothPrice+"' appear '"+expectedPriceCount+"' times on footer section on FAQ Et Service Client page.", getScreenshot(getDriver()));
 			} else {
-				Report.fail("Expected price '"+bothPrice+"' should appear <b>'"+expectedPriceCount+"'</b> times but found <b>'"+actualPriceCount+"'</b> times on footer section on Donnes Personnelles page.", getScreenshot(getDriver()));
+				Report.fail("Expected price '"+bothPrice+"' should appear <b>'"+expectedPriceCount+"'</b> times but found <b>'"+actualPriceCount+"'</b> times on footer section on FAQ Et Service Client page.", getScreenshot(getDriver()));
 			}
 					
 			// GENERAL CONDITIONS OF SALE pages
@@ -2209,19 +2213,87 @@ public class ChecklistMesMarquesTest extends BaseDriverManager {
 				Report.fail("Expected Price '"+bothPrice+"' should appear <b>'"+expectedPriceCount+"'</b> times but found <b>'"+actualPriceCount+"'</b> times on GENERAL CONDITIONS OF SALE page.", getScreenshot(getDriver()));
 			}
 			
+			// GENERAL CONDITIONS OF SALE pages > footer
+			
+			companyNameWithAddress = Enums.MesMarquesDetails.COMPANY_NAME.getValue() + " " + Enums.MesMarquesDetails.COMPANY_ADDRESS.getValue();
+			actualCompanyNameWithAddressCount = headerFooter.getCompanyFullAddressCountOnFooter(Enums.MesMarquesDetails.COMPANY_NAME.getValue(),Enums.MesMarquesDetails.COMPANY_ADDRESS.getValue());
+			expectedCompanyNameWithAddressCount = 1;
+			
+			if (actualCompanyNameWithAddressCount==expectedCompanyNameWithAddressCount) {
+				Report.pass("Company name with address '"+companyNameWithAddress+"' appear '"+expectedCompanyNameWithAddressCount+"' times on footer section on GENERAL CONDITIONS OF SALE page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected company name with address '"+companyNameWithAddress+"' should appear <b>'"+expectedCompanyNameWithAddressCount+"'</b> times but found <b>'"+actualCompanyNameWithAddressCount+"'</b> times on footer section on GENERAL CONDITIONS OF SALE page.", getScreenshot(getDriver()));
+			}
+			
+			email = Enums.MesMarquesDetails.EMAIL.getValue();			
+			actualEmailCount = headerFooter.getEmailCountOnFooter(email);			
+			expectedEmailCount = 1;
+			
+			if (actualEmailCount==expectedEmailCount) {
+				Report.pass("Email '"+email+"' appear '"+expectedEmailCount+"' times on footer section on GENERAL CONDITIONS OF SALE page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected email '"+email+"' should appear <b>'"+expectedEmailCount+"'</b> times but found <b>'"+actualEmailCount+"'</b> times on footer section on GENERAL CONDITIONS OF SALE page.", getScreenshot(getDriver()));
+			}
+		
+			contactNumber = Enums.MesMarquesDetails.CONTACT_NUMBER.getValue();
+			actualContactNumberCount = headerFooter.getContactNumberCountOnFooter(contactNumber);
+			expectedContactNumberCount = 1;
+			
+			if (actualContactNumberCount==expectedContactNumberCount) {
+				Report.pass("Contact number '"+contactNumber+"' appear '"+expectedContactNumberCount+"' times on footer section on GENERAL CONDITIONS OF SALE page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected contact number '"+contactNumber+"' should appear <b>'"+expectedContactNumberCount+"'</b> times but found <b>'"+actualContactNumberCount+"'</b> times on footer section on GENERAL CONDITIONS OF SALE page.", getScreenshot(getDriver()));
+			}
+			
+			bothPrice = "29,90€/mois ou 75€/trimestre";
+			actualPriceCount = headerFooter.getBothPriceCountFooter(bothPrice);
+			expectedPriceCount = 1;
+			
+			if (actualPriceCount==expectedPriceCount) {
+				Report.pass("Price '"+bothPrice+"' appear '"+expectedPriceCount+"' times on footer section on GENERAL CONDITIONS OF SALE page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected price '"+bothPrice+"' should appear <b>'"+expectedPriceCount+"'</b> times but found <b>'"+actualPriceCount+"'</b> times on footer section on GENERAL CONDITIONS OF SALE page.", getScreenshot(getDriver()));
+			}
+			
+			// Product Details page
+			
 			String productUrl = "https://mes-marques.com/product/parfum-femme-victorio-lucchino-aguas-no-2-edt-30-ml/";			
 			
 			Report.info("Navigate to '"+productUrl+"' product details page.");
 			homePage.navigateURL(productUrl);
+			
+			// Product Details page >> Header
+			
+			email = Enums.MesMarquesDetails.EMAIL.getValue();			
+			actualEmailCount = headerFooter.getEmailCountOnHeader(email);			
+			expectedEmailCount = 1;
+			
+			if (actualEmailCount==expectedEmailCount) {
+				Report.pass("Email '"+email+"' appear '"+expectedEmailCount+"' times on header section on Product Details page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected email '"+email+"' should appear <b>'"+expectedEmailCount+"'</b> times but found <b>'"+actualEmailCount+"'</b> times on header section on Product Details page.", getScreenshot(getDriver()));
+			}
+		
+			contactNumber = Enums.MesMarquesDetails.CONTACT_NUMBER.getValue();
+			actualContactNumberCount = headerFooter.getContactNumberCountOnHeader(contactNumber);
+			expectedContactNumberCount = 1;
+			
+			if (actualContactNumberCount==expectedContactNumberCount) {
+				Report.pass("Contact number '"+contactNumber+"' appear '"+expectedContactNumberCount+"' times on header section on Product Details page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected contact number '"+contactNumber+"' should appear <b>'"+expectedContactNumberCount+"'</b> times but found <b>'"+actualContactNumberCount+"'</b> times on header section on Product Details page.", getScreenshot(getDriver()));
+			}
+			
+			// Product Details page >> Content
 
 			monthEuroPrice = "29,90/mois";
 			actualMonthPriceCount = membershipPage.getMonthPriceCount(monthEuroPrice);
 			expectedMonthPriceCount = 1;
 			
 			if (actualMonthPriceCount==expectedMonthPriceCount) {
-				Report.pass("Month euro price '"+monthEuroPrice+"' appear '"+expectedMonthPriceCount+"' times on Membership page.", getScreenshot(getDriver()));
+				Report.pass("Month euro price '"+monthEuroPrice+"' appear '"+expectedMonthPriceCount+"' times on Product Details page.", getScreenshot(getDriver()));
 			} else {
-				Report.fail("Expected month euro price '"+monthEuroPrice+"' should appear <b>'"+expectedMonthPriceCount+"'</b> times but found <b>'"+actualMonthPriceCount+"'</b> times on Membership page.", getScreenshot(getDriver()));
+				Report.fail("Expected month euro price '"+monthEuroPrice+"' should appear <b>'"+expectedMonthPriceCount+"'</b> times but found <b>'"+actualMonthPriceCount+"'</b> times on Product Details page.", getScreenshot(getDriver()));
 			}
 			
 			ProductDetailsPage productDetailsPage = new ProductDetailsPage(getDriver());
@@ -2243,17 +2315,127 @@ public class ChecklistMesMarquesTest extends BaseDriverManager {
 			} else {
 				Report.fail("'"+expectedProductTitle+"' title on Product Details page.", getScreenshot(getDriver()));
 			}
+			
+			// Product Details page >> Footer
+			
+			companyNameWithAddress = Enums.MesMarquesDetails.COMPANY_NAME.getValue() + " " + Enums.MesMarquesDetails.COMPANY_ADDRESS.getValue();
+			actualCompanyNameWithAddressCount = headerFooter.getCompanyFullAddressCountOnFooter(Enums.MesMarquesDetails.COMPANY_NAME.getValue(),Enums.MesMarquesDetails.COMPANY_ADDRESS.getValue());
+			expectedCompanyNameWithAddressCount = 1;
+			
+			if (actualCompanyNameWithAddressCount==expectedCompanyNameWithAddressCount) {
+				Report.pass("Company name with address '"+companyNameWithAddress+"' appear '"+expectedCompanyNameWithAddressCount+"' times on footer section on Product Details page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected company name with address '"+companyNameWithAddress+"' should appear <b>'"+expectedCompanyNameWithAddressCount+"'</b> times but found <b>'"+actualCompanyNameWithAddressCount+"'</b> times on footer section on Product Details page.", getScreenshot(getDriver()));
+			}
+			
+			email = Enums.MesMarquesDetails.EMAIL.getValue();			
+			actualEmailCount = headerFooter.getEmailCountOnFooter(email);			
+			expectedEmailCount = 1;
+			
+			if (actualEmailCount==expectedEmailCount) {
+				Report.pass("Email '"+email+"' appear '"+expectedEmailCount+"' times on footer section on Product Details page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected email '"+email+"' should appear <b>'"+expectedEmailCount+"'</b> times but found <b>'"+actualEmailCount+"'</b> times on footer section on Product Details page.", getScreenshot(getDriver()));
+			}
 		
+			contactNumber = Enums.MesMarquesDetails.CONTACT_NUMBER.getValue();
+			actualContactNumberCount = headerFooter.getContactNumberCountOnFooter(contactNumber);
+			expectedContactNumberCount = 1;
+			
+			if (actualContactNumberCount==expectedContactNumberCount) {
+				Report.pass("Contact number '"+contactNumber+"' appear '"+expectedContactNumberCount+"' times on footer section on Product Details page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected contact number '"+contactNumber+"' should appear <b>'"+expectedContactNumberCount+"'</b> times but found <b>'"+actualContactNumberCount+"'</b> times on footer section on Product Details page.", getScreenshot(getDriver()));
+			}
+			
+			bothPrice = "29,90€/mois ou 75€/trimestre";
+			actualPriceCount = headerFooter.getBothPriceCountFooter(bothPrice);
+			expectedPriceCount = 1;
+			
+			if (actualPriceCount==expectedPriceCount) {
+				Report.pass("Price '"+bothPrice+"' appear '"+expectedPriceCount+"' times on footer section on Product Details page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected price '"+bothPrice+"' should appear <b>'"+expectedPriceCount+"'</b> times but found <b>'"+actualPriceCount+"'</b> times on footer section on Product Details page.", getScreenshot(getDriver()));
+			}
+			
+			//basket page 
+					
 			Report.info("Click on shopping cart button on Header.");
 			headerFooter.clickOnShoppingCartButton();
 					
-			BasketPage basketPage = new BasketPage(getDriver());
+			BasketPage basketPage = new BasketPage(getDriver());			
+			
 			
 			if (basketPage.isBasketTitleDisplayed()) {
 				Report.pass("'Panier' title on Basket page.", getScreenshot(getDriver()));
 			} else {
 				Report.fail("'Panier' title on Basket page.", getScreenshot(getDriver()));
 			}
+			
+			// Basket page >> Header
+			
+			email = Enums.MesMarquesDetails.EMAIL.getValue();			
+			actualEmailCount = headerFooter.getEmailCountOnHeader(email);			
+			expectedEmailCount = 1;
+			
+			if (actualEmailCount==expectedEmailCount) {
+				Report.pass("Email '"+email+"' appear '"+expectedEmailCount+"' times on header section on Basket page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected email '"+email+"' should appear <b>'"+expectedEmailCount+"'</b> times but found <b>'"+actualEmailCount+"'</b> times on header section on Basket page.", getScreenshot(getDriver()));
+			}
+		
+			contactNumber = Enums.MesMarquesDetails.CONTACT_NUMBER.getValue();
+			actualContactNumberCount = headerFooter.getContactNumberCountOnHeader(contactNumber);
+			expectedContactNumberCount = 1;
+			
+			if (actualContactNumberCount==expectedContactNumberCount) {
+				Report.pass("Contact number '"+contactNumber+"' appear '"+expectedContactNumberCount+"' times on header section on Basket page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected contact number '"+contactNumber+"' should appear <b>'"+expectedContactNumberCount+"'</b> times but found <b>'"+actualContactNumberCount+"'</b> times on header section on Basket page.", getScreenshot(getDriver()));
+			}
+			
+			// Basket page >> Footer
+			
+			companyNameWithAddress = Enums.MesMarquesDetails.COMPANY_NAME.getValue() + " " + Enums.MesMarquesDetails.COMPANY_ADDRESS.getValue();
+			actualCompanyNameWithAddressCount = headerFooter.getCompanyFullAddressCountOnFooter(Enums.MesMarquesDetails.COMPANY_NAME.getValue(),Enums.MesMarquesDetails.COMPANY_ADDRESS.getValue());
+			expectedCompanyNameWithAddressCount = 1;
+			
+			if (actualCompanyNameWithAddressCount==expectedCompanyNameWithAddressCount) {
+				Report.pass("Company name with address '"+companyNameWithAddress+"' appear '"+expectedCompanyNameWithAddressCount+"' times on footer section on Basket page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected company name with address '"+companyNameWithAddress+"' should appear <b>'"+expectedCompanyNameWithAddressCount+"'</b> times but found <b>'"+actualCompanyNameWithAddressCount+"'</b> times on footer section on Product Details page.", getScreenshot(getDriver()));
+			}
+			
+			email = Enums.MesMarquesDetails.EMAIL.getValue();			
+			actualEmailCount = headerFooter.getEmailCountOnFooter(email);			
+			expectedEmailCount = 1;
+			
+			if (actualEmailCount==expectedEmailCount) {
+				Report.pass("Email '"+email+"' appear '"+expectedEmailCount+"' times on footer section on Basket page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected email '"+email+"' should appear <b>'"+expectedEmailCount+"'</b> times but found <b>'"+actualEmailCount+"'</b> times on footer section on Product Details page.", getScreenshot(getDriver()));
+			}
+		
+			contactNumber = Enums.MesMarquesDetails.CONTACT_NUMBER.getValue();
+			actualContactNumberCount = headerFooter.getContactNumberCountOnFooter(contactNumber);
+			expectedContactNumberCount = 1;
+			
+			if (actualContactNumberCount==expectedContactNumberCount) {
+				Report.pass("Contact number '"+contactNumber+"' appear '"+expectedContactNumberCount+"' times on footer section on Product Details page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected contact number '"+contactNumber+"' should appear <b>'"+expectedContactNumberCount+"'</b> times but found <b>'"+actualContactNumberCount+"'</b> times on footer section on Product Details page.", getScreenshot(getDriver()));
+			}
+			
+			bothPrice = "29,90€/mois ou 75€/trimestre";
+			actualPriceCount = headerFooter.getBothPriceCountFooter(bothPrice);
+			expectedPriceCount = 1;
+			
+			if (actualPriceCount==expectedPriceCount) {
+				Report.pass("Price '"+bothPrice+"' appear '"+expectedPriceCount+"' times on footer section on Product Details page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected price '"+bothPrice+"' should appear <b>'"+expectedPriceCount+"'</b> times but found <b>'"+actualPriceCount+"'</b> times on footer section on Product Details page.", getScreenshot(getDriver()));
+			}
+			
 		
 			Report.info("Click on Proceed to checkout button on Basket page.");
 			basketPage.clickOnProceedToCheckout();

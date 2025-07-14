@@ -55,17 +55,17 @@ public class GeneralConditionPage extends BaseDriverManager {
 	}
 	
 	public int getCompanyNameAndAddressCount(String companyName,String companyAddress) {
-		List<WebElement> addresses = webDriver.findElements(By.xpath("//p[contains(.,'"+companyName+"') and ('"+companyAddress+"')]"));
+		List<WebElement> addresses = webDriver.findElements(By.xpath("//div[@class='entry-content']//p[contains(.,'"+companyName+"') and ('"+companyAddress+"')]"));
 		return addresses.size();
 	}
 	
 	public int getBothPriceCount(String price) {
-		List<WebElement> prices = webDriver.findElements(By.xpath("//p[contains(.,'"+price+"')]"));
+		List<WebElement> prices = webDriver.findElements(By.xpath("//div[@class='entry-content']//p[contains(.,'"+price+"')]"));
 		return prices.size();
 	}
 	
 	public int getMonthPriceCount(String price) {
-		List<WebElement> prices = webDriver.findElements(By.xpath("//p[contains(.,'"+price+"')]"));
+		List<WebElement> prices = webDriver.findElements(By.xpath("//div[@class='entry-content']//p[contains(.,'"+price+"')]"));
 		return prices.size();
 	}
 	
@@ -75,17 +75,17 @@ public class GeneralConditionPage extends BaseDriverManager {
 	}
 	
 	public int getCompanyNameCount(String companyName) {
-		List<WebElement> addresses = webDriver.findElements(By.xpath("//p[contains(.,'"+companyName+"')]"));
+		List<WebElement> addresses = webDriver.findElements(By.xpath("//div[@class='entry-content']//p[contains(.,'"+companyName+"')]"));
 		return addresses.size();
 	}
 	
 	public int getCompanyAddressCount(String companyAddress) {
-		List<WebElement> addresses = webDriver.findElements(By.xpath("//p[contains(.,'"+companyAddress+"')]"));
+		List<WebElement> addresses = webDriver.findElements(By.xpath("//div[@class='entry-content']//p[contains(.,'"+companyAddress+"')]"));
 		return addresses.size();
 	}
 	
 	public int getCompanyNameWithAddressCount(String companyName,String companyAddress) {
-		List<WebElement> addresses1 = webDriver.findElements(By.xpath("//li[contains(.,'"+companyName+ " " +companyAddress+"')]"));
+		List<WebElement> addresses1 = webDriver.findElements(By.xpath("//div[@class='entry-content']//li[contains(.,'"+companyName+ " " +companyAddress+"')]"));
 		return addresses1.size();
 	}
 		
