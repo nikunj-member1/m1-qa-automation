@@ -528,15 +528,19 @@ public class ChecklistMesPrixTest extends BaseDriverManager {
 
 			Report.setTest(extent.createTest("TC_PSP_05 - Test if you can buy a product- purchase should be made with a credit card, if paypal is implemented its good to try with paypal as well <br> TC_PSP_07 - Test if on the user side you have received an email of confirmation order"));
 
-			String productUrl = "https://mes-prix.com/product/ampoule-led-portable-avec-cordon-bulby-innovagoods/";			
-
 			HomePage homePage = new HomePage(getDriver());
 			
-			Report.info("Open '"+productUrl+"' in " + BROWSER_NAME + " browser.");
-			homePage.navigateURL(productUrl);
+			Report.info("Open '"+MESPRIX_URL+"' in " + BROWSER_NAME + " browser.");
+			homePage.navigateURL(MESPRIX_URL);
 			
 			homePage.selectFrancaisLanguageFromHeader();
 			Report.pass("Select francais language on Home page.");
+			
+			if (homePage.isJeDeviensMembrePrivilègeButtonFromHowItWorksSectionDisplayed()) {
+				Report.pass("'Je Deviens Membre Privilège' below how it works section on Home page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("'Je Deviens Membre Privilège' below how it works section on Home page.", getScreenshot(getDriver()));
+			}
 			
 			ProductDetailsPage productDetailsPage = new ProductDetailsPage(getDriver());
 			
@@ -546,8 +550,11 @@ public class ChecklistMesPrixTest extends BaseDriverManager {
 				Report.fail("'Product' image on Product Details page.", getScreenshot(getDriver()));
 			}
 			
+			String productTitle = "Adaptateur Startech GC15HSF              VGA";
+			homePage.selectProduct(productTitle);
+			
 			String actualProductTitle = productDetailsPage.getProductTitle(); 
-			String expectedProductTitle = "Ampoule LED Portable avec Cordon Bulby InnovaGoods";
+			String expectedProductTitle = productTitle;
 			
 			if (actualProductTitle.equalsIgnoreCase(expectedProductTitle)) {
 				Report.pass("'"+expectedProductTitle+"' title on Product Details page.", getScreenshot(getDriver()));
@@ -555,7 +562,7 @@ public class ChecklistMesPrixTest extends BaseDriverManager {
 				Report.fail("Expected <b>'" + expectedProductTitle + "'</b> but found <b>'"+ actualProductTitle +"'</b>  title on Product Details page.", getScreenshot(getDriver()));
 			}
 			
-			String productPrice = "9.70";
+			String productPrice = "9.50";
 			
 			if (productDetailsPage.isProductPriceRadioButtonDisplayed(productPrice)) {
 				Report.pass("'"+productPrice+" E' product price on Product Details page.", getScreenshot(getDriver()));
@@ -565,11 +572,7 @@ public class ChecklistMesPrixTest extends BaseDriverManager {
 			
 			Report.info("Click on Add to cart button on Product Details page.");
 			productDetailsPage.clickOnAddToCartButton();
-			
-			//2nd time
-			Report.info("Click on Add to cart button on Product Details page.");
-			productDetailsPage.clickOnAddToCartButton();
-				
+							
 			if (productDetailsPage.isMiniCartProductTitleDisplayed(expectedProductTitle)) {
 				Report.pass("'"+expectedProductTitle+"' title on Product Details page.", getScreenshot(getDriver()));
 			} else {
@@ -722,7 +725,7 @@ public class ChecklistMesPrixTest extends BaseDriverManager {
 				Report.pass("Shipping Address : '"+customerFirstName+"','"+customerLastName+"','"+customerAddress1+"','"+customerAddress2+"','"+customerCodePostal+"','"+customerVille+"' on MailDrop page.", getScreenshot(getDriver()));
 			} else {
 				Report.fail("Shipping Address : '"+customerFirstName+"','"+customerLastName+"','"+customerAddress1+"','"+customerAddress2+"','"+customerCodePostal+"','"+customerVille+"' on MailDrop page.", getScreenshot(getDriver()));
-			}		
+			}				
 			
 		} catch (Exception ex) {
 			try {

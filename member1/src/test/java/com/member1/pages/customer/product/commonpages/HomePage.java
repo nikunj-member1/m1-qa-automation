@@ -24,6 +24,8 @@ public class HomePage extends BaseDriverManager {
 	By jeDeviensMembrePrivilègeButtonFromWhoAreWeSection = new By.ByXPath("(//span[@class='elementor-button-text'])[2]");
 	By quiSommesNousTitle = new By.ByXPath("//h2[contains(text(),'Qui sommes-nous ?')]|//span[contains(text(),'QUI SOMMES-NOUS ?')]");	
 	By francaisLanguage = new By.ByXPath("//a[contains(.,'Français')]");
+	By bestSellingProductsTitle = new By.ByXPath("//div[contains(@data-attrs,'best_selling_products')]//div[@class='slick-track']//h3[contains(@class,'product-title')]/a");
+	By nextButton = new By.ByXPath("//div[contains(@data-attrs,'best_selling_products')]//button[@aria-label='Next']");
 		
 	public void navigateURL(String url) {
 		webDriver.navigate().to(url);
@@ -59,5 +61,23 @@ public class HomePage extends BaseDriverManager {
 		generics.waitForElementVisible(francaisLanguage);
 		generics.clickOn(francaisLanguage);
 	}
+	
+	public void clickOnNextButton() {
+		generics.clickOn(nextButton);
+		Generics.pause(2);
+	}
+	
+	public void selectProduct(String productName) {
+		generics.scrollToElement(webDriver.findElement(jeDeviensMembrePrivilègeButtonFromHowItWorksSection));
+		WebElement product = webDriver.findElement(By.xpath("(//div[contains(@data-attrs,'best_selling_products')]//div[@class='slick-track']//h3[contains(@class,'product-title')]/a[contains(.,'"+productName+"')])[1]"));
+		
+		if(product.isDisplayed()) {
+			product.click();
+		}else {
+			clickOnNextButton();
+			product.click();
+		}
+	}
+	
 	
 }

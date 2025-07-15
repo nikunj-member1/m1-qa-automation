@@ -28,6 +28,7 @@ public class ContactUsPage extends BaseDriverManager {
 	By envoyerButton = new By.ByCssSelector("[value='ENVOYER']");
 	By responseText = new By.ByXPath("//div[contains(@class,'response-output')][contains(.,\"Le message de l’expéditeur a bien été envoyé.\")]");
 	By commentResilierMonAbonnementText = new By.ByXPath("//a[@class=\"elementor-accordion-title\"][text()='Comment résilier mon abonnement ?']");
+	By spinner = new By.ByXPath("//form[@data-status='sent']");
 	
 	public Boolean isBasoinDaideContactUsTitleDisplayed() {
 		return generics.isElementPresent(basoinDaideContactUsTitle);
@@ -69,7 +70,6 @@ public class ContactUsPage extends BaseDriverManager {
 	public void clickOnEnvoyerButton() {
 		generics.scrollToElement(webDriver.findElement(yourMessageTextbox));
 		generics.clickOn(envoyerButton);
-		Generics.pause(5);
 	}
 	
 	public void addContactUsFormDetails(String nom,String email,String message) {
@@ -78,7 +78,9 @@ public class ContactUsPage extends BaseDriverManager {
 		typeYourMessageTextbox(message);
 	}	
 	
-	public Boolean isResponseTextDisplayed() {
+	public Boolean isResponseTextDisplayed() {	
+		generics.waitForElementVisible(spinner);
+		Generics.pause(2);
 		return generics.isElementPresent(responseText);
 	}
 	
