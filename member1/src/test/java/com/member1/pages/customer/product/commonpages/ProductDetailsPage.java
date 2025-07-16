@@ -23,6 +23,7 @@ public class ProductDetailsPage extends BaseDriverManager {
 	By addToCartButton = new By.ByXPath("//button[contains(.,'Add to cart')]|//button[contains(.,'Ajouter au panier')]");
 	By priceRadioButton = new By.ByXPath("//p[contains(.,'9.18 €')]/input[@name='price_radio']");
 	By miniCartTruncate = new By.ByXPath("//div/a[@class='mini_cart_title truncate']");
+	By countAddToCartText = new By.ByXPath("//a[@title='View your shopping cart']/span[contains(@class,'count')][contains(.,'2')]");
 		
 	public String getProductTitle() {
 		generics.waitForElementVisible(productTitle);
@@ -30,6 +31,7 @@ public class ProductDetailsPage extends BaseDriverManager {
 	}
 
 	public Boolean isProductImageDisplayed() {
+		generics.waitForElementVisible(productImage);
 		return generics.isElementPresent(productImage);
 	}
 	
@@ -40,6 +42,7 @@ public class ProductDetailsPage extends BaseDriverManager {
 	public void clickOnAddToCartButton() {
 		generics.clickOn(addToCartButton);
 		generics.waitForPageLoad("2");
+		generics.waitForElementVisible(countAddToCartText);
 	}
 	
 	public Boolean isProductPriceRadioButtonDisplayed(String price) {

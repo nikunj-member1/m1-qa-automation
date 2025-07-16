@@ -25,6 +25,7 @@ public class HomePage extends BaseDriverManager {
 	By quiSommesNousTitle = new By.ByXPath("//h2[contains(text(),'Qui sommes-nous ?')]|//span[contains(text(),'QUI SOMMES-NOUS ?')]");	
 	By francaisLanguage = new By.ByXPath("//a[contains(.,'Français')]");
 	By bestSellingProductsTitle = new By.ByXPath("//div[contains(@data-attrs,'best_selling_products')]//div[@class='slick-track']//h3[contains(@class,'product-title')]/a");
+	By bestSellingProducts = new By.ByXPath("//div[contains(@data-attrs,'best_selling_products')]");
 	By nextButton = new By.ByXPath("//div[contains(@data-attrs,'best_selling_products')]//button[@aria-label='Next']");
 		
 	public void navigateURL(String url) {
@@ -63,6 +64,8 @@ public class HomePage extends BaseDriverManager {
 	}
 	
 	public void clickOnNextButton() {
+		generics.moveTo(webDriver.findElement(bestSellingProducts));
+		Generics.pause(2);
 		generics.clickOn(nextButton);
 		Generics.pause(2);
 	}

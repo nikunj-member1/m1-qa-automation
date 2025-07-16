@@ -135,7 +135,6 @@ public class Generics implements Configuration {
 	 */
 	public boolean isElementPresent(By by) {
 		try {
-		//	waitForElementVisible(by);
 			WebElement element = generalDriver.findElement(by);
 			return element.isDisplayed();
 		} catch (NoSuchElementException nse) {
