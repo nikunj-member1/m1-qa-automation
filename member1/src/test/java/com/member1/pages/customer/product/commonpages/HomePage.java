@@ -45,7 +45,7 @@ public class HomePage extends BaseDriverManager {
 	
 	public Boolean isJeDeviensMembrePrivilègeButtonFromWhoAreWeSectionDisplayed() {
 		generics.waitForElementVisible(jeDeviensMembrePrivilègeButtonFromWhoAreWeSection);
-	//	generics.scrollToElement(webDriver.findElement(quiSommesNousTitle));
+		generics.scrollToElement(webDriver.findElement(bestSellingProducts));
 		return generics.isElementPresent(jeDeviensMembrePrivilègeButtonFromWhoAreWeSection);
 	}
 	

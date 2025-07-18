@@ -33,6 +33,9 @@ public class HeaderFooter extends BaseDriverManager {
 	By mesPrixComLogo = new By.ByXPath("//a[@href='https://mes-prix.com/']|(//img[@alt='Mes-prix.com'])[1]");
 	By becomeAPrivilegeMemberLink = new By.ByXPath("(//a[contains(.,'Devenez Membre Privilège')])[1]|(//a[contains(.,'Become a Privilege Member')])[1]|(//a[contains(.,'Devenez Membre') and contains(.,'Privilège')])[1]");
 	By fAQetServiceClientLink = new By.ByXPath("//a[text()='FAQ et service client']|//a[text()='FAQ']");
+	By monCompteLink = new By.ByXPath("//a[text()='Mon compte']");
+	By quiSommesNousLink = new By.ByXPath("//a[text()='Qui sommes-nous ?']");
+	By politiqueDeRetoursEtDeRemboursementsLink = new By.ByXPath("//a[text()='Politique de retours et de remboursements']");
 	
 	//mes marques HeaderFooter
 	By mesMarquesLogo = new By.ByXPath("//a[@href='https://mes-marques.com']");
@@ -213,6 +216,24 @@ public class HeaderFooter extends BaseDriverManager {
 		generics.scrollToElement(webDriver.findElement(becomeAPrivilegeMemberLink));
 		List<WebElement> prices = webDriver.findElements(By.xpath("(//div[@class='footer-contact'])[1]/following::p[contains(.,'"+price+"')]"));
 		return prices.size();
+	}
+	
+	public void clickOnMonCompteLink() {
+		generics.scrollToElement(webDriver.findElement(conditionGeneralesLink));
+		generics.clickOn(monCompteLink);
+		generics.waitForPageLoad("2");
+	}
+	
+	public void clickOnQuiSommesNousLink() {
+		generics.scrollToElement(webDriver.findElement(conditionGeneralesLink));
+		generics.clickOn(quiSommesNousLink);
+		generics.waitForPageLoad("2");
+	}
+	
+	public void clickOnPolitiqueDeRetoursEtDeRemboursementsLink() {
+		generics.scrollToElement(webDriver.findElement(conditionGeneralesLink));
+		generics.clickOn(politiqueDeRetoursEtDeRemboursementsLink);
+		generics.waitForPageLoad("2");
 	}
 	
 	
