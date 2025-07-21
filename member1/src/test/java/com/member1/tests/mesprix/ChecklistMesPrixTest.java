@@ -15,6 +15,7 @@ import com.member1.pages.customer.product.commonpages.*;
 import com.member1.pages.customer.product.mesprix.ContactUsPage;
 import com.member1.pages.data.DataProvider;
 import com.member1.pages.data.Enums;
+import com.member1.pages.data.ProductDetails;
 
 public class ChecklistMesPrixTest extends BaseDriverManager {
 	
@@ -1683,7 +1684,7 @@ public class ChecklistMesPrixTest extends BaseDriverManager {
 			membershipPage.clickLesConditionLink();
 			
 			// no need to routing alert bug
-		    // getDriver().switchTo().alert().accept();
+		    //getDriver().switchTo().alert().accept();
 			
 			if (membershipPage.isCGVTitleDisplayed()) {
 				Report.pass("'CGV' title on cgv modal on Membership page.", getScreenshot(getDriver()));
@@ -2676,9 +2677,8 @@ public class ChecklistMesPrixTest extends BaseDriverManager {
 			} else {
 				Report.fail("Expected contact number '"+contactNumber+"' should appear <b>'"+expectedContactNumberCount+"'</b> times but found <b>'"+actualContactNumberCount+"'</b> times on header section on Payment page.", getScreenshot(getDriver()));
 			}
-			
-			
-			// Payment page > Content
+						
+			// Payment page >  Content
 			
 			PaymentPage paymentPage = new PaymentPage(getDriver());
 			
@@ -2687,6 +2687,8 @@ public class ChecklistMesPrixTest extends BaseDriverManager {
 			} else {
 				Report.fail("'Paiement' title on Payment page.", getScreenshot(getDriver()));
 			}
+			
+			// Payment page >  Terms and conditions content
 			
 			Report.info("Click on terms and condition link on Payment page.");
 			paymentPage.clickOnTermsAndConditionLink();
@@ -2799,6 +2801,125 @@ public class ChecklistMesPrixTest extends BaseDriverManager {
 				Report.fail("Expected price '"+bothPrice+"' should appear <b>'"+expectedPriceCount+"'</b> times but found <b>'"+actualPriceCount+"'</b> times on footer section on Payment page.", getScreenshot(getDriver()));
 			}
 			
+			// Payment page >  privacy policy
+			
+			Report.info("Click 'privacy policy' link on Payment page.");
+			paymentPage.clickOnPrivacyPolicyLink();	
+			
+			// Payment page > Privacy policy: donnees-personnelles page > Header
+						
+			email = Enums.MesPrixDetails.EMAIL.getValue();			
+			actualEmailCount = headerFooter.getEmailCountOnHeader(email);			
+			expectedEmailCount = 1;
+			
+			if (actualEmailCount==expectedEmailCount) {
+				Report.pass("Email '"+email+"' appear '"+expectedEmailCount+"' times on header section on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected email '"+email+"' should appear <b>'"+expectedEmailCount+"'</b> times but found <b>'"+actualEmailCount+"'</b> times on header section on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			}
+		
+			contactNumber = Enums.MesPrixDetails.CONTACT_NUMBER.getValue();
+			actualContactNumberCount = headerFooter.getContactNumberCountOnHeader(contactNumber);
+			expectedContactNumberCount = 1;
+			
+			if (actualContactNumberCount==expectedContactNumberCount) {
+				Report.pass("Contact number '"+contactNumber+"' appear '"+expectedContactNumberCount+"' times on header section on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected contact number '"+contactNumber+"' should appear <b>'"+expectedContactNumberCount+"'</b> times but found <b>'"+actualContactNumberCount+"'</b> times on header section on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			}
+			
+			//  Payment page > Privacy policy: donnees-personnelles page > content
+			
+			companyName = Enums.MesPrixDetails.COMPANY_NAME.getValue();
+			actualCompanyNameCount = personalDataPage.getCompanyNameCount(Enums.MesPrixDetails.COMPANY_NAME.getValue());
+			expectedCompanyNameCount = 17;
+			
+			if (actualCompanyNameCount==expectedCompanyNameCount) {
+				Report.pass("Company name '"+companyName+"' appear '"+expectedCompanyNameCount+"' times on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected company name '"+companyName+"' should appear <b>'"+expectedCompanyNameCount+"'</b> times but found <b>'"+actualCompanyNameCount+"'</b> times on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			}
+			
+			companyAddress = Enums.MesPrixDetails.COMPANY_ADDRESS.getValue();
+			actualCompanyAddressCount = personalDataPage.getCompanyAddressCount(companyAddress);
+			expectedCompanyAddressCount = 2;
+			
+			if (actualCompanyAddressCount==expectedCompanyAddressCount) {
+				Report.pass("Company Address '"+companyNameWithAddress+"' appear '"+expectedCompanyAddressCount+"' times on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected company address '"+companyNameWithAddress+"' should appear <b>'"+expectedCompanyAddressCount+"'</b> times but found <b>'"+actualCompanyAddressCount+"'</b> times on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			}
+			
+			actualCompanyNameWithAddressCount = personalDataPage.getCompanyNameWithAddressCount(Enums.MesPrixDetails.COMPANY_NAME.getValue(),Enums.MesPrixDetails.COMPANY_ADDRESS.getValue());
+			expectedCompanyNameWithAddressCount = 1;
+			
+			if (actualCompanyNameWithAddressCount==expectedCompanyNameWithAddressCount) {
+				Report.pass("Company name with address '"+companyNameWithAddress+"' appear '"+expectedCompanyNameWithAddressCount+"' times on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected company name with address '"+companyNameWithAddress+"' should appear <b>'"+expectedCompanyNameWithAddressCount+"'</b> times but found <b>'"+actualCompanyNameWithAddressCount+"'</b> times on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			}
+			
+			actualContactNumberCount = personalDataPage.getContactNumberCount(contactNumber);
+			expectedContactNumberCount = 1;
+			
+			if (actualContactNumberCount==expectedContactNumberCount) {
+				Report.pass("Contact number '"+contactNumber+"'  appear '"+expectedContactNumberCount+"' times on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected contact number '"+contactNumber+"' should appear <b>'"+expectedContactNumberCount+"'</b> times but found <b>'"+actualContactNumberCount+"'</b> times on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			}	
+			
+			actualEmailCount = personalDataPage.getEmailCount(email);			
+			expectedEmailCount = 2;
+			
+			if (actualEmailCount==expectedEmailCount) {
+				Report.pass("Email '"+email+"' appear '"+expectedEmailCount+"' times on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected email '"+email+"' should appear <b>'"+expectedEmailCount+"' </b> times but found <b>'"+actualEmailCount+"'</b> times on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			}
+			
+			//  Payment page > Privacy policy: donnees-personnelles page > Footer
+			
+			companyNameWithAddress = Enums.MesPrixDetails.COMPANY_NAME.getValue() + " " + Enums.MesPrixDetails.COMPANY_ADDRESS.getValue();
+			actualCompanyNameWithAddressCount = headerFooter.getCompanyFullAddressCountOnFooter(Enums.MesPrixDetails.COMPANY_NAME.getValue(),Enums.MesPrixDetails.COMPANY_ADDRESS.getValue());
+			expectedCompanyNameWithAddressCount = 1;
+			
+			if (actualCompanyNameWithAddressCount==expectedCompanyNameWithAddressCount) {
+				Report.pass("Company name with address '"+companyNameWithAddress+"' appear '"+expectedCompanyNameWithAddressCount+"' times on footer section on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected company name with address '"+companyNameWithAddress+"' should appear <b>'"+expectedCompanyNameWithAddressCount+"'</b> times but found <b>'"+actualCompanyNameWithAddressCount+"'</b> times on footer section on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			}
+			
+			email = Enums.MesPrixDetails.EMAIL.getValue();			
+			actualEmailCount = headerFooter.getEmailCountOnFooter(email);			
+			expectedEmailCount = 1;
+			
+			if (actualEmailCount==expectedEmailCount) {
+				Report.pass("Email '"+email+"' appear '"+expectedEmailCount+"' times on footer section on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected email '"+email+"' should appear <b>'"+expectedEmailCount+"'</b> times but found <b>'"+actualEmailCount+"'</b> times on footer section on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			}
+		
+			contactNumber = Enums.MesPrixDetails.CONTACT_NUMBER.getValue();
+			actualContactNumberCount = headerFooter.getContactNumberCountOnFooter(contactNumber);
+			expectedContactNumberCount = 1;
+			
+			if (actualContactNumberCount==expectedContactNumberCount) {
+				Report.pass("Contact number '"+contactNumber+"' appear '"+expectedContactNumberCount+"' times on footer section on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected contact number '"+contactNumber+"' should appear <b>'"+expectedContactNumberCount+"'</b> times but found <b>'"+actualContactNumberCount+"'</b> times on footer section on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			}
+			
+			bothPrice = "29,90€/mois ou 75€/trimestre";
+			actualPriceCount = headerFooter.getBothPriceCountFooter(bothPrice);
+			expectedPriceCount = 1;
+			
+			if (actualPriceCount==expectedPriceCount) {
+				Report.pass("Price '"+bothPrice+"' appear '"+expectedPriceCount+"' times on footer section on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			} else {
+				Report.fail("Expected price '"+bothPrice+"' should appear <b>'"+expectedPriceCount+"'</b> times but found <b>'"+actualPriceCount+"'</b> times on footer section on Payment page > Donnes Personnelles page.", getScreenshot(getDriver()));
+			}		
+			
+			
 		} catch (Exception ex) {
 			try {
 				ex.printStackTrace();
@@ -2813,7 +2934,7 @@ public class ChecklistMesPrixTest extends BaseDriverManager {
 				t.printStackTrace();
 			}
 		}
-	}
+	}	
 	
 	
 }

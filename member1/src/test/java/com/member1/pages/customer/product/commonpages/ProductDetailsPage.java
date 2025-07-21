@@ -40,6 +40,7 @@ public class ProductDetailsPage extends BaseDriverManager {
 	}
 	
 	public void clickOnAddToCartButton() {
+		generics.scrollToElement(webDriver.findElement(productTitle));
 		generics.clickOn(addToCartButton);
 		generics.waitForPageLoad("2");
 		generics.waitForElementVisible(countAddToCartText);

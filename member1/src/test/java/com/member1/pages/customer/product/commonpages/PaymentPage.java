@@ -60,6 +60,7 @@ public class PaymentPage extends BaseDriverManager{
 	By paymentByCreditCardTitle = new By.ByXPath("//label[@for='payment_method_emerchantpay_direct'][contains(.,'Paiement par carte bancaire')]");
 	By yourOrderTitleText = new By.ByXPath("//h3[@id='order_review_heading'][contains(.,'Votre commande')]");
 	By termsAndConditionLink = new By.ByXPath("//a[contains(@class,'terms-and-conditions-link')]");
+	By privacyPolicyLink = new By.ByXPath("//a[contains(@class,'privacy-policy-link')]");
 			
 	public String getPaymentTitle() {
 		generics.waitForElementVisible(paymentTitle);
@@ -327,6 +328,12 @@ public class PaymentPage extends BaseDriverManager{
 		generics.clickOn(termsAndConditionLink);
 	}
 	
+	public void clickOnPrivacyPolicyLink() {
+		generics.scrollToElement(webDriver.findElement(cardCodeTextbox));
+		generics.clickOn(privacyPolicyLink);
+		generics.switchToWindow();
+	}
+		
 	public int getCompanyNameAndAddressCount(String companyName,String companyAddress) {
 		List<WebElement> addresses = webDriver.findElements(By.xpath("//p[contains(.,'"+companyName+"') and ('"+companyAddress+"')]"));
 		return addresses.size();
