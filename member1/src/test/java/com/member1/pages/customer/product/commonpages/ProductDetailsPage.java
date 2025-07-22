@@ -24,6 +24,7 @@ public class ProductDetailsPage extends BaseDriverManager {
 	By priceRadioButton = new By.ByXPath("//p[contains(.,'9.18 €')]/input[@name='price_radio']");
 	By miniCartTruncate = new By.ByXPath("//div/a[@class='mini_cart_title truncate']");
 	By countAddToCartText = new By.ByXPath("//a[@title='View your shopping cart']/span[contains(@class,'count')][contains(.,'2')]");
+	By contactUsLink = new By.ByXPath("//a[contains(.,'CONTACTEZ NOUS')]");
 		
 	public String getProductTitle() {
 		generics.waitForElementVisible(productTitle);
@@ -40,7 +41,7 @@ public class ProductDetailsPage extends BaseDriverManager {
 	}
 	
 	public void clickOnAddToCartButton() {
-		generics.scrollToElement(webDriver.findElement(productTitle));
+		generics.scrollToElement(webDriver.findElement(contactUsLink));
 		generics.clickOn(addToCartButton);
 		generics.waitForPageLoad("2");
 		generics.waitForElementVisible(countAddToCartText);

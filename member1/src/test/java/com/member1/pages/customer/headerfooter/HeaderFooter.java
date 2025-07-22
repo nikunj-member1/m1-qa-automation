@@ -78,6 +78,7 @@ public class HeaderFooter extends BaseDriverManager {
 	}
 	
 	public void clickOnShoppingCartButton() {
+		generics.scrollToElement(webDriver.findElement(contactUsLink));
 		generics.clickOn(shoppingCart);
 		generics.waitForPageLoad("2");
 	}	
