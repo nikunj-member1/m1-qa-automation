@@ -27,6 +27,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
+        working-directory: member1-pw
         run: npm run test
 
       - name: Upload Playwright HTML report
