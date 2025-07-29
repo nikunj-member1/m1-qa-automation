@@ -12,7 +12,15 @@ export default defineConfig({
     actionTimeout: 300000,
     headless: false,               // Run tests in headed mode
     trace: 'on-first-retry', 
-    screenshot: 'only-on-failure',  
+    screenshot: 'only-on-failure', 
+	video: {
+      mode :'retain-on-failure',  
+      size: { width: 1920, height: 1080 },
+    }, 
+    viewport: { width: 1920, height: 1080 }, // ⬅️ higher resolution
+    launchOptions: {
+      slowMo: 1000,
+    },
   },
   projects: [
     {
