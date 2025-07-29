@@ -1,4 +1,4 @@
-name: Playwright Tests on Windows
+name: tech-vip tests
 
 on:
   schedule:
@@ -8,7 +8,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  psp-checklist:
     runs-on: windows-latest
 
     timeout-minutes: 60
