@@ -6,6 +6,7 @@ const fakerUtils = new FakerUtils();
 //pass
 test('TC_PSP_01_VerifySubscribePageNavigation', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
+  await page.waitForLoadState('networkidle');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
   await expect(page.getByRole('link', { name: 'S’abonner' })).toBeVisible();
   await page.getByRole('link', { name: 'S’abonner' }).click();
@@ -18,6 +19,7 @@ test('TC_PSP_01_VerifySubscribePageNavigation', async ({ page }) => {
 // fail - card verification issue > confirmation page
 test('TC_PSP_02_VerifyEmailAfterPurchaseMembership', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
+  await page.waitForLoadState('networkidle');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
   await expect(page.getByRole('link', { name: 'S’abonner' })).toBeVisible();
   await page.getByRole('link', { name: 'S’abonner' }).click();
@@ -147,6 +149,7 @@ test('TC_PSP_02_VerifyEmailAfterPurchaseMembership', async ({ page }) => {
 //failed due to captcha dialog box issue
 test('TC_PSP_05_TC_PSP_07_VerifyEmailAfterPurchaseProduct', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
+  await page.waitForLoadState('networkidle');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
   await expect(page.getByRole('link', { name: 'PRIX VIP −50% Crochets adhé' })).toBeVisible();
   await page.getByRole('link', { name: 'PRIX VIP −50% Crochets adhé' }).click();
@@ -247,6 +250,7 @@ test('TC_PSP_05_TC_PSP_07_VerifyEmailAfterPurchaseProduct', async ({ page }) => 
 //failed due to captcha dialog box issue
 test('TC_PSP_06_VerifyProductOrderOnBackend', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
+  await page.waitForLoadState('networkidle');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
   await expect(page.getByRole('link', { name: 'PRIX VIP −50% Crochets adhé' })).toBeVisible();
   await page.getByRole('link', { name: 'PRIX VIP −50% Crochets adhé' }).click();
@@ -348,6 +352,7 @@ test('TC_PSP_06_VerifyProductOrderOnBackend', async ({ page }) => {
 // pass // Not getting any message or validation 
 test('TC_PSP_09_VerifyEmailAfterFillingUpContact', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
+  await page.waitForLoadState('networkidle');
   await page.locator('.menu-toggle').click();
   await expect(page.getByRole('link', { name: 'Contact', exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'Contact', exact: true }).click();
@@ -384,6 +389,7 @@ test('TC_PSP_09_VerifyEmailAfterFillingUpContact', async ({ page }) => {
 //failed due to captcha dialog box issue
 test('TC_PSP_13_VerifyProductOrderRefundOnBackend', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
+  await page.waitForLoadState('networkidle');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
   await expect(page.getByRole('link', { name: 'PRIX VIP −50% Crochets adhé' })).toBeVisible();
   await page.getByRole('link', { name: 'PRIX VIP −50% Crochets adhé' }).click();
@@ -485,6 +491,7 @@ test('TC_PSP_13_VerifyProductOrderRefundOnBackend', async ({ page }) => {
 //pass
 test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
+  await page.waitForLoadState('networkidle');
   await expect(page.locator('body')).toContainText('01 76 44 03 44');
   await expect(page.locator('body')).toContainText('contact@tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
@@ -963,3 +970,4 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.getByRole('contentinfo')).toContainText('Nous contacter ? du lundi au vendredi (09h00 à 18h00) 01 76 44 03 44 tech-vip.com Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR Les entreprises et produits cités sont des marques de commerce™ ou des marques déposées® appartenant à leurs propriétaires respectifs. L\'utilisation de ces marques ne suggère aucun lien ou approbation de leur part. Les spécifications peuvent changer sans préavis. Les marques tierces, y compris les logos et les icônes, restent la propriété de leurs détenteurs. En l\'absence d\'indications contraires, l\'utilisation de ces marques n\'implique aucune relation, parrainage ou approbation de la part des propriétaires. Les références à des marques tierces visent simplement à identifier les produits et services de manière équitable, en respectant le droit des marques. Cette offre privée est gérée par une société indépendante non liée au propriétaire initial des marques/produits mentionnés ici.');
 });
+
