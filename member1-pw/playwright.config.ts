@@ -10,7 +10,7 @@ export default defineConfig({
   reporter: 'html',  // the default reporter
   use: {
     actionTimeout: 300000,
-    headless: false,               // Run tests in headed mode
+    headless: true,               // Run tests in headed mode
     trace: 'on-first-retry', 
     screenshot: 'only-on-failure', 
 	video: {
@@ -27,7 +27,7 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        headless: false,           // Ensure browser is headed
+        headless: true,           // Ensure browser is headed
         viewport: { width: 1920, height: 1080 },   
         launchOptions: {
           slowMo: 1000, // slow down each action by 1000ms
