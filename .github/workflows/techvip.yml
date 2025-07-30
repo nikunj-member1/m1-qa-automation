@@ -1,4 +1,4 @@
-name: tech-vip tests
+name: Tech-vip Tests
 
 on:
   schedule:
