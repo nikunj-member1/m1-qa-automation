@@ -22,16 +22,12 @@ export class FakerUtils {
     return "Welcome1*";
   }
 
-  getUsername(): string {
-    return faker.internet.userName();
-  }
-
   getPhoneNumber(): string {
-    return faker.phone.number();
+    return faker.phone.number({ style: 'national' });
   }
 
   getAddress(): string {
-    return `${faker.address.streetAddress()}, ${faker.address.city()}, ${faker.address.country()}`;
+    return `${faker.location.streetAddress()}, ${faker.location.city()}, ${faker.location.country()}`;
   }
 
   getBirthDate(): string {
@@ -39,6 +35,10 @@ export class FakerUtils {
   }
 
   getPostalCode(): string {
-    return faker.address.zipCode('#####')
+    return faker.location.zipCode('#####')
+  }
+
+  getDescription(): string {
+    return faker.lorem.paragraphs({ min: 1, max: 3 });
   }
 }

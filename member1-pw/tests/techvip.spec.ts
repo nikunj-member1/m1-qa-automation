@@ -109,7 +109,7 @@ test('TC_PSP_02_VerifyEmailAfterPurchaseMembership', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Mot de passe*', exact: true }).click();
   await page.getByRole('textbox', { name: 'Mot de passe*', exact: true }).fill(fakerUtils.getPassword());
   await page.getByRole('textbox', { name: 'Confirmez votre mot de passe*' }).click();
-  await page.getByRole('textbox', { name: 'Confirmez votre mot de passe*' }).fill('Welcome1*');
+  await page.getByRole('textbox', { name: 'Confirmez votre mot de passe*' }).fill(fakerUtils.getPassword());
   await page.locator('select[name="subscriber[civility]"]').selectOption('1');
   await page.getByRole('textbox', { name: 'Ville*' }).click();
   await page.getByRole('textbox', { name: 'Ville*' }).fill('Paris');
@@ -120,10 +120,8 @@ test('TC_PSP_02_VerifyEmailAfterPurchaseMembership', async ({ page }) => {
   await expect(page.getByText('Vous faites maintenant partie')).toBeVisible();
   await expect(page.getByRole('link', { name: 'Découvrez nos produits' })).toBeVisible();
   await page.goto('https://maildrop.cc/');
-  await page.waitForTimeout(2000);
   await page.locator('#navbar').getByRole('textbox', { name: 'view-this-mailbox' }).click();
-  await page.locator('#navbar').getByRole('textbox', { name: 'view-this-mailbox' }).fill('johndev');
-  await page.waitForTimeout(1000);
+  await page.locator('#navbar').getByRole('textbox', { name: 'view-this-mailbox' }).fill(firstName);
   await page.locator('#navbar').getByRole('button', { name: 'View Mailbox' }).click();
   // Code for email company details
   await expect(page.getByText('Tech Vip <clients@tech-vip.').first()).toBeVisible();
@@ -146,7 +144,7 @@ test('TC_PSP_02_VerifyEmailAfterPurchaseMembership', async ({ page }) => {
   // Code for email verification > taking 30-40m for email appeareance
 });
 
-//failed due to human interaction dialog box issue
+//failed due to captcha dialog box issue
 test('TC_PSP_05_TC_PSP_07_VerifyEmailAfterPurchaseProduct', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
@@ -203,7 +201,6 @@ test('TC_PSP_05_TC_PSP_07_VerifyEmailAfterPurchaseProduct', async ({ page }) => 
   await page.getByRole('textbox', { name: 'Ville' }).click();
   await page.getByRole('textbox', { name: 'Ville' }).fill('france');
   await page.locator('#main-button-container div').nth(2).click();
-  await page.waitForTimeout(2000);
   await expect(page.getByText('Vous avez déjà un compte PayPal ? Connectez-vous')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Payer par carte bancaire' })).toBeVisible();
   await expect(page.getByTestId('countrySelector')).toBeVisible();
@@ -238,17 +235,16 @@ test('TC_PSP_05_TC_PSP_07_VerifyEmailAfterPurchaseProduct', async ({ page }) => 
   await expect(page.getByRole('link', { name: 'Annuler et retourner sur le' })).toBeVisible();
   await expect(page.getByText('Annuler et retourner sur le site du marchandEnglishSélecteur de pays,')).toBeVisible();
   await expect(page.getByText('Bouclier de protection des paiements sécuriséPayPal, votre réflexe sécurité')).toBeVisible();
-  // Paypal details coding pending
   await page.getByRole('textbox', { name: 'Email' }).click();
-  await page.getByRole('textbox', { name: 'Email' }).fill('test@mail.com');
+  await page.getByRole('textbox', { name: 'Email' }).fill(fakerUtils.getEmail(firstName));
   await page.getByTestId('phone').click();
-  await page.getByTestId('phone').fill('98 89 98 88 88');
+  await page.getByTestId('phone').fill(fakerUtils.getPhoneNumber());
   await page.getByTestId('card-type-selector').selectOption('VISA');  
   await page.locator('body').selectOption('VISA');
-  await page.pause();
+  // Pending code for paypal payment
 });
 
-//failed due to human interaction dialog box issue
+//failed due to captcha dialog box issue
 test('TC_PSP_06_VerifyProductOrderOnBackend', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
@@ -305,7 +301,6 @@ test('TC_PSP_06_VerifyProductOrderOnBackend', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Ville' }).click();
   await page.getByRole('textbox', { name: 'Ville' }).fill('france');
   await page.locator('#main-button-container div').nth(2).click();
-  await page.waitForTimeout(2000);
   await expect(page.getByText('Vous avez déjà un compte PayPal ? Connectez-vous')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Payer par carte bancaire' })).toBeVisible();
   await expect(page.getByText('Nous ne communiquons pas vos')).toBeVisible();
@@ -341,8 +336,13 @@ test('TC_PSP_06_VerifyProductOrderOnBackend', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'Annuler et retourner sur le' })).toBeVisible();
   await expect(page.getByText('Annuler et retourner sur le site du marchandEnglishSélecteur de pays,')).toBeVisible();
   await expect(page.getByText('Bouclier de protection des paiements sécuriséPayPal, votre réflexe sécurité')).toBeVisible();
-  // Paypal details coding pending
-  await page.pause();
+  await page.getByRole('textbox', { name: 'Email' }).click();
+  await page.getByRole('textbox', { name: 'Email' }).fill(fakerUtils.getEmail(firstName));
+  await page.getByTestId('phone').click();
+  await page.getByTestId('phone').fill(fakerUtils.getPhoneNumber());
+  await page.getByTestId('card-type-selector').selectOption('VISA');  
+  await page.locator('body').selectOption('VISA');
+  // Pending code for paypal payment  
 });
 
 // pass // Not getting any message or validation 
@@ -357,8 +357,9 @@ test('TC_PSP_09_VerifyEmailAfterFillingUpContact', async ({ page }) => {
   await expect(page.getByText('Avant d\'envoyer votre message')).toBeVisible();
   await expect(page.locator('#co').getByRole('link', { name: 'FAQ' })).toBeVisible();
   await expect(page.getByText('Avez-vous une question sur')).toBeVisible();
-  await expect(page.getByText('Vous pouvez également nous')).toBeVisible();
-  await expect(page.getByText('Site édité par CASSIOPEIA DIGITAL LTD. Immatriculée sous le n° 12829698 et dont')).toBeVisible();
+  await expect(page.locator('#co')).toContainText('Avez-vous une question sur notre service ou souhaitez-vous gérer votre abonnement ? Peu importe la raison, ce formulaire de contact a été mis en place pour vous permettre de nous joindre facilement et rapidement. Nous mettrons tout en œuvre pour vous répondre dans les meilleurs délais.');
+  await expect(page.locator('#co')).toContainText('Vous pouvez également nous contacter par téléphone au 01 76 44 03 44 du lundi au vendredi (09h00 à 18h00)');
+  await expect(page.locator('#co')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD. Immatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
   await expect(page.getByRole('combobox')).toBeVisible();
   await expect(page.getByRole('textbox', { name: 'Prénom *' })).toBeVisible();
   await expect(page.getByRole('textbox', { name: 'Nom *', exact: true })).toBeVisible();
@@ -366,20 +367,21 @@ test('TC_PSP_09_VerifyEmailAfterFillingUpContact', async ({ page }) => {
   await expect(page.getByRole('textbox', { name: 'Sujet du message *' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Envoyer' })).toBeVisible();
   await expect(page.getByText('* Champs obligatoires')).toBeVisible();
+  const firstName = fakerUtils.getFirstName();
   await page.getByRole('combobox').selectOption('Inscription');
   await page.getByRole('textbox', { name: 'Prénom *' }).click();
-  await page.getByRole('textbox', { name: 'Prénom *' }).fill('test');
+  await page.getByRole('textbox', { name: 'Prénom *' }).fill(fakerUtils.getFirstName());
   await page.getByRole('textbox', { name: 'Nom *', exact: true }).click();
-  await page.getByRole('textbox', { name: 'Nom *', exact: true }).fill('test');
+  await page.getByRole('textbox', { name: 'Nom *', exact: true }).fill(fakerUtils.getLastName());
   await page.getByRole('textbox', { name: 'Email *' }).click();
-  await page.getByRole('textbox', { name: 'Email *' }).fill('karl@maildrop.cc');
+  await page.getByRole('textbox', { name: 'Email *' }).fill(fakerUtils.getEmail(firstName));
   await page.getByRole('textbox', { name: 'Sujet du message *' }).click();
-  await page.getByRole('textbox', { name: 'Sujet du message *' }).fill('test');
+  await page.getByRole('textbox', { name: 'Sujet du message *' }).fill(fakerUtils.getDescription());
   await page.getByRole('button', { name: 'Envoyer' }).click();
   // Not getting any message or validation 
 });
 
-//failed due to human interaction dialog box issue
+//failed due to captcha dialog box issue
 test('TC_PSP_13_VerifyProductOrderRefundOnBackend', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
@@ -436,7 +438,6 @@ test('TC_PSP_13_VerifyProductOrderRefundOnBackend', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Ville' }).click();
   await page.getByRole('textbox', { name: 'Ville' }).fill('france');
   await page.locator('#main-button-container div').nth(2).click();
-  await page.waitForTimeout(2000);
   await expect(page.getByText('Vous avez déjà un compte PayPal ? Connectez-vous')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Payer par carte bancaire' })).toBeVisible();
   await expect(page.getByText('Nous ne communiquons pas vos')).toBeVisible();
@@ -472,8 +473,13 @@ test('TC_PSP_13_VerifyProductOrderRefundOnBackend', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'Annuler et retourner sur le' })).toBeVisible();
   await expect(page.getByText('Annuler et retourner sur le site du marchandEnglishSélecteur de pays,')).toBeVisible();
   await expect(page.getByText('Bouclier de protection des paiements sécuriséPayPal, votre réflexe sécurité')).toBeVisible();
-  // Paypal details coding pending
-  await page.pause();
+  await page.getByRole('textbox', { name: 'Email' }).click();
+  await page.getByRole('textbox', { name: 'Email' }).fill(fakerUtils.getEmail(firstName));
+  await page.getByTestId('phone').click();
+  await page.getByTestId('phone').fill(fakerUtils.getPhoneNumber());
+  await page.getByTestId('card-type-selector').selectOption('VISA');  
+  await page.locator('body').selectOption('VISA');
+  // Pending code for paypal payment
 });
 
 //pass
@@ -483,7 +489,7 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.locator('body')).toContainText('contact@tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.locator('#copyright')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD. Imatriculée au registre des sociétés de l\'Angleterre et du Pays de Galles sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
   await page.getByRole('link', { name: 'High Tech' }).click();
   await expect(page.locator('body')).toContainText('01 76 44 03 44');
@@ -501,7 +507,7 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.locator('body')).toContainText('01 76 44 03 44');
   await expect(page.locator('body')).toContainText('contact@tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByText('Le site tech-vip.com, propose')).toBeVisible();
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.locator('#copyright')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD. Imatriculée au registre des sociétés de l\'Angleterre et du Pays de Galles sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
@@ -509,14 +515,14 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.locator('body')).toContainText('01 76 44 03 44');
   await expect(page.locator('body')).toContainText('contact@tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.locator('#copyright')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD. Imatriculée au registre des sociétés de l\'Angleterre et du Pays de Galles sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
   await page.getByRole('link', { name: 'Animalerie' }).click();
   await expect(page.locator('body')).toContainText('01 76 44 03 44');
   await expect(page.locator('body')).toContainText('contact@tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.locator('#copyright')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD. Imatriculée au registre des sociétés de l\'Angleterre et du Pays de Galles sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
   await page.getByRole('link', { name: 'Sport' }).click();
@@ -524,7 +530,7 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.locator('body')).toContainText('contact@tech-vip.com');
   await expect(page.locator('div').filter({ hasText: 'AccueilSport' }).nth(1)).toBeVisible();
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.locator('#copyright')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD. Imatriculée au registre des sociétés de l\'Angleterre et du Pays de Galles sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
   await page.locator('#menu-item-79157').getByRole('link', { name: 'Presse' }).click();
@@ -532,7 +538,7 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.locator('body')).toContainText('contact@tech-vip.com');
   await expect(page.getByText('AccueilPresse')).toBeVisible();
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.locator('#copyright')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD. Imatriculée au registre des sociétés de l\'Angleterre et du Pays de Galles sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
   await page.getByRole('link', { name: 'Connexion' }).click();
@@ -542,7 +548,7 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.locator('#main')).toContainText('contact@tech-vip.com');
   await expect(page.getByText('AccueilLogin')).toBeVisible();
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée');
   await expect(page.getByRole('contentinfo')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
@@ -555,7 +561,7 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.getByText('AccueilLogin')).toBeVisible();
   await expect(page.getByText('Espace Membre')).toBeVisible();
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.getByText('Le service proposé par tech-')).toBeVisible();
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée');
@@ -586,7 +592,7 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.locator('#co')).toContainText('Vous pouvez également nous contacter par téléphone au 01 76 44 03 44 du lundi au vendredi (09h00 à 18h00)');
   await expect(page.locator('#co')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD. Immatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée');
   await expect(page.getByRole('contentinfo')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
@@ -638,7 +644,7 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.locator('#main')).toContainText('contact@tech-vip.com');
   await expect(page.getByText('AccueilRetractation')).toBeVisible();
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée');
   await expect(page.getByRole('contentinfo')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
@@ -716,7 +722,7 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.locator('#lm')).toContainText('Téléphone au 01 76 44 03 44 du lundi au vendredi (09h00 à 18h00)');
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée');
   await expect(page.getByRole('contentinfo')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
   await expect(page.getByRole('contentinfo')).toContainText('Les entreprises et produits cités sont des marques de commerce™ ou des marques déposées® appartenant à leurs propriétaires respectifs. L\'utilisation de ces marques ne suggère aucun lien ou approbation de leur part. Les spécifications peuvent changer sans préavis. Les marques tierces, y compris les logos et les icônes, restent la propriété de leurs détenteurs. En l\'absence d\'indications contraires, l\'utilisation de ces marques n\'implique aucune relation, parrainage ou approbation de la part des propriétaires. Les références à des marques tierces visent simplement à identifier les produits et services de manière équitable, en respectant le droit des marques. Cette offre privée est gérée par une société indépendante non liée au propriétaire initial des marques/produits mentionnés ici.');
@@ -740,7 +746,7 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.getByText('AccueilMenu.view_rp')).toBeVisible();
   await expect(page.locator('#rp')).toContainText('Tous nos produits bénéficient d’une garantie de remboursement de 60 jours. Envoyez-nous simplement un message sur la page Contactez-nous ou contactez-nous sur contact@tech-vip.com et nous vous rembourserons le prix d’achat.');
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+ await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée');
   await expect(page.getByRole('contentinfo')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
@@ -796,7 +802,7 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.locator('#co')).toContainText('Vous pouvez également nous contacter par téléphone au 01 76 44 03 44 du lundi au vendredi (09h00 à 18h00)');
   await expect(page.locator('#co')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD. Immatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée');
   await expect(page.getByRole('contentinfo')).toContainText('Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR');
@@ -819,14 +825,14 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.getByText('AccueilMenu.view_tr')).toBeVisible();
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR Les entreprises et produits cités sont des marques de commerce™ ou des marques déposées® appartenant à leurs propriétaires respectifs. L\'utilisation de ces marques ne suggère aucun lien ou approbation de leur part. Les spécifications peuvent changer sans préavis. Les marques tierces, y compris les logos et les icônes, restent la propriété de leurs détenteurs. En l\'absence d\'indications contraires, l\'utilisation de ces marques n\'implique aucune relation, parrainage ou approbation de la part des propriétaires. Les références à des marques tierces visent simplement à identifier les produits et services de manière équitable, en respectant le droit des marques. Cette offre privée est gérée par une société indépendante non liée au propriétaire initial des marques/produits mentionnés ici.');
   await page.locator('.menu-toggle').click();
   await page.locator('#menu-item-1827').getByRole('link', { name: 'Moyens de paiement' }).click();
   await expect(page.locator('#main')).toContainText('01 76 44 03 44 contact@tech-vip.com');
   await expect(page.getByText('AccueilMenu.view_pm')).toBeVisible();
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR Les entreprises et produits cités sont des marques de commerce™ ou des marques déposées® appartenant à leurs propriétaires respectifs. L\'utilisation de ces marques ne suggère aucun lien ou approbation de leur part. Les spécifications peuvent changer sans préavis. Les marques tierces, y compris les logos et les icônes, restent la propriété de leurs détenteurs. En l\'absence d\'indications contraires, l\'utilisation de ces marques n\'implique aucune relation, parrainage ou approbation de la part des propriétaires. Les références à des marques tierces visent simplement à identifier les produits et services de manière équitable, en respectant le droit des marques. Cette offre privée est gérée par une société indépendante non liée au propriétaire initial des marques/produits mentionnés ici.');
   await page.getByRole('link', { name: 'Cgv', exact: true }).click();
@@ -836,7 +842,7 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.locator('#ts')).toContainText('Les Présentes Conditions Générales de Vente (ci-après « Conditions Générales » ou « CGV ») ont pour objet de préciser les droits et obligations des parties entre CASSIOPEIA Digital Ltd, immatriculée au registre des sociétés d’Angleterre et du Pays de galles sous le n° 12829698, dont le siège social se situe OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR (ci-après la « Société » ou « Nous ») et toute personne ayant choisi de s’abonner au service (Ci-après l’« Abonné »).');
   await expect(page.locator('#ts')).toContainText('CONDITIONS GÉNÉRALES DE VENTE www.tech-vip.com Les Présentes Conditions Générales de Vente (ci-après « Conditions Générales » ou « CGV ») ont pour objet de préciser les droits et obligations des parties entre CASSIOPEIA Digital Ltd, immatriculée au registre des sociétés d’Angleterre et du Pays de galles sous le n° 12829698, dont le siège social se situe OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR (ci-après la « Société » ou « Nous ») et toute personne ayant choisi de s’abonner au service (Ci-après l’« Abonné »). Les présentes Conditions Générales de vente (ci-après « CGV ») ont pour objet de définir les relations contractuelles entre la Société et l’Abonné. Tout abonnement contracté auprès de la Société implique l’acceptation expresse, préalable, pleine et entière des présentes Conditions générales de vente par l’Abonné, ainsi que de la Charte de Données personnelles. Les CGV ainsi que l’ensemble des informations contractuelles mentionnées sur le Site sont rédigées en langue française. L’acceptation en ligne des présentes CGV est matérialisée par une case à cocher obligatoire lors du processus d’abonnement décrit à l’Article 4 des CGV. Adresse courriel du service clients : contact@tech-vip.com Numéro de téléphone du service clients : 01 76 44 03 44 (Du lundi au vendredi 09h à 18h00) Présentation Nous proposons à nos Abonnés, via notre site internet www.tech-vip.com (ci-après « le Site ») des réductions exclusives sur une sélection de produits (ci-après « le Service»). L’accès au Site L’Abonné est seul responsable des moyens technologiques nécessaires pour accéder au Site, et doit notamment disposer d’un accès à Internet et d’une adresse e-mail. Il conserve à sa charge les frais de télécommunication et d’accès à Internet pour l’utilisation du Site. L’accès au Site est possible 24h/24, 7j/7, sauf en cas de force majeure ou d’un événement hors du contrôle de la Société et sous réserve des éventuelles pannes et interventions de maintenance nécessaires au bon fonctionnement de celui-ci. La Société ne peut être tenue responsable de l’incapacité de l’Abonné à se connecter à Internet ou au Site, ou à accéder à son compte d’Abonné sur le Site. Le Site internet est hébergé chez Anyfes Digital Almogàvers, 29-31, Les Roquetes, Sant Père de Ribes 08812 Barcelone, Espagne Le Site internet est édité par la « Société » Directeur de la publication : Richard TURNER Abonnement au Service Il est possible de s’abonner au Service : - En se rendant directement sur le Site, ou - au moyen du formulaire d’abonnement proposant une offre de bienvenue réservée aux nouveaux Abonnés. Afin de souscrire un abonnement, l’Abonné garantit : - être une personne physique et ne pas contracter dans le cadre d’une activité professionnelle ; - être majeur et responsable selon la loi en vigueur en France, et pouvoir légalement conclure un contrat qui l’engage ; - Résider en France métropolitaine ; - Ne pas avoir déjà souscrit un abonnement au Service dont il se serait rétracté, Pour s’abonner au Service, l’Abonné doit remplir l’ensemble des champs du formulaire mis à sa disposition. En cas de communication de données erronées, la Société ne pourra voir sa responsabilité engagée. L’Abonné garantit que toutes les informations qu’il donne dans le formulaire sont exactes, à jour et sincères et ne sont entachées d’aucun caractère trompeur. Il s’engage à informer la Société (à l’adresse mentionnée en préambule des présentes CGV) en cas de modifications de ses coordonnées, notamment bancaires et/ou postales. L’Abonné est informé et accepte que les informations saisies aux fins de création ou de mise à jour de son Compte valent preuve de son identité. Les informations saisies l’engagent dès leur validation, étant précisé que la Société se réserve le droit de vérifier l’exactitude des données fournies. A l’issue de son inscription, et après paiement du prix du Service conformément à l’article 5 des présentes, l’Abonné reçoit un email de confirmation de son abonnement, qui reprendra le détail de sa commande, les conditions et modalités d’exercice de son droit de rétractation. Présentation du Service Offre de bienvenue La Société propose régulièrement des « Offres de Bienvenue » dans le cadre de sa politique commerciale. Ces offres réservées aux nouveaux Abonnés, permettent de s\'abonner au Service en profitant : - d’une part d’un contre remboursement de 80€ maximum pour seulement 1€ sur le produit indiqué dans l’offre de bienvenue (le « Produit Promotionnel »), et - d’autre part d’un accès découverte au Site d’une durée de 72h. A l’issue de cette période de 72h, en l’absence de résiliation par l’Abonné, l’Abonnement de 29,90€ (ou 75€ par trimestre) prendra alors effet automatiquement et se poursuivra selon les modalités fixées à l’article 5 des CGV. Pour pouvoir bénéficier de l’Offre de bienvenue et du contre remboursement de 80€, le nouvel Abonné devra : - Dans un premier temps, souscrire à l’abonnement et verser la somme de 1€. - Dans un deuxième temps, faire l’acquisition du Produit Promotionnel. Cette acquisition pourra se faire auprès de n’importe quel commerçant, que ce soit en ligne ou en magasin. - Dans un troisième temps, dans les 30 jours suivant la souscription à l’Abonnement, l’Abonné devra adresser la facture d’achat du Produit Promotionnel à l’adresse suivante : contact@tech-vip.com La Société versera alors le remboursement de 80€ sur le compte Paypal associé à l’email fourni par l’Abonné. Si l’Abonné n’a pas de compte Paypal, il recevra un email de la part de Paypal pour ouvrir un compte et percevoir son remboursement. A défaut d’avoir adressé la facture d’achat du Produit Promotionnel dans ce délai de 30 jours, la Société ne versera pas le somme de 80€. Fonctionnement du Service La Société propose chaque mois à ses Abonnés une large sélection de produits (High-Tech, Bricolage, Jeux Vidéo, Audio&Vidéo…) sur lesquels sont appliqués des réductions exclusives (ci-après « les Produits »). Les frais de livraison s’affichent au moment de la validation du panier pour les non-membres. Chaque mois, l’Abonné est invité à consulter dans son espace Abonné sur le Site le catalogue des Produits -avec des réductions exclusives- proposés à l’achat. ATTENTION : TOUS LES ABONNÉS SONT FACTURÉS DE LA COTISATION TOUS LES MOIS (OU TOUS LES 3 MOIS), QU’ILS AIENT PROFITÉ OU NON DE LEUR ABONNEMENT EN PASSANT UNE OU PLUSIEURS COMMANDES. L’accès au catalogue des Produits est ILLIMITÉ, et l\'Abonné peut passer autant de commandes qu\'il le souhaite pendant toute la durée de son abonnement. L’Abonné peut profiter du Service sous réserve du bon encaissement du prix du Service conformément à l’article 5. Les produits proposés peuvent varier d’un mois sur l’autre. Les équipes s’efforcent de proposer aux abonnés une offre la plus large possible pour satisfaire le plus grand nombre. Les photographies des Produits figurant sur le Site ne sont pas contractuelles. Caractéristiques du Service a. Durée et Résiliation L’abonnement entre en vigueur au jour de l’adhésion, soit 72h après la date de souscription. L’abonnement au Service est un abonnement mensuel ou trimestriel (selon le choix fait par l’Abonné lors de la souscription), sans engagement de durée, et à reconduction tacite. Cela signifie que l’abonnement sera reconduit et l’Abonné prélevé tous les mois -ou tous les trois mois- à chaque date d’anniversaire de la souscription. A titre d’illustration, si l’abonnement a été souscrit le 1er juillet, il entrera en vigueur à l’expiration de la période de 72h, soit le 4 juillet, et l’Abonné sera prélevé de sa première mensualité le 4 juillet. La résiliation peut être notifiée par l’Abonné à tout moment par courriel sans préavis et sans motif. La résiliation devra être notifiée par l’Abonné : - soit en remplissant le formulaire de résiliation en cliquant ici. - soit par un e-mail envoyé au Service Client de tech-vip.com à l’adresse courriel suivante : contact@tech-vip.com La résiliation prendra effet à la fin de la période d’abonnement en cours (mensuelle ou trimestrielle selon l’offre choisie par le client), de sorte que l’Abonné qui résilie son Contrat et qui aura payé pour la période en cours aura le droit d’utiliser le Site et l’application pour le reste de la période en cours. A la fin de la période en cours l’Abonné n’aura plus accès au Service et ne sera plus prélevé par la Société. La Société se réserve par ailleurs le droit de résilier le Service à tout moment en cas de non-respect par l’Abonné des présentes Conditions Générales, ou d’invalidité du moyen de paiement fourni par l’Abonné. Elle se réserve également le droit d’arrêter de proposer le Service. L’arrêt du Service fera l’objet d’une information de l’Abonné par tout moyen approprié. b. Prix et Paiement Le coût de l’abonnement au Service s’élève à la somme de 29,90€ TTC par mois, ou 75€ par trimestre, selon la formule d’abonnement choisie par l’Abonné au moment de la souscription. Chaque mois (ou chaque trimestre), l’Abonné pourra retrouver la facture correspondante à la période au sein de son espace Abonné sur le Site. L’Abonné autorise la Société à prélever automatiquement le montant de son abonnement au moyen des coordonnées bancaires qu’il aura fournies. Le paiement du montant de l’Abonnement s’effectue exclusivement par carte bancaire. La carte bancaire sera débitée de 29,90€ chaque mois (ou de 75€ par trimestre) et cela jusqu’à ce que l’Abonné souhaite mettre fin à son Abonnement dans les conditions énoncées à l’article 5. a) des CGV. En cas d’échec de paiement, et/ou en cas de fraude ou de tentative fraude de l’Abonné dont la Société aurait connaissance, celle-ci se réserve le droit de résilier l’abonnement et l’accès au Service correspondant. c. Période d’essai - Droit de Rétractation Conformément à l\'article L 221-18 du Code de la consommation, l’Abonné dispose d\'un délai légal de rétractation de 14 jours calendaires à compter de la date d\'abonnement au Site En se rétractant, l’Abonné résilie automatiquement son abonnement, et il reçoit le remboursement total des frais d\'abonnement déjà payés. Ce remboursement a lieu au plus tard dans les 14 jours à compter de la date à laquelle La Société a reçu sa demande de rétractation. A la suite de sa demande de rétractation, un email sera envoyé à l’Abonné, précisant que sa demande a été prise en considération. L’Abonné pourra exercer son droit légal de rétractation en utilisant le formulaire présent sur le site internet dans la rubrique « Rétractation » ou en recopiant le formulaire ci-dessous sur papier libre : Je vous notifie par la présente, ma rétractation du contrat pour la prestation de services ci-dessous Date de souscription à l\'abonnement : Nom & Prénom : Adresse email utilisée : Date & Signature (en cas de notification du présent formulaire sur papier): L\'exercice du droit de rétractation entraîne la résiliation du contrat". Ce formulaire de rétractation devra être adressé : - Par courrier postal à CASSIOPEIA Digital Ltd, OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR, ou - par email à contact@tech-vip.com Livraison Les livraisons de Produits sont effectuées à l’adresse de livraison indiquée par l’Abonné lors de la souscription de son abonnement. Les livraisons sont effectuées par envoi postal, dans le délai maximum de 30 jours suivant la validation de la commande par l’Abonné dans les conditions prévues à l’article 4. Dans le cas où l’Abonné ne reçoit pas le Produit commandé dans ce délai, il peut contacter la Société par e-mail : contact@tech-vip.com ou par téléphone au 01 76 44 03 44. La Société prendra toute mesure appropriée pour rechercher le Produit perdu et dès confirmation de cette perte, réadressera le Produit à l’Abonné, dans les meilleurs délais ou se verra proposer un remboursement intégral. En l’absence de livraison dans un délai de 30 jours à la suite de la notification par l’Abonné du retard de livraison, celui-ci peut également demander, par email ou par téléphone, l’annulation et / ou le remboursement intégral de sa commande. Données personnelles et Bancaires La Société respecte le droit à la vie privée. Elle est amenée, lors de l’inscription de l’Abonné au Site, à collecter des données à caractère personnel (adresse email, nom, prénom, numéro de téléphone…), aux fins de gestion de sa commande et des relations commerciales avec la Société. Les conditions de traitement des données personnelles par la Société sont énoncées dans la Politique de protection des données personnelles du Site. Conformément aux dispositions de la loi n°78-17 dite loi Informatique et libertés, du 6 janvier 1978 et au règlement de l’UE 2016/679 applicable depuis le 25 mai 2018, l’Abonné dispose d\'un droit d’obtention, d’effacement, d’opposition, d\'accès, de rectification et de suppression de toutes données personnelles le concernant obtenues par la Société lors de l\'utilisation du Service. Tout Abonné peut exercer ce droit en envoyant un e-mail à l\'adresse contact@tech-vip.com. Dans le cas où l’Abonné prendrait finalement la décision de ne pas finaliser son abonnement, la Société collecte uniquement l’adresse email. Cette adresse email pourra être utilisée ultérieurement par la Société, afin de relancer le prospect qui n’aurait pas finalisé sa commande. Les autres informations ne sont conservées que pour les Abonnés qui finalisent vraiment leur abonnement au Service. La Société est particulièrement sensible à la sécurité de son site internet et aux informations que ses Abonnés pourraient lui confier. C’est pour cela que nous avons contracté avec les meilleurs prestataires de paiements. Les prélèvements des mensualités sont effectués via ces prestataires et de manière totalement sécurisée. Ces derniers sont les seuls à avoir accès à vos informations bancaires. Droit applicable et compétence Les présentes Conditions Générales sont régies par la loi française. En cas de contestation relative à l\'interprétation, la validité et/ou l\'exécution des présentes CGV, l’Abonné pourra saisir selon son choix : - l\'une des juridictions territorialement compétentes en vertu du code de procédure civile, ou - la juridiction du lieu où il demeurait au moment de la conclusion du contrat ou de la survenance du fait dommageable. Si tout ou partie d’une clause des présentes s’avérait illicite, non écrite, nulle ou inapplicable, cette clause sera abandonnée, en tout ou partie, sans que la validité des autres clauses en soit affectée, le reste du présent accord conservant son plein effet. Dispositions générales Les textes en vigueur exigent que certaines informations ou communications soient transmises par écrit. En utilisant ce Site, l’Abonné accepte que ces communications se fassent principalement par voie électronique. Pour des raisons contractuelles, l’Abonné accepte ce moyen de communication électronique et reconnaît que tous les contrats, avis, informations et autres communications que le Site fournira par voie électronique sont conformes aux obligations légales prévoyant que lesdites communications soient faites par écrit. La Société se réserve le droit de mettre à jour les présentes CGV à tout moment et pour quelque motif que ce soit. Dans une telle hypothèse, la Société avertira l’Abonné de ces modifications et lui communiquera les dernières CGV au moins trente (30) jours avant sa mise en œuvre, en l’informant qu’il peut choisir de résilier son abonnement par courriel adressé avant l’expiration de ce délai de 30 jours. En l’absence de résiliation intervenue dans ce délai, l’Abonné sera réputé avoir accepté les nouvelles CGV auxquelles il sera désormais lié dans le cadre de son abonnement. Réclamations et médiation Pour tous litiges entre la Société et l’Abonné, ce dernier est invité à tenter de le résoudre à l’amiable avant de saisir les juridictions judiciaires, en prenant le plus rapidement possible contact avec le service client de la Société selon les modalités suivantes : - en envoyant un email à l\'adresse suivante : contact@tech-vip.com , ou - en utilisant le formulaire en ligne accessible ici , ou - en contactant le support téléphonique au numéro suivant : 01 76 44 03 44. A défaut d’accord amiable ou en l’absence de réponse de la Société dans un délai d’un mois, l’Abonné pourra recourir à une médiation conventionnelle ou à tout autre mode alternatif de règlement des différends. L’Abonné pourra notamment saisir gratuitement, conformément aux articles L.612-1 et suivants du Code de la consommation, la plateforme de règlement en ligne des litiges de la Commission Européenne. Cette plateforme est accessible ici. Cette plateforme de Médiation permet aux consommateurs de déposer en ligne une demande de médiation accompagnée des documents justificatifs. L’Abonné demeure libre d’accepter ou de refuser le recours à la médiation et, en cas de recours à la médiation, d’accepter ou de refuser la solution proposée par le Médiateur.');
   await expect(page.getByRole('contentinfo')).toContainText('01 76 44 03 44');
-  await expect(page.getByText('tech-vip.com', { exact: true })).toBeVisible();
+  await expect(page.locator('h4')).toContainText('tech-vip.com');
   await expect(page.getByRole('contentinfo')).toContainText('Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR Les entreprises et produits cités sont des marques de commerce™ ou des marques déposées® appartenant à leurs propriétaires respectifs. L\'utilisation de ces marques ne suggère aucun lien ou approbation de leur part. Les spécifications peuvent changer sans préavis. Les marques tierces, y compris les logos et les icônes, restent la propriété de leurs détenteurs. En l\'absence d\'indications contraires, l\'utilisation de ces marques n\'implique aucune relation, parrainage ou approbation de la part des propriétaires. Les références à des marques tierces visent simplement à identifier les produits et services de manière équitable, en respectant le droit des marques. Cette offre privée est gérée par une société indépendante non liée au propriétaire initial des marques/produits mentionnés ici.');
   await page.locator('#menu-item-27').getByRole('link', { name: 'Mentions légales' }).click();
