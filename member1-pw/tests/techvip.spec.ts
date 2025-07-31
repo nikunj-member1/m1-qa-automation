@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { FakerUtils } from '../utils/fakerUtils';
+import { asyncWrapProviders } from 'async_hooks';
 
 const fakerUtils = new FakerUtils();
 
@@ -1005,4 +1006,41 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR Les entreprises et produits cités sont des marques de commerce™ ou des marques déposées® appartenant à leurs propriétaires respectifs. L\'utilisation de ces marques ne suggère aucun lien ou approbation de leur part. Les spécifications peuvent changer sans préavis. Les marques tierces, y compris les logos et les icônes, restent la propriété de leurs détenteurs. En l\'absence d\'indications contraires, l\'utilisation de ces marques n\'implique aucune relation, parrainage ou approbation de la part des propriétaires. Les références à des marques tierces visent simplement à identifier les produits et services de manière équitable, en respectant le droit des marques. Cette offre privée est gérée par une société indépendante non liée au propriétaire initial des marques/produits mentionnés ici.');
 });
 
+test.only('full page visual comparison', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+
+  await page.waitForTimeout(20000);
+
+  const headerTop = await page.locator('//div[@class="header-top"]');
+  expect(await headerTop.screenshot()).toMatchSnapshot('headerTop.png');
+
+  const headerDescription = await page.locator('//header[@class="header-desc"]');
+  expect(await headerDescription.screenshot()).toMatchSnapshot('headerDescription.png');
+
+  const homeSlider = await page.locator('//div[contains(@class,"home-slider")]');
+  expect(await homeSlider.screenshot()).toMatchSnapshot('homeSlider.png');
+
+  const topSellingProduct = await page.locator('#top-selling-product > .container');
+  expect(await topSellingProduct.screenshot()).toMatchSnapshot('topSellingProduct.png');
+
+  await page.locator('#best-deals').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
+  await page.waitForTimeout(2000);
+  const bestDeals = await page.locator('#best-deals');
+  expect(await bestDeals.screenshot()).toMatchSnapshot('bestDeals.png');
+
+  await page.locator('#new-arrivals').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
+  await page.waitForTimeout(2000);
+  const newArrivals = await page.locator('#new-arrivals');
+  expect(await newArrivals.screenshot()).toMatchSnapshot('newArrivals.png');
+
+  const featuresContainer = await page.locator('//div[@id="new-arrivals"]/following::div[1][@class="container"]');
+  expect(await featuresContainer.screenshot()).toMatchSnapshot('featuresContainer.png');
+
+  const footerHome1 = await page.locator('//footer[@class="footer"]/div[1][@class="container"]');
+  expect(await footerHome1.screenshot()).toMatchSnapshot('footerHome1.png');
+
+  const footerHome2 = await page.locator('(//footer[@class="footer"]//div[@class="container"])[2]');
+  expect(await footerHome2.screenshot()).toMatchSnapshot('footerHome2.png');
+
+});
 
