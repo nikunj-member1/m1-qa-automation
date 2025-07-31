@@ -4,7 +4,6 @@ export default defineConfig({
   testDir: './tests',
   timeout: 300000,  // 600000- 10 minute timeout per test
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
   retries: 0,
   workers: 1,
   reporter: 'html',  // the default reporter
