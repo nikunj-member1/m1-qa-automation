@@ -11,8 +11,6 @@ jobs:
   psp-checklist:
     runs-on: windows-latest
 
-    timeout-minutes: 60
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
