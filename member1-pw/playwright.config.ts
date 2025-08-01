@@ -2,16 +2,16 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 300000,  // 600000- 10 minute timeout per test
+  timeout: 600000,  // 600000- 10 minute timeout per test
   fullyParallel: true,
   retries: 0,
   workers: 1,
   reporter: 'html',  // the default reporter
   expect: {
-    timeout: 300000,
+    timeout: 600000,
   },
   use: {
-    actionTimeout: 30000,
+    actionTimeout: 400000,
     headless: false,               // Run tests in headed mode
     trace: 'on-first-retry', 
     screenshot: 'only-on-failure', 

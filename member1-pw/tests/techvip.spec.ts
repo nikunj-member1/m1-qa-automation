@@ -1006,10 +1006,8 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR Les entreprises et produits cités sont des marques de commerce™ ou des marques déposées® appartenant à leurs propriétaires respectifs. L\'utilisation de ces marques ne suggère aucun lien ou approbation de leur part. Les spécifications peuvent changer sans préavis. Les marques tierces, y compris les logos et les icônes, restent la propriété de leurs détenteurs. En l\'absence d\'indications contraires, l\'utilisation de ces marques n\'implique aucune relation, parrainage ou approbation de la part des propriétaires. Les références à des marques tierces visent simplement à identifier les produits et services de manière équitable, en respectant le droit des marques. Cette offre privée est gérée par une société indépendante non liée au propriétaire initial des marques/produits mentionnés ici.');
 });
 
-test('full page visual comparison', async ({ page }) => {
+test('TC_VerifyHomePageContent', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com');
-  await page.pause();
-  await page.waitForTimeout(20000);
 
   const headerTop = await page.locator('//div[@class="header-top"]');
   expect(await headerTop.screenshot()).toMatchSnapshot('headerTop.png');
@@ -1044,9 +1042,8 @@ test('full page visual comparison', async ({ page }) => {
 
 });
 
-test.only('full page cgv snapshot testing', async ({ page }) => {
+test('TC_VerifyCGVSnapshotTesting', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com');
-  await page.waitForTimeout(20000);
 
   await page.getByRole('link', { name: 'Cgv', exact: true }).click();
   await expect(page.locator('#ts')).toMatchAriaSnapshot(`
