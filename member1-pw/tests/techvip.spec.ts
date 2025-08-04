@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 import { FakerUtils } from '../utils/fakerUtils';
-import { asyncWrapProviders } from 'async_hooks';
 
 const fakerUtils = new FakerUtils();
 
@@ -1009,6 +1008,8 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
 test('TC_VerifyHomePageContent', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com');
 
+  await page.waitForTimeout(20000);
+
   const headerTop = await page.locator('//div[@class="header-top"]');
   expect(await headerTop.screenshot()).toMatchSnapshot('headerTop.png');
 
@@ -1044,6 +1045,8 @@ test('TC_VerifyHomePageContent', async ({ page }) => {
 
 test('TC_VerifyCGVSnapshotTesting', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com');
+
+  await page.waitForTimeout(20000);
 
   await page.getByRole('link', { name: 'Cgv', exact: true }).click();
   await expect(page.locator('#ts')).toMatchAriaSnapshot(`
