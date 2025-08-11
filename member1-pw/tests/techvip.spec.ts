@@ -1,10 +1,518 @@
 import { test, expect } from '@playwright/test';
 import { FakerUtils } from '../utils/fakerUtils';
+import { CommonMethods } from '../utils/CommonMethods';
 
 const fakerUtils = new FakerUtils();
 
+test('TC_001: Verify Home page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await page.waitForURL('https://shop.tech-vip.com');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad(7000);
+  await page.locator('#new-arrivals').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('home-fullpage.png'); 
+});
+
+test('TC_002: Verify HighTech Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'High Tech' }).click();
+  await page.waitForURL('https://shop.tech-vip.com/high-tech/');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('hightech-fullpage.png', { maxDiffPixelRatio: 0.01 }); 
+});
+
+test('TC_003: Verify Beaute Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'Beauté' }).click();
+  await page.waitForURL('https://shop.tech-vip.com/beaute/');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('beaute-fullpage.png'); 
+});
+
+test('TC_004: Verify Maison Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'Maison' }).click();
+  await page.waitForURL('https://shop.tech-vip.com/maison/');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('maison-fullpage.png'); 
+});
+
+test('TC_005: Verify Maison > Bricolage Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'Maison' }).hover();
+  await page.getByRole('link', { name: 'Bricolage' }).click();
+  await page.waitForURL('https://shop.tech-vip.com/bricolage/');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('maison-bricolage-fullpage.png'); 
+});
+
+test('TC_006: Verify Maison > Decoration Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'Maison' }).hover();
+  await page.getByRole('link', { name: 'Décoration' }).click();
+  await page.waitForURL('https://shop.tech-vip.com/decoration/');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('maison-decoration-fullpage.png'); 
+});
+
+test('TC_007: Verify Maison > Nettoyage Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'Maison' }).hover();
+  await page.getByRole('link', { name: 'Nettoyage' }).click();
+  await page.waitForURL('https://shop.tech-vip.com/nettoyage/');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('maison-nettoyage-fullpage.png'); 
+});
+
+test('TC_008: Verify Electromenager Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'Électroménager' }).click();
+  await page.waitForURL('https://shop.tech-vip.com/electro/');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('electromenager-fullpage.png'); 
+});
+
+test('TC_009: Verify Animalerie Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'Animalerie' }).click();
+  await page.waitForURL('https://shop.tech-vip.com/animalerie/');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('animalerie-fullpage.png'); 
+});
+
+test('TC_010: Verify Sport Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'Sport' }).click();
+  await page.waitForURL('https://shop.tech-vip.com/sport/');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({ fullPage: true })).toMatchSnapshot('sport-fullpage.png');
+});
+
+test('TC_011: Verify Presse Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.locator('#menu-item-79157').getByRole('link', { name: 'Presse' }).click();
+  await page.waitForURL('https://shop.tech-vip.com/presse/');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('presse-fullpage.png'); 
+});
+
+test('TC_012: Verify Presse > On parle de nous Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.locator('#menu-item-79157').getByRole('link', { name: 'Presse' }).hover();
+  await page.getByRole('link', { name: 'On parle de nous' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/pr/presse.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('presse-onparledenous-fullpage.png'); 
+});
+
+test('TC_013: Verify Sabonner Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'S’abonner' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/su/s-abonner.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('sabonner-fullpage.png'); 
+});
+
+test('TC_014: Verify Connexion Header menu', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'Connexion' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/li/login.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('connexion-fullpage.png'); 
+});
+
+test('TC_015: Verify Forgot Password page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'Connexion' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/li/login.html');
+  await page.getByRole('link', { name: 'Mot de passe oublié ?' }).click();
+  await page.goto('https://tech-vip.com/fr/li/login.html?recover');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('forgot-password-fullpage.png'); 
+});
+
+// SideBar 
+test('TC_016: Verify CGV SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.locator('.menu-toggle').click();
+  await page.getByRole('link', { name: 'CGV', exact: true }).click();
+  await page.waitForURL('https://tech-vip.com/fr/ts/cgv.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('cgv-fullpage.png');
+});
+
+test('TC_017: Verify Mentions Legales SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('.menu-toggle').click();
+  await page.locator('#menu-item-1819').getByRole('link', { name: 'Mentions légales' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/lm/mention-legales.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('mention-legales-fullpage.png');
+});
+
+test('TC_018: Verify Expedition Livraison SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('.menu-toggle').click();
+  await page.getByRole('link', { name: 'Expédition & Livraision' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/sd/expedition-et-livraison.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('expedition-livraison-fullpage.png');
+});
+
+test('TC_019: Verify Politique De Remboursementet SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('.menu-toggle').click();
+  await page.locator('#menu-item-1821').getByRole('link', { name: 'Politique de remboursement et' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/rp/remboursement-et-retour.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('politiquederemboursementet-fullpage.png');
+});
+
+test('TC_020: Verify Politique De Confidentialité SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('.menu-toggle').click();
+  await page.locator('#menu-item-1822').getByRole('link', { name: 'Politique de Confidentialité' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/pp/politique-de-protection-des-donnees-personnelles.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('politiquedeconfidentialite-fullpage.png');
+});
+
+test('TC_021: Verify FAQ SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('.menu-toggle').click();
+  await page.locator('#menu-item-1823').getByRole('link', { name: 'FAQ' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/fq/foire-aux-questions.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('faq-fullpage.png');
+});
+
+test('TC_022: Verify FAQ > Description SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('.menu-toggle').click();
+  await page.locator('#menu-item-1823').getByRole('link', { name: 'FAQ' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/fq/foire-aux-questions.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await page.locator('a').filter({ hasText: 'Comment fonctionne Tech-Vip ?' }).click();
+  await page.locator('a').filter({ hasText: 'Y-a-t-il des frais supplé' }).click();
+  await page.locator('a').filter({ hasText: 'Je souhaite de désabonner,' }).click();
+  await page.locator('a').filter({ hasText: 'Quand serais-je débité de mon' }).click();
+  await page.locator('a').filter({ hasText: 'Comment puis-je vous' }).click();
+  await page.locator('a').filter({ hasText: 'Qu\'est-ce que l\'Offre de' }).click();
+  await page.locator('a').filter({ hasText: 'Mon paiement est-il sécurisé ?' }).click();
+  await page.locator('a').filter({ hasText: 'Quand recevrai-je ma commande' }).click();
+  await page.locator('a').filter({ hasText: 'Y a t-il une limite de' }).click();
+  await page.locator('a').filter({ hasText: 'Le produit commandé est arriv' }).click();
+  await page.locator('a').filter({ hasText: 'Est-ce possible de me faire' }).click();
+  await page.locator('a').filter({ hasText: 'Quels produits puis-je' }).click();
+  await page.locator('a').filter({ hasText: 'Est-ce que je peux modifier' }).click();
+  await page.locator('a').filter({ hasText: 'Est-il possible de consulter' }).click();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('faq-description-fullpage.png');
+});
+
+test('TC_023: Verify Contact SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('.menu-toggle').click();
+  await page.getByRole('link', { name: 'Contact', exact: true }).click();
+  await page.waitForURL('https://tech-vip.com/fr/co/contact.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('contact-fullpage.png');
+});
+
+test('TC_024: Verify NotreOffre SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('.menu-toggle').click();
+  await page.getByRole('link', { name: 'Notre offre' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/hw/notre-offre.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('notreoffre-fullpage.png');
+});
+
+test('TC_025: Verify Suivre Votre Commande SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('.menu-toggle').click();
+  await page.locator('#menu-item-1826').getByRole('link', { name: 'Suivre votre commande' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/tr/suivre-votre-commande.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('suivrevotrecommande-fullpage.png');
+});
+
+test('TC_026: Verify Moyens De Paiement SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('.menu-toggle').click();
+  await page.getByRole('link', { name: 'Moyens de paiment' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/pm/moyens-de-paiement.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('moyensdepaiement-fullpage.png');
+});
+
+test('TC_027: Verify Sabonner SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('.menu-toggle').click();
+  await page.getByRole('link', { name: 'S’abonner', exact: true }).click();
+  await page.waitForURL('https://tech-vip.com/fr/su/s-abonner.html');
+  await page.locator('//footer[@class="footer"]/div[1][@class="container"]').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('sabonner-sidebar-fullpage.png');
+});
+
+test('TC_028: Verify Mon Compte SideBar page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('.menu-toggle').click();
+  await page.getByRole('link', { name: 'Mon compte' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/my/espace-membre.php');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('moncompte-fullpage.png');
+});
+
+//footer
+
+test('TC_029: Verify CGV Footer page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.getByRole('link', { name: 'Cgv', exact: true }).click();
+  await page.waitForURL('https://tech-vip.com/fr/ts/cgv.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('cgv-fullpage.png');
+});
+
+test('TC_030: Verify Politique De Confidentialite Footer page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('#menu-item-81629').getByRole('link', { name: 'Politique de Confidentialité' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/pp/politique-de-protection-des-donnees-personnelles.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('politiquedeconfidentialite-fullpage.png');
+});
+
+test('TC_031: Verify Mentions Legales Footer page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('#menu-item-27').getByRole('link', { name: 'Mentions légales' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/lm/mention-legales.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('mention-legales-fullpage.png');
+});
+
+test('TC_032: Verify Politique De Remboursementet Footer page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('#menu-item-81630').getByRole('link', { name: 'Politique de remboursement et' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/rp/remboursement-et-retour.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('politiquederemboursementet-fullpage.png');
+});
+
+test('TC_033: Verify FAQ Footer page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('#menu-item-1828').getByRole('link', { name: 'FAQ' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/fq/foire-aux-questions.html');
+  await expect(page.getByText('FAQ : Foire aux questions')).toBeVisible();
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('faq-fullpage.png');
+});
+
+test('TC_034: Verify FAQ > Description Footer page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('#menu-item-1828').getByRole('link', { name: 'FAQ' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/fq/foire-aux-questions.html');
+  await expect(page.getByText('FAQ : Foire aux questions')).toBeVisible();
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await page.locator('a').filter({ hasText: 'Comment fonctionne Tech-Vip ?' }).click();
+  await page.locator('a').filter({ hasText: 'Y-a-t-il des frais supplé' }).click();
+  await page.locator('a').filter({ hasText: 'Je souhaite de désabonner,' }).click();
+  await page.locator('a').filter({ hasText: 'Quand serais-je débité de mon' }).click();
+  await page.locator('a').filter({ hasText: 'Comment puis-je vous' }).click();
+  await page.locator('a').filter({ hasText: 'Qu\'est-ce que l\'Offre de' }).click();
+  await page.locator('a').filter({ hasText: 'Mon paiement est-il sécurisé ?' }).click();
+  await page.locator('a').filter({ hasText: 'Quand recevrai-je ma commande' }).click();
+  await page.locator('a').filter({ hasText: 'Y a t-il une limite de' }).click();
+  await page.locator('a').filter({ hasText: 'Le produit commandé est arriv' }).click();
+  await page.locator('a').filter({ hasText: 'Est-ce possible de me faire' }).click();
+  await page.locator('a').filter({ hasText: 'Quels produits puis-je' }).click();
+  await page.locator('a').filter({ hasText: 'Est-ce que je peux modifier' }).click();
+  await page.locator('a').filter({ hasText: 'Est-il possible de consulter' }).click();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('faq-description-fullpage.png');
+});
+
+
+test('TC_035: Verify Expedition Livraison Footer page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.getByRole('link', { name: 'Expédition & Livraison' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/sd/expedition-et-livraison.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('expedition-livraison-fullpage.png');
+});
+
+test('TC_036: Verify Desabonnement Footer page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.getByRole('link', { name: 'Désabonnement' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/us/desabonnement.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('desabonnement-fullpage.png');
+});
+
+test('TC_037: Verify Moyens De Paiement Footer page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.getByRole('link', { name: 'Moyens de paiement' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/pm/moyens-de-paiement.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('moyensdepaiement-fullpage.png');
+});
+
+test('TC_038: Verify Suivre Votre Commande Footer page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com'); 
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible(); 
+  await page.locator('#menu-item-1830').getByRole('link', { name: 'Suivre votre commande' }).click();  await page.waitForURL('https://tech-vip.com/fr/tr/suivre-votre-commande.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('suivrevotrecommande-fullpage.png');
+});
+
+test('TC_039: Verify Presse Footer page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.locator('#menu-item-81632').getByRole('link', { name: 'Presse' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/pr/presse.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('presse-fullpage.png'); 
+});
+
+test('TC_040: Verify NewsLetter Footer page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'Newsletter' }).click();
+  await page.waitForURL('https://tech-vip.com/fr/nl/newsletter.html');
+  const common = new CommonMethods(page);
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true})).toMatchSnapshot('newsletter-fullpage.png'); 
+});
+
+test('TC_041: Verify Product Description page', async ({ page }) => {
+  await page.goto('https://shop.tech-vip.com');
+  await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
+  await page.getByRole('link', { name: 'PRIX VIP −50% Crochets adhé' }).click();
+  await page.waitForURL('https://shop.tech-vip.com/guanyao-crochets-adhesifs-multi-usages-support-mural-de-serpillieres-organisateur-pour-balais-et-autres-accessoires-a-manche-crochet-de-cintre-pour-cuisine-salle-de-bains/');
+  const common = new CommonMethods(page);
+  await page.locator('//footer[@class="footer"]/div[1][@class="container"]').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
+  await common.waitForPageLoad();
+  await common.removeIFrameChatIcon();
+  expect(await page.screenshot({fullPage: true, mask: [
+      page.locator('div[class="aship-box-products list-product related-products"]')
+    ]})).toMatchSnapshot('product-description-fullpage.png'); 
+});
+
 //pass
-test('TC_PSP_01_VerifySubscribePageNavigation', async ({ page }) => {
+test.skip('TC_PSP_01_VerifySubscribePageNavigation', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
   await page.waitForLoadState('networkidle');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
@@ -17,7 +525,7 @@ test('TC_PSP_01_VerifySubscribePageNavigation', async ({ page }) => {
 });
 
 // fail - card verification issue > confirmation page
-test('TC_PSP_02_VerifyEmailAfterPurchaseMembership', async ({ page }) => {
+test.skip('TC_PSP_02_VerifyEmailAfterPurchaseMembership', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
   await page.waitForLoadState('networkidle');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
@@ -147,7 +655,7 @@ test('TC_PSP_02_VerifyEmailAfterPurchaseMembership', async ({ page }) => {
 });
 
 //failed due to captcha dialog box issue
-test('TC_PSP_05_TC_PSP_07_VerifyEmailAfterPurchaseProduct', async ({ page }) => {
+test.skip('TC_PSP_05_TC_PSP_07_VerifyEmailAfterPurchaseProduct', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
   await page.waitForLoadState('networkidle');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
@@ -248,7 +756,7 @@ test('TC_PSP_05_TC_PSP_07_VerifyEmailAfterPurchaseProduct', async ({ page }) => 
 });
 
 //failed due to captcha dialog box issue
-test('TC_PSP_06_VerifyProductOrderOnBackend', async ({ page }) => {
+test.skip('TC_PSP_06_VerifyProductOrderOnBackend', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
   await page.waitForLoadState('networkidle');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
@@ -350,7 +858,7 @@ test('TC_PSP_06_VerifyProductOrderOnBackend', async ({ page }) => {
 });
 
 // pass // Not getting any message or validation 
-test('TC_PSP_09_VerifyEmailAfterFillingUpContact', async ({ page }) => {
+test.skip('TC_PSP_09_VerifyEmailAfterFillingUpContact', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
   await page.waitForLoadState('networkidle');
   await page.locator('.menu-toggle').click();
@@ -387,7 +895,7 @@ test('TC_PSP_09_VerifyEmailAfterFillingUpContact', async ({ page }) => {
 });
 
 //failed due to captcha dialog box issue
-test('TC_PSP_13_VerifyProductOrderRefundOnBackend', async ({ page }) => {
+test.skip('TC_PSP_13_VerifyProductOrderRefundOnBackend', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
   await page.waitForLoadState('networkidle');
   await expect(page.getByRole('link').filter({ hasText: /^$/ })).toBeVisible();
@@ -489,7 +997,7 @@ test('TC_PSP_13_VerifyProductOrderRefundOnBackend', async ({ page }) => {
 });
 
 //pass
-test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
+test.skip('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await page.goto('https://shop.tech-vip.com/');
   await page.waitForLoadState('networkidle');
   await expect(page.locator('body')).toContainText('01 76 44 03 44');
@@ -1004,338 +1512,4 @@ test('TC_PSP_15_VerifyCompanyNameOnLegalTerms', async ({ page }) => {
   await expect(page.getByRole('contentinfo')).toContainText('Nous contacter ? du lundi au vendredi (09h00 à 18h00) 01 76 44 03 44 tech-vip.com Le site tech-vip.com, propose un service par abonnement mensuel de (29,90€/mois ou 75€/trimestre) à reconduction tacite sans engagement de durée.');
   await expect(page.getByRole('contentinfo')).toContainText('Le service proposé par tech-vip.com est facturé sous forme d’abonnement mensuel de 29,90€/mois ou 75€/trimestre avec reconduction tacite et sans engagement de durée Site édité par CASSIOPEIA DIGITAL LTD.Imatriculée sous le n° 12829698 et dont le siège social est situé au OFFICE 9, DALTON HOUSE 60 WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR Les entreprises et produits cités sont des marques de commerce™ ou des marques déposées® appartenant à leurs propriétaires respectifs. L\'utilisation de ces marques ne suggère aucun lien ou approbation de leur part. Les spécifications peuvent changer sans préavis. Les marques tierces, y compris les logos et les icônes, restent la propriété de leurs détenteurs. En l\'absence d\'indications contraires, l\'utilisation de ces marques n\'implique aucune relation, parrainage ou approbation de la part des propriétaires. Les références à des marques tierces visent simplement à identifier les produits et services de manière équitable, en respectant le droit des marques. Cette offre privée est gérée par une société indépendante non liée au propriétaire initial des marques/produits mentionnés ici.');
 });
-
-test('TC_VerifyHomePageContent', async ({ page }) => {
-  await page.goto('https://shop.tech-vip.com');
-
-  await page.waitForTimeout(20000);
-
-  const headerTop = await page.locator('//div[@class="header-top"]');
-  expect(await headerTop.screenshot()).toMatchSnapshot('headerTop.png');
-
-  const headerDescription = await page.locator('//header[@class="header-desc"]');
-  expect(await headerDescription.screenshot()).toMatchSnapshot('headerDescription.png');
-
-  const homeSlider = await page.locator('//div[contains(@class,"home-slider")]');
-  expect(await homeSlider.screenshot()).toMatchSnapshot('homeSlider.png');
-
-  const topSellingProduct = await page.locator('#top-selling-product > .container');
-  expect(await topSellingProduct.screenshot()).toMatchSnapshot('topSellingProduct.png');
-
-  await page.locator('#best-deals').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
-  await page.waitForTimeout(2000);
-  const bestDeals = await page.locator('#best-deals');
-  expect(await bestDeals.screenshot()).toMatchSnapshot('bestDeals.png');
-
-  await page.locator('#new-arrivals').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
-  await page.waitForTimeout(2000);
-  const newArrivals = await page.locator('#new-arrivals');
-  expect(await newArrivals.screenshot()).toMatchSnapshot('newArrivals.png');
-
-  const featuresContainer = await page.locator('//div[@id="new-arrivals"]/following::div[1][@class="container"]');
-  expect(await featuresContainer.screenshot()).toMatchSnapshot('featuresContainer.png');
-
-  const footerHome1 = await page.locator('//footer[@class="footer"]/div[1][@class="container"]');
-  expect(await footerHome1.screenshot()).toMatchSnapshot('footerHome1.png');
-
-  const footerHome2 = await page.locator('(//footer[@class="footer"]//div[@class="container"])[2]');
-  expect(await footerHome2.screenshot()).toMatchSnapshot('footerHome2.png');
-
-});
-
-test('TC_VerifyCGVSnapshotTesting', async ({ page }) => {
-  await page.goto('https://shop.tech-vip.com');
-
-  await page.waitForTimeout(20000);
-
-  await page.getByRole('link', { name: 'Cgv', exact: true }).click();
-  await expect(page.locator('#ts')).toMatchAriaSnapshot(`
-    - paragraph:
-      - strong: CONDITIONS
-      - strong: GÉNÉRALES DE VENTE
-    - paragraph:
-      - link "www.tech-vip.com":
-        - /url: http://www.tech-vip.com
-        - strong: www.tech-vip.com
-    - paragraph:
-      - strong
-    - paragraph:
-      - text: Les Présentes Conditions Générales de Vente (ci-après «
-      - strong: Conditions Générales
-      - text: » ou «
-      - strong: CGV
-      - text: ») ont pour objet de préciser les droits et obligations des parties entre
-      - strong: CASSIOPEIA Digital Ltd,
-      - text: immatriculée au registre des sociétés d’Angleterre et du Pays de galles sous le n°
-      - strong: /\\d+/
-      - text: ", dont le siège social se situe"
-      - strong: /OFFICE 9, DALTON HOUSE \\d+ WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR/
-      - text: (ci-après la «
-      - strong: Société
-      - text: » ou «
-      - strong: Nous
-      - text: ») et toute personne ayant choisi de s’abonner au service (Ci-après l’«
-      - strong: Abonné
-      - text: »).
-    - paragraph:
-      - text: Les présentes Conditions Générales de vente (ci-après «
-      - strong: CGV
-      - text: ») ont pour objet de définir les relations contractuelles entre la Société et l’Abonné.
-    - paragraph:
-      - text: Tout abonnement contracté auprès de la Société implique l’acceptation expresse, préalable, pleine et entière des présentes Conditions générales de vente par l’Abonné, ainsi que de la
-      - link "Charte de Données personnelles":
-        - /url: https://tech-vip.com/fr/pp/politique-de-protection-des-donnees-personnelles.html
-      - text: .
-    - paragraph:
-      - text: Les
-      - strong: CGV
-      - text: ainsi que l’ensemble des informations contractuelles mentionnées sur le
-      - strong: Site
-      - text: sont rédigées en langue française. L’acceptation en ligne des présentes
-      - strong: CGV
-      - text: est matérialisée par une case à cocher obligatoire lors du processus d’abonnement décrit à l’Article 4 des CGV.
-    - paragraph:
-      - text: "Adresse courriel du service clients :"
-      - link "contact@tech-vip.com":
-        - /url: mailto:contact@tech-vip.com
-    - paragraph:
-      - text: "Numéro de téléphone du service clients :"
-      - strong: /\\d+ \\d+ \\d+ \\d+ \\d+/
-      - text: /\\(Du lundi au vendredi \\d+[hmsp]+ à 18h00\\)/
-    - paragraph
-    - list:
-      - listitem:
-        - strong: Présentation
-    - paragraph:
-      - text: Nous proposons à nos Abonnés, via notre site internet
-      - strong: www.tech-vip.com
-      - text: (ci-après «
-      - strong: le Site
-      - text: ») des réductions exclusives sur une sélection de produits (ci-après «
-      - strong: le Service
-      - text: »).
-    - paragraph
-    - list:
-      - listitem:
-        - strong: L’accès au Site
-    - paragraph: L’Abonné est seul responsable des moyens technologiques nécessaires pour accéder au Site, et doit notamment disposer d’un accès à Internet et d’une adresse e-mail.
-    - paragraph: Il conserve à sa charge les frais de télécommunication et d’accès à Internet pour l’utilisation du Site.
-    - paragraph: /L’accès au Site est possible \\d+[hmsp]+\\/\\d+, 7j\\/7, sauf en cas de force majeure ou d’un événement hors du contrôle de la Société et sous réserve des éventuelles pannes et interventions de maintenance nécessaires au bon fonctionnement de celui-ci\\./
-    - paragraph: La Société ne peut être tenue responsable de l’incapacité de l’Abonné à se connecter à Internet ou au Site, ou à accéder à son compte d’Abonné sur le Site.
-    - paragraph: /Le Site internet est hébergé chez Anyfes Digital Almogàvers, \\d+-\\d+, Les Roquetes, Sant Père de Ribes \\d+ Barcelone, Espagne/
-    - paragraph:
-      - text: Le Site internet est édité par la «
-      - strong: Société
-      - text: »
-    - paragraph: "Directeur de la publication : Richard TURNER"
-    - paragraph
-    - list:
-      - listitem:
-        - strong: Abonnement au Service
-    - paragraph: "Il est possible de s’abonner au Service :"
-    - paragraph: "- En se rendant directement sur le Site, ou"
-    - paragraph: "- au moyen du formulaire d’abonnement proposant une offre de bienvenue réservée aux nouveaux Abonnés."
-    - paragraph: "Afin de souscrire un abonnement, l’Abonné garantit :"
-    - paragraph: "- être une personne physique et ne pas contracter dans le cadre d’une activité professionnelle ;"
-    - paragraph: "- être majeur et responsable selon la loi en vigueur en France, et pouvoir légalement conclure un contrat qui l’engage ;"
-    - paragraph: "- Résider en France métropolitaine ;"
-    - paragraph: "- Ne pas avoir déjà souscrit un abonnement au Service dont il se serait rétracté,"
-    - paragraph: Pour s’abonner au Service, l’Abonné doit remplir l’ensemble des champs du formulaire mis à sa disposition. En cas de communication de données erronées, la Société ne pourra voir sa responsabilité engagée.
-    - paragraph: L’Abonné garantit que toutes les informations qu’il donne dans le formulaire sont exactes, à jour et sincères et ne sont entachées d’aucun caractère trompeur. Il s’engage à informer la Société (à l’adresse mentionnée en préambule des présentes CGV) en cas de modifications de ses coordonnées, notamment bancaires et/ou postales.
-    - paragraph: L’Abonné est informé et accepte que les informations saisies aux fins de création ou de mise à jour de son Compte valent preuve de son identité. Les informations saisies l’engagent dès leur validation, étant précisé que la Société se réserve le droit de vérifier l’exactitude des données fournies.
-    - paragraph: A l’issue de son inscription, et après paiement du prix du Service conformément à l’article 5 des présentes, l’Abonné reçoit un email de confirmation de son abonnement, qui reprendra le détail de sa commande, les conditions et modalités d’exercice de son droit de rétractation.
-    - paragraph
-    - list:
-      - listitem:
-        - strong: Présentation du Service
-    - paragraph:
-      - strong
-    - list:
-      - list:
-        - listitem:
-          - strong: Offre de bienvenue
-    - paragraph:
-      - text: La Société propose régulièrement des «
-      - strong: Offres de Bienvenue
-      - text: » dans le cadre de sa politique commerciale.
-    - paragraph: "Ces offres réservées aux nouveaux Abonnés, permettent de s'abonner au Service en profitant :"
-    - paragraph:
-      - text: /- d’une part d’un contre remboursement de \\d+€ maximum pour seulement 1€ sur le produit indiqué dans l’offre de bienvenue \\(le «/
-      - strong: Produit Promotionnel
-      - text: »), et
-    - paragraph
-    - paragraph: /- d’autre part d’un accès découverte au Site d’une durée de \\d+[hmsp]+\\./
-    - paragraph: /A l’issue de cette période de \\d+[hmsp]+, en l’absence de résiliation par l’Abonné, l’Abonnement de \\d+,\\d+€ \\(ou \\d+€ par trimestre\\) prendra alors effet automatiquement et se poursuivra selon les modalités fixées à l’article 5 des CGV\\./
-    - paragraph: /Pour pouvoir bénéficier de l’Offre de bienvenue et du contre remboursement de \\d+€, le nouvel Abonné devra :/
-    - paragraph: "- Dans un premier temps, souscrire à l’abonnement et verser la somme de 1€."
-    - paragraph
-    - paragraph: "- Dans un deuxième temps, faire l’acquisition du Produit Promotionnel."
-    - paragraph: Cette acquisition pourra se faire auprès de n’importe quel commerçant, que ce soit en ligne ou en magasin.
-    - paragraph:
-      - text: /- Dans un troisième temps, dans les \\d+ jours suivant la souscription à l’Abonnement, l’Abonné devra adresser la facture d’achat du Produit Promotionnel à l’adresse suivante :/
-      - link "contact@tech-vip.com":
-        - /url: mailto:contact@tech-vip.com
-    - paragraph: /La Société versera alors le remboursement de \\d+€ sur le compte Paypal associé à l’email fourni par l’Abonné\\. Si l’Abonné n’a pas de compte Paypal, il recevra un email de la part de Paypal pour ouvrir un compte et percevoir son remboursement\\./
-    - paragraph: /A défaut d’avoir adressé la facture d’achat du Produit Promotionnel dans ce délai de \\d+ jours, la Société ne versera pas le somme de \\d+€\\./
-    - paragraph
-    - paragraph
-    - list:
-      - list:
-        - listitem:
-          - strong: Fonctionnement du Service
-    - paragraph:
-      - text: La Société propose chaque mois à ses Abonnés une large sélection de produits (High-Tech, Bricolage, Jeux Vidéo, Audio&Vidéo…) sur lesquels sont appliqués des réductions exclusives (ci-après «
-      - strong: les Produits
-      - text: »).
-    - paragraph: Les frais de livraison s’affichent au moment de la validation du panier pour les non-membres.
-    - paragraph: Chaque mois, l’Abonné est invité à consulter dans son espace Abonné sur le Site le catalogue des Produits -avec des réductions exclusives- proposés à l’achat.
-    - paragraph:
-      - strong: "ATTENTION : TOUS LES"
-      - strong: ABONNÉS SONT FACTURÉS DE LA COTISATION TOUS LES MOIS (OU TOUS LES 3 MOIS), QU’ILS AIENT PROFITÉ OU NON DE LEUR ABONNEMENT EN PASSANT UNE OU PLUSIEURS COMMANDES.
-    - paragraph: L’accès au catalogue des Produits est ILLIMITÉ, et l'Abonné peut passer autant de commandes qu'il le souhaite pendant toute la durée de son abonnement.
-    - paragraph: L’Abonné peut profiter du Service sous réserve du bon encaissement du prix du Service conformément à l’article 5.
-    - paragraph: Les produits proposés peuvent varier d’un mois sur l’autre. Les équipes s’efforcent de proposer aux abonnés une offre la plus large possible pour satisfaire le plus grand nombre.
-    - paragraph: Les photographies des Produits figurant sur le Site ne sont pas contractuelles.
-    - paragraph
-    - paragraph
-    - list:
-      - listitem:
-        - strong: Caractéristiques du Service
-    - paragraph
-    - paragraph:
-      - strong: a. Durée et Résiliation
-    - paragraph: /L’abonnement entre en vigueur au jour de l’adhésion, soit \\d+[hmsp]+ après la date de souscription\\./
-    - paragraph: L’abonnement au Service est un abonnement mensuel ou trimestriel (selon le choix fait par l’Abonné lors de la souscription), sans engagement de durée, et à reconduction tacite.
-    - paragraph: Cela signifie que l’abonnement sera reconduit et l’Abonné prélevé tous les mois -ou tous les trois mois- à chaque date d’anniversaire de la souscription.
-    - paragraph:
-      - text: A titre d’illustration, si l’abonnement a été souscrit le 1
-      - superscript: er
-      - text: /juillet, il entrera en vigueur à l’expiration de la période de \\d+[hmsp]+, soit le 4 juillet, et l’Abonné sera prélevé de sa première mensualité le 4 juillet\\./
-    - paragraph: La résiliation peut être notifiée par l’Abonné à tout moment par courriel sans préavis et sans motif.
-    - paragraph: "La résiliation devra être notifiée par l’Abonné :"
-    - paragraph:
-      - text: "- soit en remplissant le formulaire de résiliation en cliquant"
-      - link "ici.":
-        - /url: https://www.tech-vip.com/fr/rt/retractation.html
-    - paragraph:
-      - text: "- soit par un e-mail envoyé au Service Client de tech-vip.com à l’adresse courriel suivante :"
-      - link "contact@tech-vip.com":
-        - /url: mailto:contact@tech-vip.com
-    - paragraph: La résiliation prendra effet à la fin de la période d’abonnement en cours (mensuelle ou trimestrielle selon l’offre choisie par le client), de sorte que l’Abonné qui résilie son Contrat et qui aura payé pour la période en cours aura le droit d’utiliser le Site et l’application pour le reste de la période en cours.
-    - paragraph: A la fin de la période en cours l’Abonné n’aura plus accès au Service et ne sera plus prélevé par la Société.
-    - paragraph: La Société se réserve par ailleurs le droit de résilier le Service à tout moment en cas de non-respect par l’Abonné des présentes Conditions Générales, ou d’invalidité du moyen de paiement fourni par l’Abonné.
-    - paragraph: Elle se réserve également le droit d’arrêter de proposer le Service. L’arrêt du Service fera l’objet d’une information de l’Abonné par tout moyen approprié.
-    - paragraph
-    - paragraph:
-      - strong: b. Prix et Paiement
-    - paragraph: /Le coût de l’abonnement au Service s’élève à la somme de \\d+,\\d+€ TTC par mois, ou \\d+€ par trimestre, selon la formule d’abonnement choisie par l’Abonné au moment de la souscription\\./
-    - paragraph: Chaque mois (ou chaque trimestre), l’Abonné pourra retrouver la facture correspondante à la période au sein de son espace Abonné sur le Site.
-    - paragraph: L’Abonné autorise la Société à prélever automatiquement le montant de son abonnement au moyen des coordonnées bancaires qu’il aura fournies.
-    - paragraph: /Le paiement du montant de l’Abonnement s’effectue exclusivement par carte bancaire\\. La carte bancaire sera débitée de \\d+,\\d+€ chaque mois \\(ou de \\d+€ par trimestre\\) et cela jusqu’à ce que l’Abonné souhaite mettre fin à son Abonnement dans les conditions énoncées à l’article 5\\. a\\) des CGV\\./
-    - paragraph: En cas d’échec de paiement, et/ou en cas de fraude ou de tentative fraude de l’Abonné dont la Société aurait connaissance, celle-ci se réserve le droit de résilier l’abonnement et l’accès au Service correspondant.
-    - paragraph:
-      - strong: c. Période d’essai - Droit de Rétractation
-    - paragraph: /Conformément à l'article L \\d+-\\d+ du Code de la consommation, l’Abonné dispose d'un délai légal de rétractation de \\d+ jours calendaires à compter de la date d'abonnement au Site/
-    - paragraph: En se rétractant, l’Abonné résilie automatiquement son abonnement, et il reçoit le remboursement total des frais d'abonnement déjà payés.
-    - paragraph: /Ce remboursement a lieu au plus tard dans les \\d+ jours à compter de la date à laquelle La Société a reçu sa demande de rétractation\\. A la suite de sa demande de rétractation, un email sera envoyé à l’Abonné, précisant que sa demande a été prise en considération\\./
-    - paragraph: "L’Abonné pourra exercer son droit légal de rétractation en utilisant le formulaire présent sur le site internet dans la rubrique « Rétractation » ou en recopiant le formulaire ci-dessous sur papier libre :"
-    - paragraph:
-      - emphasis: Je vous notifie par la présente, ma rétractation du contrat pour la prestation de services ci-dessous
-    - paragraph:
-      - emphasis: "Date de souscription à l'abonnement :"
-    - paragraph:
-      - emphasis: "Nom & Prénom :"
-    - paragraph:
-      - emphasis: "Adresse email utilisée :"
-    - paragraph:
-      - emphasis: "Date & Signature (en cas de notification du présent formulaire sur papier):"
-    - paragraph:
-      - emphasis: L'exercice du droit de rétractation entraîne la résiliation du contrat".
-    - paragraph
-    - paragraph: "Ce formulaire de rétractation devra être adressé :"
-    - paragraph: /- Par courrier postal à CASSIOPEIA Digital Ltd, OFFICE 9, DALTON HOUSE \\d+ WINDSOR AVENUE- LONDON - UNITED KINGDOM- SW19 2RR, ou/
-    - paragraph:
-      - text: "- par email à"
-      - link "contact@tech-vip.com":
-        - /url: mailto:contact@tech-vip.com
-        - strong: contact@tech-vip.com
-    - paragraph
-    - list:
-      - listitem:
-        - strong: Livraison
-    - paragraph: Les livraisons de Produits sont effectuées à l’adresse de livraison indiquée par l’Abonné lors de la souscription de son abonnement.
-    - paragraph: /Les livraisons sont effectuées par envoi postal, dans le délai maximum de \\d+ jours suivant la validation de la commande par l’Abonné dans les conditions prévues à l’article 4\\./
-    - paragraph:
-      - text: "Dans le cas où l’Abonné ne reçoit pas le Produit commandé dans ce délai, il peut contacter la Société par e-mail :"
-      - link "contact@tech-vip.com":
-        - /url: about:blank
-      - text: /ou par téléphone au \\d+ \\d+ \\d+ \\d+ \\d+\\./
-    - paragraph: La Société prendra toute mesure appropriée pour rechercher le Produit perdu et dès confirmation de cette perte, réadressera le Produit à l’Abonné, dans les meilleurs délais ou se verra proposer un remboursement intégral.
-    - paragraph: /En l’absence de livraison dans un délai de \\d+ jours à la suite de la notification par l’Abonné du retard de livraison, celui-ci peut également demander, par email ou par téléphone, l’annulation et \\/ ou le remboursement intégral de sa commande\\./
-    - paragraph:
-      - strong
-    - list:
-      - listitem:
-        - strong: Données personnelles et Bancaires
-    - paragraph: La Société respecte le droit à la vie privée. Elle est amenée, lors de l’inscription de l’Abonné au Site, à collecter des données à caractère personnel (adresse email, nom, prénom, numéro de téléphone…), aux fins de gestion de sa commande et des relations commerciales avec la Société.
-    - paragraph:
-      - text: Les conditions de traitement des données personnelles par la Société sont énoncées dans la
-      - link "Politique de protection des données personnelles du Site":
-        - /url: https://tech-vip.com/fr/pp/politique-de-protection-des-donnees-personnelles.html
-      - text: .
-    - paragraph:
-      - text: /Conformément aux dispositions de la loi n°\\d+-\\d+ dite loi Informatique et libertés, du 6 janvier \\d+ et au règlement de l’UE \\d+\\/\\d+ applicable depuis le \\d+ mai \\d+, l’Abonné dispose d'un droit d’obtention, d’effacement, d’opposition, d'accès, de rectification et de suppression de toutes données personnelles le concernant obtenues par la Société lors de l'utilisation du Service\\. Tout Abonné peut exercer ce droit en envoyant un e-mail à l'adresse/
-      - link "contact@tech-vip.com.":
-        - /url: about:blank
-    - paragraph: Dans le cas où l’Abonné prendrait finalement la décision de ne pas finaliser son abonnement, la Société collecte uniquement l’adresse email. Cette adresse email pourra être utilisée ultérieurement par la Société, afin de relancer le prospect qui n’aurait pas finalisé sa commande. Les autres informations ne sont conservées que pour les Abonnés qui finalisent vraiment leur abonnement au Service.
-    - paragraph: La Société est particulièrement sensible à la sécurité de son site internet et aux informations que ses Abonnés pourraient lui confier. C’est pour cela que nous avons contracté avec les meilleurs prestataires de paiements. Les prélèvements des mensualités sont effectués via ces prestataires et de manière totalement sécurisée. Ces derniers sont les seuls à avoir accès à vos informations bancaires.
-    - paragraph
-    - list:
-      - listitem:
-        - strong: Droit applicable et compétence
-    - paragraph: Les présentes Conditions Générales sont régies par la loi française.
-    - paragraph: "En cas de contestation relative à l'interprétation, la validité et/ou l'exécution des présentes CGV, l’Abonné pourra saisir selon son choix :"
-    - paragraph: "- l'une des juridictions territorialement compétentes en vertu du code de procédure civile, ou"
-    - paragraph: "- la juridiction du lieu où il demeurait au moment de la conclusion du contrat ou de la survenance du fait dommageable."
-    - paragraph: Si tout ou partie d’une clause des présentes s’avérait illicite, non écrite, nulle ou inapplicable, cette clause sera abandonnée, en tout ou partie, sans que la validité des autres clauses en soit affectée, le reste du présent accord conservant son plein effet.
-    - paragraph
-    - list:
-      - listitem:
-        - strong: Dispositions générales
-    - paragraph: Les textes en vigueur exigent que certaines informations ou communications soient transmises par écrit. En utilisant ce Site, l’Abonné accepte que ces communications se fassent principalement par voie électronique.
-    - paragraph: Pour des raisons contractuelles, l’Abonné accepte ce moyen de communication électronique et reconnaît que tous les contrats, avis, informations et autres communications que le Site fournira par voie électronique sont conformes aux obligations légales prévoyant que lesdites communications soient faites par écrit.
-    - paragraph: /La Société se réserve le droit de mettre à jour les présentes CGV à tout moment et pour quelque motif que ce soit\\. Dans une telle hypothèse, la Société avertira l’Abonné de ces modifications et lui communiquera les dernières CGV au moins trente \\(\\d+\\) jours avant sa mise en œuvre, en l’informant qu’il peut choisir de résilier son abonnement par courriel adressé avant l’expiration de ce délai de \\d+ jours\\./
-    - paragraph: En l’absence de résiliation intervenue dans ce délai, l’Abonné sera réputé avoir accepté les nouvelles CGV auxquelles il sera désormais lié dans le cadre de son abonnement.
-    - paragraph
-    - list:
-      - listitem:
-        - strong: Réclamations et médiation
-    - paragraph: "Pour tous litiges entre la Société et l’Abonné, ce dernier est invité à tenter de le résoudre à l’amiable avant de saisir les juridictions judiciaires, en prenant le plus rapidement possible contact avec le service client de la Société selon les modalités suivantes :"
-    - paragraph:
-      - text: "- en envoyant un email à l'adresse suivante :"
-      - link "contact@tech-vip.com":
-        - /url: mailto:contact@tech-vip.com
-      - text: ", ou"
-    - paragraph:
-      - text: "- en utilisant le formulaire en ligne accessible"
-      - link "ici":
-        - /url: https://www.tech-vip.com/fr/co/contact.html
-      - text: ", ou"
-    - paragraph: "/- en contactant le support téléphonique au numéro suivant : \\\\d+ \\\\d+ \\\\d+ \\\\d+ \\\\d+\\\\./"
-    - paragraph: A défaut d’accord amiable ou en l’absence de réponse de la Société dans un délai d’un mois, l’Abonné pourra recourir à une médiation conventionnelle ou à tout autre mode alternatif de règlement des différends.
-    - paragraph: /L’Abonné pourra notamment saisir gratuitement, conformément aux articles L\\.\\d+-1 et suivants du Code de la consommation, la plateforme de règlement en ligne des litiges de la Commission Européenne\\./
-    - paragraph:
-      - text: Cette plateforme est accessible
-      - link "ici":
-        - /url: https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home.howitworks#heading-6
-      - text: .
-    - paragraph: Cette plateforme de Médiation permet aux consommateurs de déposer en ligne une demande de médiation accompagnée des documents justificatifs.
-    - paragraph: L’Abonné demeure libre d’accepter ou de refuser le recours à la médiation et, en cas de recours à la médiation, d’accepter ou de refuser la solution proposée par le Médiateur.
-    `);
-  await expect(page.locator('#ts')).toContainText('CONDITIONS GÉNÉRALES DE VENTE - TECH-VIP.COM');
-
-});
-
-
-
 

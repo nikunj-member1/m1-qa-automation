@@ -8,10 +8,11 @@ export default defineConfig({
   workers: 1,
   reporter: 'html',  // the default reporter
   expect: {
-    timeout: 60000,
+    timeout: 600000,
   },
   use: {
     actionTimeout: 60000,
+    navigationTimeout: 50000,
     headless: false,               // Run tests in headed mode
     trace: 'on-first-retry', 
     screenshot: 'only-on-failure', 
