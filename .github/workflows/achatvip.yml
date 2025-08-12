@@ -1,18 +1,16 @@
-name: ACHAT-VIP | Smoke Test
+name: ACHAT-VIP
 
 on:
   schedule:
   # * is a special character in YAML so you have to quote this string
   - cron: '0 4 * * *'
-  push:
-    branches: [ "main" ]
 
 jobs:
   PSP_Smoke_Test:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -20,7 +18,7 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install Dependencies
         working-directory: member1-pw
         run: npm ci
 
@@ -35,5 +33,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: achat-vip-report
+          name: Achat-Vip-Report
           path: member1-pw/playwright-report/
