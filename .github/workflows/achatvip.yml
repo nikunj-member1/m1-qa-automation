@@ -8,7 +8,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  psp-checklist:
+  PSP | Smoke Test:
     runs-on: windows-latest
 
     steps:
@@ -27,13 +27,13 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install chromium
 
-      - name: Run Playwright tests
+      - name: Run Playwright Tests
         working-directory: member1-pw
         run: npm run test tests/achatvip.spec.ts
 
-      - name: Upload Playwright HTML report
+      - name: Upload Playwright HTML Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: achat-vip-report
           path: member1-pw/playwright-report/
