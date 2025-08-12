@@ -1,4 +1,4 @@
-name: Buy-club Tests
+name: BUY-CLUB
 
 on:
   schedule:
@@ -8,11 +8,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-  psp-checklist:
+  PSP_Smoke_Test:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -20,20 +20,20 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install Dependencies
         working-directory: member1-pw
         run: npm ci
 
       - name: Install Playwright Chromium
         run: npx playwright install chromium
 
-      - name: Run Playwright tests
+      - name: Run Playwright Tests
         working-directory: member1-pw
         run: npm run test tests/buyclub.spec.ts
 
-      - name: Upload Playwright HTML report
+      - name: Upload Playwright HTML Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: Buy-Club-Report
           path: member1-pw/playwright-report/
