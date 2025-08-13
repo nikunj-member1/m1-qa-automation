@@ -42,4 +42,15 @@ export class CommonMethods {
       }
     });
   }
+
+  async hideElements(selectors: string[]=['#fc_widget','.b-top-but']) {
+    await this.page.evaluate((sels) => {
+      sels.forEach(sel => {
+        const ele = document.querySelector(sel);
+        if (ele instanceof HTMLElement) {
+          ele.style.visibility = 'hidden'; // hides but keeps layout
+        }
+      });
+    }, selectors);
+  }
 }

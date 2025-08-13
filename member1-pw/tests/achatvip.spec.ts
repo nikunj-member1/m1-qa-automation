@@ -430,6 +430,7 @@ test('TC_035: Verify Product Description page', async ({ page }) => {
   await page.getByRole('link', { name: 'PRIX VIP −50% Bouquet de' }).click();
   await page.waitForURL('https://shop.achat-vip.com/pink-peony-and-rose-home-decor-artificial-flowers-bouquet/');
   const common = new CommonMethods(page);
+  await common.waitForPageLoad();
   await page.locator('//footer[@class="footer"]/div[1][@class="container"]').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
   await common.waitForPageLoad();
   await common.removeIFrameChatIcon();
