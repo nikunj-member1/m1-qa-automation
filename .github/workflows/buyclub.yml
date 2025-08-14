@@ -4,8 +4,6 @@ on:
   schedule:
   # * is a special character in YAML so you have to quote this string
   - cron: '0 3 * * *'
-  push:
-    branches: [ "main" ]
 
 jobs:
   PSP_Smoke_Test:
