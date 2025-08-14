@@ -16,10 +16,10 @@ export default defineConfig({
     headless: false,               // Run tests in headed mode
     trace: 'on-first-retry', 
     screenshot: 'only-on-failure', 
-	  video: {
-      mode :'retain-on-failure',  
-      size: { width: 1920, height: 1080 },
-    }, 
+	  // video: {
+    //   mode :'retain-on-failure',  
+    //   size: { width: 1920, height: 1080 },
+    // }, 
     viewport: { width: 1920, height: 1080 }, // ⬅️ higher resolution
     launchOptions: {
       slowMo: 1000,
