@@ -8,9 +8,9 @@ test('TC_001: Verify Home page', async ({ page }) => {
   await page.goto('https://shop.buy-club.net/');
   await page.waitForURL('https://shop.buy-club.net/');
   const common = new CommonMethods(page);
-  await common.waitForPageLoad();
+  await common.waitForPageLoad(7000);
   await page.locator('#best-deals').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
-  await common.waitForPageLoad();
+  await common.waitForPageLoad(10000);
   await page.locator('#new-arrivals').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
   await common.waitForPageLoad();
   await common.hideElements(); 

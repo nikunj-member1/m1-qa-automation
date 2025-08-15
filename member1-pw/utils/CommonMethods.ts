@@ -27,7 +27,7 @@ export class CommonMethods {
     await this.page.fill(selector, text);
   }
 
-  async waitForPageLoad(delay: number = 3000){
+  async waitForPageLoad(delay: number = 5000){
     await this.page.waitForLoadState('load');
     await this.page.waitForLoadState('domcontentloaded');
     await this.page.waitForLoadState('networkidle');

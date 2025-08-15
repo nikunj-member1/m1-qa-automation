@@ -9,6 +9,8 @@ test('TC_001: Verify Home page', async ({ page }) => {
   await page.waitForURL('https://shop.tech-vip.com');
   const common = new CommonMethods(page);
   await common.waitForPageLoad(7000);
+  await page.locator('#best-deals').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
+  await common.waitForPageLoad(10000);
   await page.locator('#new-arrivals').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
   await common.waitForPageLoad();
   await common.hideElements();
