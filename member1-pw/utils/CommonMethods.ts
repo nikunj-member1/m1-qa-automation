@@ -43,7 +43,7 @@ export class CommonMethods {
     });
   }
 
-  async hideElements(selectors: string[]=['#fc_widget','.b-top-but']) {
+  async hideElements(selectors: string[]=['#fc_frame','#fc_widget','.b-top-but','#scroller']) {
     await this.page.evaluate((sels) => {
       sels.forEach(sel => {
         const ele = document.querySelector(sel);
