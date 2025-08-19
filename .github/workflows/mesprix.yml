@@ -11,7 +11,7 @@ name: MES-PRIX
 on:
   schedule:
   # * is a special character in YAML so you have to quote this string
-  - cron: '0 1 * * *'
+  - cron: '0 * * * *'
  
 jobs:
   PSP_Smoke_Test:
