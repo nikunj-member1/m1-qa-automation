@@ -1,0 +1,37 @@
+name: AFFAIREXCLU
+
+on:
+  schedule:
+  # * is a special character in YAML so you have to quote this string
+  - cron: '0 7 * * *'
+
+jobs:
+  PSP_Smoke_Test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        working-directory: member1-pw
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium
+
+      - name: Run Playwright Tests
+        working-directory: member1-pw
+        run: npm run test tests/affairexclu.spec.ts
+
+      - name: Upload Playwright HTML Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Affairexclu-Report
+          path: member1-pw/playwright-report/
