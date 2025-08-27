@@ -23,7 +23,8 @@ jobs:
         run: npm ci
 
       - name: Install Playwright Chromium
-        run: npx playwright install chromium
+        working-directory: member1-pw
+        run: npx playwright install chromium --with-deps
 
       - name: Run Playwright Tests
         working-directory: member1-pw

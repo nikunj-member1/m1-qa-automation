@@ -23,6 +23,7 @@ jobs:
         run: npm ci
 
       - name: Install Playwright Chromium
+        working-directory: member1-pw
         run: npx playwright install chromium
 
       - name: Run Playwright Tests
