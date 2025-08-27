@@ -13,7 +13,7 @@ test('TC_001: Verify Home page', async ({ page }) => {
   await common.waitForPageLoad(10000);
   await page.locator('#new-arrivals').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
   await common.waitForPageLoad();
-  await common.hideElements(); 
+  await common.hideElementsInTechVip(); 
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('home-fullpage.png'); 
 });
 
@@ -24,7 +24,7 @@ test('TC_002: Verify Sport Header menu', async ({ page }) => {
   await page.waitForURL('https://shop.buy-club.net/sport/');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({ fullPage: true })).toMatchSnapshot('sport-fullpage.png');
 });
 
@@ -35,7 +35,7 @@ test('TC_003: Verify Objets Connectes Header menu', async ({ page }) => {
   await page.waitForURL('https://shop.buy-club.net/objets-connectes/');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({ fullPage: true })).toMatchSnapshot('objets-connectes-fullpage.png');
 });
 
@@ -46,7 +46,7 @@ test('TC_004: Verify Audio Header menu', async ({ page }) => {
   await page.waitForURL('https://shop.buy-club.net/audio-video/');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({ fullPage: true })).toMatchSnapshot('audio-fullpage.png');
 });
 
@@ -57,7 +57,7 @@ test('TC_005: Verify Cuisine Header menu', async ({ page }) => {
   await page.waitForURL('https://shop.buy-club.net/cuisine/');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({ fullPage: true })).toMatchSnapshot('cuisine-fullpage.png');
 });
 
@@ -68,7 +68,7 @@ test('TC_006: Verify Beaute Header menu', async ({ page }) => {
   await page.waitForURL('https://shop.buy-club.net/beaute/');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({ fullPage: true })).toMatchSnapshot('beaute-fullpage.png');
 });
 
@@ -79,7 +79,7 @@ test('TC_007: Verify Informatique Header menu', async ({ page }) => {
   await page.waitForURL('https://shop.buy-club.net/informatique/');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({ fullPage: true })).toMatchSnapshot('informatique-fullpage.png');
 });
 
@@ -90,7 +90,7 @@ test('TC_008: Verify Presse Header menu', async ({ page }) => {
   await page.waitForURL('https://shop.buy-club.net/presse/');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({ fullPage: true })).toMatchSnapshot('presse-fullpage.png');
 });
 
@@ -101,7 +101,7 @@ test('TC_009: Verify Sabonner Header menu', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/su/s-abonner.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('sabonner-fullpage.png'); 
 });
 
@@ -112,7 +112,7 @@ test('TC_010: Verify Connexion Header menu', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/li/login.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('connexion-fullpage.png'); 
 });
 
@@ -125,7 +125,7 @@ test('TC_011: Verify Forgot Password page', async ({ page }) => {
   await page.goto('https://buy-club.net/fr/li/login.html?recover');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('forgot-password-fullpage.png'); 
 });
 
@@ -138,7 +138,7 @@ test('TC_012: Verify CGV SideBar page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/ts/cgv.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('cgv-fullpage.png');
 });
 
@@ -149,7 +149,7 @@ test('TC_013: Verify Mentions Legales SideBar page', async ({ page }) => {
   await page.locator('#menu-item-1357').getByRole('link', { name: 'Mentions légales' }).click();  await page.waitForURL('https://buy-club.net/fr/lm/mention-legales.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('mention-legales-fullpage.png');
 });
 
@@ -161,7 +161,7 @@ test('TC_014: Verify Expedition Livraison SideBar page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/sd/expedition-et-livraison.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('expedition-livraison-fullpage.png');
 });
 
@@ -173,7 +173,7 @@ test('TC_015: Verify Politique De Remboursementet SideBar page', async ({ page }
   await page.waitForURL('https://buy-club.net/fr/rp/remboursement-et-retour.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('politiquederemboursementet-fullpage.png');
 });
 
@@ -185,7 +185,7 @@ test('TC_016: Verify Politique De Confidentialité SideBar page', async ({ page 
   await page.waitForURL('https://buy-club.net/fr/pp/politique-de-protection-des-donnees-personnelles.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('politiquedeconfidentialite-fullpage.png');
 });
 
@@ -197,7 +197,7 @@ test('TC_017: Verify FAQ SideBar page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/fq/foire-aux-questions.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('faq-fullpage.png');
 });
 
@@ -223,7 +223,7 @@ test('TC_018: Verify FAQ > Description SideBar page', async ({ page }) => {
   await page.locator('a').filter({ hasText: 'Quels produits puis-je' }).click();
   await page.locator('a').filter({ hasText: 'Est-ce que je peux modifier' }).click();
   await page.locator('a').filter({ hasText: 'Est-il possible de consulter' }).click();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('faq-description-fullpage.png');
 });
 
@@ -235,7 +235,7 @@ test('TC_019: Verify Contact SideBar page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/co/contact.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('contact-fullpage.png');
 });
 
@@ -247,7 +247,7 @@ test('TC_020: Verify NotreOffre SideBar page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/hw/le-concept.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('notreoffre-fullpage.png');
 });
 
@@ -259,7 +259,7 @@ test('TC_021: Verify Suivre Votre Commande SideBar page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/tr/suivre-votre-commande.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('suivrevotrecommande-fullpage.png');
 });
 
@@ -271,7 +271,7 @@ test('TC_022: Verify Moyens De Paiement SideBar page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/pm/moyens-de-paiement.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('moyensdepaiement-fullpage.png');
 });
 
@@ -283,7 +283,7 @@ test('TC_023: Verify Sabonner SideBar page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/su/s-abonner.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('sabonner-sidebar-fullpage.png');
 });
 
@@ -295,7 +295,7 @@ test('TC_024: Verify Mon Compte SideBar page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/my/espace-membre.php');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('moncompte-fullpage.png');
 });
 
@@ -308,7 +308,7 @@ test('TC_025: Verify CGV Footer page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/ts/cgv.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('cgv-fullpage.png');
 });
 
@@ -319,7 +319,7 @@ test('TC_026: Verify Mentions Legales Footer page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/lm/mention-legales.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('mention-legales-fullpage.png');
 });
 
@@ -330,7 +330,7 @@ test('TC_027: Verify NewsLetter Footer page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/nl/newsletter.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('newsletter-fullpage.png'); 
 });
 
@@ -341,7 +341,7 @@ test('TC_028: Verify Desabonnement Footer page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/us/desabonnement.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('desabonnement-fullpage.png');
 });
 
@@ -352,7 +352,7 @@ test('TC_029: Verify Presse Footer page', async ({ page }) => {
   await page.waitForURL('https://shop.buy-club.net/presse/');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('presse-fullpage.png'); 
 });
 
@@ -364,7 +364,7 @@ test('TC_030: Verify FAQ Footer page', async ({ page }) => {
   await expect(page.getByText('FAQ : Foire aux questions')).toBeVisible();
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('faq-fullpage.png');
 });
 
@@ -390,7 +390,7 @@ test('TC_031: Verify FAQ > Description Footer page', async ({ page }) => {
   await page.locator('a').filter({ hasText: 'Quels produits puis-je' }).click();
   await page.locator('a').filter({ hasText: 'Est-ce que je peux modifier' }).click();
   await page.locator('a').filter({ hasText: 'Est-il possible de consulter' }).click();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('faq-description-fullpage.png');
 });
 
@@ -401,7 +401,7 @@ test('TC_032: Verify Expedition Livraison Footer page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/sd/expedition-et-livraison.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('expedition-livraison-fullpage.png');
 });
 
@@ -411,7 +411,7 @@ test('TC_033: Verify Suivre Votre Commande Footer page', async ({ page }) => {
   await page.locator('#menu-item-2149').getByRole('link', { name: 'Suivre votre commande' }).click();
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('suivrevotrecommande-fullpage.png');
 });
 
@@ -422,7 +422,7 @@ test('TC_034: Verify Moyens De Paiement Footer page', async ({ page }) => {
   await page.waitForURL('https://buy-club.net/fr/pm/moyens-de-paiement.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('moyensdepaiement-fullpage.png');
 });
 
@@ -433,7 +433,7 @@ test('TC_035: Verify Politique De Remboursementet Footer page', async ({ page })
   await page.waitForURL('https://buy-club.net/fr/rp/remboursement-et-retour.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('politiquederemboursementet-fullpage.png');
 });
 
@@ -444,7 +444,7 @@ test('TC_036: Verify Politique De Confidentialite Footer page', async ({ page })
   await page.waitForURL('https://buy-club.net/fr/pp/politique-de-protection-des-donnees-personnelles.html');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('politiquedeconfidentialite-fullpage.png');
 });
 
@@ -455,7 +455,7 @@ test('TC_037: Verify Product Description page', async ({ page }) => {
   await page.waitForURL('https://shop.buy-club.net/professional-wired-gaming-mouse/');
   const common = new CommonMethods(page);
   await common.waitForPageLoad();
-  await common.hideElements();
+  await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true, mask: [
       page.locator('div[class="aship-box-products list-product related-products"]')
     ]})).toMatchSnapshot('product-description-fullpage.png'); 

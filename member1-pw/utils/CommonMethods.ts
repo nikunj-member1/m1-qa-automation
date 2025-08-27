@@ -43,7 +43,18 @@ export class CommonMethods {
     });
   }
 
-  async hideElements(selectors: string[]=['#fc_frame','#fc_widget','.b-top-but','#scroller']) {
+  async hideElementsInTechVip(selectors: string[]=['#fc_frame','#fc_widget','.b-top-but','#scroller']) {
+    await this.page.evaluate((sels) => {
+      sels.forEach(sel => {
+        const ele = document.querySelector(sel);
+        if (ele instanceof HTMLElement) {
+          ele.style.visibility = 'hidden'; // hides but keeps layout
+        }
+      });
+    }, selectors);
+  }
+
+  async hideElementsInBoutikPrive(selectors: string[]=['#fc_widget','.upbutton']) {
     await this.page.evaluate((sels) => {
       sels.forEach(sel => {
         const ele = document.querySelector(sel);
