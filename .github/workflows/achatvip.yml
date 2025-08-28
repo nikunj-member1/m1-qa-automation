@@ -4,6 +4,7 @@ on:
   schedule:
   # * is a special character in YAML so you have to quote this string
   - cron: '0 4 * * *'
+  workflow_dispatch:
 
 jobs:
   PSP_Smoke_Test:
@@ -22,9 +23,9 @@ jobs:
         working-directory: member1-pw
         run: npm ci
 
-      - name: Install Playwright Chromium
+      - name: Install Playwright Browsers
         working-directory: member1-pw
-        run: npx playwright install chromium
+        run: npx playwright install --with-deps
 
       - name: Run Playwright Tests
         working-directory: member1-pw
