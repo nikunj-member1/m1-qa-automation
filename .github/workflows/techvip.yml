@@ -23,7 +23,7 @@ jobs:
         working-directory: member1-pw
         run: npm ci
 
-      - name: Install Playwright Chromium
+      - name: Install Playwright Browsers
         working-directory: member1-pw
         run: npx playwright install --with-deps
 
