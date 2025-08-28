@@ -1,9 +1,9 @@
-name: TOP-REDUC
+name: TECH-VIP-USA
 
 on:
   schedule:
   # * is a special character in YAML so you have to quote this string
-  - cron: '0 6 * * *'
+  - cron: '0 1 * * *'
   workflow_dispatch:
 
 jobs:
@@ -29,11 +29,11 @@ jobs:
 
       - name: Run Playwright Tests
         working-directory: member1-pw
-        run: npm run test tests/topreduc.spec.ts
+        run: npm run test tests/techvip-usa.spec.ts
 
       - name: Upload Playwright HTML Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Top-Reduc-Report
+          name: Tech-Vip-Usa-Report
           path: member1-pw/playwright-report/
