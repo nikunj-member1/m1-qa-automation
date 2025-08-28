@@ -43,7 +43,9 @@ export class CommonMethods {
     });
   }
 
-  async hideElementsInTechVip(selectors: string[]=['#fc_frame','#fc_widget','.b-top-but','#scroller']) {
+  async hideElementsInTechVip(selectors: string[]=['body iframe','#fc_frame','#fc_widget','.b-top-but','#scroller','body div#scroller span.b-top-but']) {
+    await this.page.click('body');
+    await this.page.waitForTimeout(5000);
     await this.page.evaluate((sels) => {
       sels.forEach(sel => {
         const ele = document.querySelector(sel);
@@ -54,7 +56,9 @@ export class CommonMethods {
     }, selectors);
   }
 
-  async hideElementsInBoutikPrive(selectors: string[]=['#fc_widget','.upbutton']) {
+  async hideElementsInBoutikPrive(selectors: string[]=['#fc_widget','body iframe','.upbutton']) {
+    await this.page.click('body');
+    await this.page.waitForTimeout(5000);
     await this.page.evaluate((sels) => {
       sels.forEach(sel => {
         const ele = document.querySelector(sel);
