@@ -252,6 +252,8 @@ test('TC_018: Verify FAQ > Description SideBar page', async ({ page }) => {
   await page.locator('a').filter({ hasText: 'Mon paiement est-il sécurisé ?' }).click();
   await page.locator('a').filter({ hasText: 'Quand recevrai-je ma commande' }).click();
   await page.locator('a').filter({ hasText: 'Y a t-il une limite de' }).click();
+  await page.locator('footer.footer').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
+  await common.waitForPageLoad(3000);
   await page.locator('a').filter({ hasText: 'Le produit commandé est arriv' }).click();
   await page.locator('a').filter({ hasText: 'Est-ce possible de me faire' }).click();
   await page.locator('a').filter({ hasText: 'Quels produits puis-je' }).click();

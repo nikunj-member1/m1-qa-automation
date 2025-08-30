@@ -423,7 +423,7 @@ test('TC_029: Verify FAQ > Description Footer page', async ({ page }) => {
   await page.locator('a').filter({ hasText: 'Est-ce que je peux modifier' }).click();
   await page.locator('a').filter({ hasText: 'Est-il possible de consulter' }).click();
   await page.locator('footer.footer').evaluate(el => el.scrollIntoView({ behavior: 'smooth' }));
-  await common.waitForPageLoad();
+  await common.waitForPageLoad(7000);
   await common.hideElementsInTechVip();
   expect(await page.screenshot({fullPage: true})).toMatchSnapshot('faq-description-fullpage.png');
 });
